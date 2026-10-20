@@ -5,9 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quillmark – Sign &amp; Initial terms of use</title>
 <style>
-body{font-family:system-ui,sans-serif;max-width:680px;margin:2rem auto;padding:0 1rem;line-height:1.55;color:#1f2328;background:#fff}
-h1,h2,h3{line-height:1.2}a{color:#0b57d0}
-@media (prefers-color-scheme:dark){body{color:#e6e6e6;background:#141414}a{color:#8ab4f8}}
+:root{--paper:#f4efe6;--shelf:#e9e1d3;--ink:#1d1b18;--muted:#5d564c;--accent:#c4421d;--line:#d6ccbb;
+--display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#171512;--shelf:#221f1a;--ink:#ede6da;--muted:#a89f92;--accent:#f07a52;--line:#3a352d}}
+body{font-family:system-ui,sans-serif;max-width:680px;margin:2rem auto;padding:0 1.25rem;line-height:1.55;color:var(--ink);background:var(--paper)}
+h1,h2,h3{font-family:var(--display);line-height:1.15}a{color:var(--accent)}
+.back a{color:var(--muted);text-decoration:none}.back a::before{content:"← "}
+.icon{border-radius:22%;display:block}
+.lead{font-size:1.15rem;color:var(--muted)}
+.button{display:inline-block;padding:.75rem 1.25rem;border-radius:6px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600}
+.stamp{display:inline-block;padding:.15rem .55rem;border:2px solid currentColor;border-radius:3px;font-size:.8rem;font-weight:700;color:var(--muted)}
+.stamp-live{color:#2f7a4a}.stamp-review{color:#8a5a00}.stamp-testing{color:var(--accent)}
+@media (prefers-color-scheme:dark){.stamp-live{color:#7cc89a}.stamp-review{color:#e2b45c}}
+.home{max-width:1040px}
+.hero{padding:2.5rem 0 1.5rem;border-bottom:2px solid var(--ink)}
+.wordmark{font-weight:800;letter-spacing:-.02em;font-size:1.1rem;margin:0}
+.hero h1{font-size:clamp(2.4rem,7vw,4.6rem);font-weight:700;letter-spacing:-.02em;margin:.6rem 0 .8rem;max-width:15ch}
+.hero .lead{max-width:34rem;margin:0}
+section h2{font-size:1.6rem;margin:2.5rem 0 1rem}
+.shelf{list-style:none;padding:0;margin:0;display:grid;gap:1.75rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr))}
+.app{display:flex;flex-direction:column;gap:.75rem;color:inherit;text-decoration:none}
+.feature{width:100%;height:auto;border-radius:8px;box-shadow:0 1px 0 var(--line),0 8px 20px -12px rgba(0,0,0,.35);transition:transform .2s ease}
+.app:hover .feature,.app:focus-visible .feature{transform:translateY(-4px)}
+.app-line{display:flex;gap:.85rem;align-items:center}.app-line .icon{width:56px;height:56px;flex:none}
+.app-line b{display:block;font-family:var(--display);font-size:1.25rem}
+.app-line span{color:var(--muted);font-size:.95rem}.app-line b{color:var(--ink)}
+.app .stamp{align-self:flex-start}
+.pages ul{list-style:none;padding:0;columns:2 240px;column-gap:2rem}
+.pages li{padding:.45rem 0;border-bottom:1px solid var(--line);break-inside:avoid;display:flex;gap:.75rem;align-items:baseline}
+.pages li a:first-child{flex:1;color:var(--ink);font-weight:600;text-decoration:none}
+.pages li a:not(:first-child){font-size:.9rem;min-height:24px}
+footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.feature{transition:none}}
 </style>
 </head>
 <body>
