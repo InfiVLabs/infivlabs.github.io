@@ -18,7 +18,8 @@ h1,h2,h3{font-family:var(--display);line-height:1.15}a{color:var(--accent)}
 .stamp-live{color:#2f7a4a}.stamp-review{color:#8a5a00}.stamp-testing{color:var(--accent)}
 @media (prefers-color-scheme:dark){.stamp-live{color:#7cc89a}.stamp-review{color:#e2b45c}}
 .home{--paper:#0f0e0c;--surface:#1a1815;--ink:#f2ede4;--muted:#b0a797;--accent:#ff7a50;--line:#2e2a24;
-max-width:1100px;color-scheme:dark;overflow-x:hidden;margin-top:0}
+max-width:1100px;color-scheme:dark;margin-top:0}
+html:has(.home),.home{overflow-x:clip}
 .hero{position:relative;padding:2.5rem 0 2rem;isolation:isolate}
 .hero::before{content:"";position:absolute;inset:-30% -40% -10%;z-index:-1;pointer-events:none;
 background:radial-gradient(40% 45% at 25% 35%,rgba(255,122,80,.22),transparent 70%),radial-gradient(35% 40% at 75% 55%,rgba(63,179,154,.16),transparent 70%);
