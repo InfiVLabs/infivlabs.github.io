@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
 Sitemap: https://infivlabs.github.io/apps/leaftag/sitemap.xml
+Sitemap: https://infivlabs.github.io/apps/fartchaos/sitemap.xml
