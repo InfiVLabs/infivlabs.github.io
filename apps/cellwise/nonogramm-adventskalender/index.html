@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adventskalender-Rätsel für Erwachsene: Nonogramme lösen</title>
+<style>
+:root{--paper:#f4efe6;--shelf:#e9e1d3;--ink:#1d1b18;--muted:#5d564c;--accent:#c4421d;--line:#d6ccbb;
+--display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#171512;--shelf:#221f1a;--ink:#ede6da;--muted:#a89f92;--accent:#f07a52;--line:#3a352d}}
+body{font-family:system-ui,sans-serif;max-width:680px;margin:2rem auto;padding:0 1.25rem;line-height:1.55;color:var(--ink);background:var(--paper);overflow-wrap:break-word}
+a{overflow-wrap:anywhere}
+h1,h2,h3{font-family:var(--display);line-height:1.15}a{color:var(--accent)}
+.back a{color:var(--muted);text-decoration:none;display:inline-block;padding:.75rem 0}.back a::before{content:"← "}
+.icon{border-radius:22%;display:block}
+.lead{font-size:1.15rem;color:var(--muted)}
+.links a,footer a{display:inline-block;padding:.75rem 0}
+.button{display:inline-block;padding:.75rem 1.25rem;border-radius:6px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600}
+.stamp{display:inline-block;padding:.15rem .55rem;border:2px solid currentColor;border-radius:3px;font-size:.8rem;font-weight:700;color:var(--muted)}
+.stamp-live{color:#2f7a4a}.stamp-review{color:#8a5a00}.stamp-testing{color:var(--accent)}
+@media (prefers-color-scheme:dark){.stamp-live{color:#7cc89a}.stamp-review{color:#e2b45c}}
+.home{--paper:#0f0e0c;--surface:#1a1815;--ink:#f2ede4;--muted:#b0a797;--accent:#ff7a50;--line:#2e2a24;
+max-width:1100px;color-scheme:dark;margin-top:0}
+html:has(.home){overflow-x:clip}
+.hero{position:relative;padding:2.5rem 0 2rem;isolation:isolate}
+.home::before{content:"";position:fixed;inset:-10%;z-index:-1;pointer-events:none;
+background:radial-gradient(70vmax 55vmax at 10% 5%,rgba(255,122,80,.26),transparent 60%),radial-gradient(60vmax 50vmax at 100% 50%,rgba(63,179,154,.18),transparent 60%),
+radial-gradient(70vmax 45vmax at 15% 100%,rgba(255,196,107,.1),transparent 60%);animation:drift 20s ease-in-out infinite alternate}
+.wordmark{font-weight:800;letter-spacing:-.02em;font-size:1.05rem;margin:0}
+.hero h1{font-size:clamp(2.2rem,min(11vw,13vh),5.4rem);font-weight:700;letter-spacing:-.025em;line-height:1.02;margin:.7rem 0 1rem;max-width:14ch}
+.hero h1 span{display:inline-block;animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both}
+.hero h1 span:nth-child(n+5){background:linear-gradient(90deg,#ff7a50,#ffc46b,#ff7a50) 0 0/200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both,shimmer 5s 1.2s linear infinite}
+.hero .lead{max-width:34rem;margin:0;animation:rise .7s .5s cubic-bezier(.2,.7,.2,1) both}
+.ticker{overflow:hidden;border-block:1px solid var(--line);margin:0 calc(50% - 50vw);padding:.7rem 0;font-weight:700;font-size:.9rem;color:var(--muted);white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.ticker p{display:inline-block;margin:0;animation:ticker 78s linear infinite}
+.ticker span{padding:0 1.1rem}.ticker span::after{content:"✦";color:var(--accent);padding-left:2.2rem}
+section h2{font-size:1.5rem;margin:2.2rem 0 1rem}
+.shelf{list-style:none;padding:0;margin:0;display:grid;gap:1.5rem}
+.shelf li{animation:rise .8s calc(.6s + var(--i)*140ms) cubic-bezier(.2,.7,.2,1) both}
+@property --spread{syntax:"<number>";inherits:true;initial-value:0}
+.app{position:relative;isolation:isolate;display:grid;overflow:hidden;border-radius:24px;color:inherit;text-decoration:none;
+transition:transform .2s ease;-webkit-tap-highlight-color:transparent}
+.app::before{content:"";position:absolute;inset:-100%;z-index:-2;background:conic-gradient(var(--line) 0 55%,#ff7a50 72%,#ffc46b 82%,var(--line) 100%);animation:turn 7s linear infinite}
+.app::after{content:"";position:absolute;inset:2px;z-index:-1;border-radius:22px;background:var(--surface)}
+.app:active{transform:scale(.98)}
+.info{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;padding:1.5rem 1.4rem .5rem}
+.info .icon{width:72px;height:72px;box-shadow:0 10px 24px -8px rgba(0,0,0,.6);animation:bob 5s ease-in-out infinite alternate}
+.info b{font-family:var(--display);font-size:1.9rem;line-height:1.1;color:var(--ink)}
+.info>span:not(.stamp){color:var(--muted)}
+.home .stamp-live{color:#7cc89a}.home .stamp-review{color:#e2b45c}
+.app .stamp{animation:stamp .5s calc(1.2s + var(--i)*140ms) cubic-bezier(.3,1.4,.5,1) both}
+.fan{display:flex;justify-content:center;align-items:center;padding:1.5rem 1rem 2.5rem;animation:breathe 7s 2s ease-in-out infinite;transition:--spread .5s}
+.fan img{position:relative;width:29%;max-width:190px;height:auto;margin-inline:-2%;border-radius:18px;box-shadow:0 18px 36px -10px rgba(0,0,0,.65);
+translate:calc(var(--x)*var(--spread)*12%) var(--y);rotate:calc(var(--r)*(1 + var(--spread)*.5));animation:bob 4.5s ease-in-out infinite alternate}
+.fan img:nth-child(1){--x:-1;--y:16px;--r:-8deg;animation-delay:-1.5s}
+.fan img:nth-child(2){--x:0;--y:-8px;--r:0deg;z-index:1}
+.fan img:nth-child(3){--x:1;--y:16px;--r:8deg;animation-delay:-3s}
+.poster{padding:0 1.4rem 1.4rem}.poster img{width:100%;height:auto;border-radius:12px}
+@media (hover:hover){.app:hover .fan{animation-play-state:paused;--spread:1}}
+@media (min-width:720px){.app{grid-template-columns:1fr 1.15fr;min-height:420px}.info{justify-content:center;padding:2.5rem}.info .icon{width:88px;height:88px}.info b{font-size:2.4rem}}
+.home tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
+.table{overflow-x:auto}.home table{border-collapse:collapse;width:100%;min-width:560px}
+.home th,.home td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.home th{font-size:.85rem;color:var(--muted)}
+@media (max-width:599px){.home table{min-width:0}.home thead{display:none}.home tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.home td{border:0;padding:0}.home td:first-child{grid-row:span 3}.home td:nth-child(2){grid-column:2/4;font-weight:600}.home td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}.home td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}.home td:nth-child(5){grid-column:2/4}}.home td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}.home td .icon{width:40px;height:40px}
+.doc{--card:#fbf8f2;--deep:#8f3417;--accent:var(--deep);max-width:1120px;margin:0 auto;padding:0 1.25rem 1rem}
+@media (prefers-color-scheme:dark){.doc{--card:#1f1c18;--accent:var(--lift,#f07a52)}}
+.top{display:flex;align-items:center;flex-wrap:wrap;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.top a{padding:.7rem 0;text-decoration:none}.mark{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.trail{color:var(--muted)}.trail::before{content:"/";margin:0 .7rem;color:var(--line)}
+.doc .button{background:var(--deep);color:#fff;border-radius:999px;padding:.85rem 1.5rem;box-shadow:0 10px 24px -12px var(--deep);transition:transform .2s ease}
+.doc .button:active{transform:scale(.97)}
+.hero-app{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding:2.5rem 0 1rem;align-items:center}
+.hero-app h1{font-size:clamp(2.1rem,5vw,3.5rem);letter-spacing:-.02em;margin:1rem 0 .7rem;max-width:18ch}
+.hero-app .icon{width:88px;height:88px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+.hero-app .lead{max-width:36rem;margin:0 0 1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin:0}
+.stage{border-radius:28px;background:radial-gradient(80% 70% at 50% 45%,color-mix(in oklab,var(--accent) 22%,transparent),transparent 72%)}
+.stage .fan{padding:2rem 1rem 3rem}
+@media (min-width:860px){.hero-app{grid-template-columns:1.05fr 1fr;min-height:480px}}
+.prose{max-width:68ch;font-size:1.075rem;line-height:1.72}
+.prose h2{font-size:1.8rem;letter-spacing:-.01em;margin:2.8rem 0 .8rem;scroll-margin-top:1rem}
+.prose h3{font-family:system-ui,sans-serif;font-size:1.13rem;margin:1.9rem 0 .35rem}
+.prose ul{padding-left:1.2rem}.prose li{margin:.45rem 0}.prose li::marker{color:var(--accent)}
+.prose ol{counter-reset:step;list-style:none;padding:0}
+.prose ol>li{counter-increment:step;position:relative;padding-left:2.7rem;margin:.9rem 0}
+.prose ol>li::before{content:counter(step);position:absolute;left:0;top:.15rem;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .88rem/1.85rem system-ui,sans-serif;text-align:center}
+.prose .table{margin:1.6rem 0;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.prose table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+.prose th{background:var(--shelf);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left}
+.prose th,.prose td{padding:.7rem .95rem;border-bottom:1px solid var(--line);vertical-align:top}
+.prose tbody tr:last-child td{border-bottom:0}.prose td:first-child{font-weight:600}
+.prose blockquote{margin:1.8rem 0;padding:1rem 1.25rem 1rem 3rem;position:relative;border-radius:14px;background:color-mix(in oklab,var(--accent) 9%,var(--card));border:1px solid color-mix(in oklab,var(--accent) 28%,transparent);font-size:.98rem}
+.prose blockquote::before{content:"i";position:absolute;left:1.05rem;top:1.15rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .8rem/1.3rem Georgia,serif;text-align:center}
+.prose blockquote p{margin:0}
+.prose b{color:var(--ink)}.prose code{font:.9em ui-monospace,Menlo,monospace;padding:.1em .35em;border-radius:5px;background:var(--shelf);overflow-wrap:anywhere}
+.head{padding:2.8rem 0 2rem;max-width:48rem}
+.kicker{display:flex;align-items:center;gap:.6rem;margin:0;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.kicker img{width:30px;height:30px;border-radius:22%}
+.head h1{font-size:clamp(2.05rem,4.8vw,3.4rem);letter-spacing:-.02em;margin:.8rem 0 .9rem}
+.standfirst{font-size:1.24rem;line-height:1.5;color:var(--muted);margin:0 0 1.1rem}
+.meta{margin:0;font-size:.9rem;color:var(--muted)}.meta span+span::before{content:"·";margin:0 .55rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;border-top:1px solid var(--line);padding-top:.5rem}
+.toc{display:none}
+@media (min-width:980px){.layout{grid-template-columns:minmax(0,1fr) 300px;gap:4rem}.rail{position:sticky;top:1.5rem;align-self:start;padding-top:2.4rem}
+.toc{display:block;margin-bottom:1.5rem}}
+.toc b{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.toc ol{list-style:none;padding:0;margin:.7rem 0 0;border-left:2px solid var(--line)}
+.toc a{display:block;margin-left:-2px;padding:.35rem 0 .35rem 1rem;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:.93rem;line-height:1.4}
+.toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+.get{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;align-items:center;padding:1.4rem;border-radius:22px;border:1px solid var(--line);
+background:linear-gradient(155deg,color-mix(in oklab,var(--accent) 16%,var(--card)),var(--card) 70%)}
+.get .icon{grid-row:span 2;width:58px;height:58px;box-shadow:0 10px 22px -12px rgba(0,0,0,.5)}
+.get b{font-family:var(--display);font-size:1.35rem;line-height:1.15}.get small{color:var(--muted)}
+.get p{grid-column:1/-1;margin:.8rem 0 1rem;color:var(--muted);font-size:.95rem;line-height:1.5}
+.get .button{grid-column:1/-1;text-align:center}
+.cards{margin:3.5rem 0 1rem}.cards h2{font-size:1.65rem;margin-bottom:1.1rem}
+.cards ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.cards a{display:flex;flex-direction:column;gap:.55rem;height:100%;box-sizing:border-box;padding:1.3rem 1.3rem 1.1rem;border-radius:18px;border:1px solid var(--line);
+background:var(--card);color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.cards b{font-family:var(--display);font-size:1.22rem;line-height:1.25}.cards span{color:var(--muted);font-size:.94rem;line-height:1.5}
+.cards i{margin-top:auto;padding-top:.4rem;font-style:normal;font-weight:700;font-size:.9rem;color:var(--accent)}
+@media (hover:hover){.cards a:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 18px 34px -22px rgba(0,0,0,.5)}}
+.foot{display:flex;flex-wrap:wrap;gap:0 1.4rem;margin:4rem 0 1rem;padding-top:.6rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.foot a{color:var(--muted);padding:.75rem 0;display:inline-block}
+.prose td:empty{height:2.3rem}
+@media (min-width:860px){.stage .fan img{max-width:230px}}
+@media print{.top,.rail,.cards,.foot,.stage,.actions,.kicker img{display:none!important}.doc{max-width:none;padding:0}
+.layout{display:block;border:0}.prose{max-width:none;font-size:11pt}.prose .table{break-inside:avoid}.prose td:empty{height:9mm}
+.prose a{color:inherit}*{animation:none!important;box-shadow:none!important}}
+footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted)}
+@keyframes rise{from{opacity:0;transform:translateY(.6em)}}
+@keyframes drift{to{transform:translate(4%,3%) scale(1.08)}}
+@keyframes shimmer{to{background-position:-200% 0}}
+@keyframes ticker{to{transform:translateX(-50%)}}
+@keyframes turn{to{transform:rotate(1turn)}}
+@keyframes bob{to{transform:translateY(-10px)}}
+@keyframes breathe{0%,30%,100%{--spread:0}50%,80%{--spread:1}}
+@keyframes draw{from{transform:scaleX(0)}}
+@keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-12deg)}60%{opacity:1;transform:scale(.94) rotate(-1deg)}100%{transform:rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
+</style>
+<meta name="description" content="Nonogramm-Adventskalender für Erwachsene: so löst du Nonogramme Schritt für Schritt, mit 5×5-Beispiel und einem 24-Tage-Plan zum Selbermachen.">
+<link rel="canonical" href="https://infivlabs.github.io/apps/cellwise/nonogramm-adventskalender/">
+<meta property="og:site_name" content="InfiV Labs">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:url" content="https://infivlabs.github.io/apps/cellwise/nonogramm-adventskalender/">
+<meta property="og:title" content="Adventskalender-Rätsel für Erwachsene: Nonogramme lösen">
+<meta property="og:description" content="Nonogramm-Adventskalender für Erwachsene: so löst du Nonogramme Schritt für Schritt, mit 5×5-Beispiel und einem 24-Tage-Plan zum Selbermachen.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://infivlabs.github.io/apps/cellwise/feature.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "Adventskalender-Rätsel für Erwachsene: 24 Nonogramme bis Heiligabend", "description": "Nonogramm-Adventskalender für Erwachsene: so löst du Nonogramme Schritt für Schritt, mit 5×5-Beispiel und einem 24-Tage-Plan zum Selbermachen.", "inLanguage": "de", "url": "https://infivlabs.github.io/apps/cellwise/nonogramm-adventskalender/", "mainEntityOfPage": "https://infivlabs.github.io/apps/cellwise/nonogramm-adventskalender/", "author": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "publisher": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "about": {"@id": "https://infivlabs.github.io/apps/cellwise/#app", "name": "Cellwise – Nonogram"}, "image": "https://infivlabs.github.io/apps/cellwise/feature.png", "datePublished": "2026-11-26", "dateModified": "2026-11-26"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "InfiV Labs", "item": "https://infivlabs.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Cellwise – Nonogram", "item": "https://infivlabs.github.io/apps/cellwise/"}, {"@type": "ListItem", "position": 3, "name": "Adventskalender-Rätsel für Erwachsene: 24 Nonogramme bis Heiligabend", "item": "https://infivlabs.github.io/apps/cellwise/nonogramm-adventskalender/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Was ist ein Nonogramm?", "acceptedAnswer": {"@type": "Answer", "text": "Ein Logikrätsel auf einem Gitter. Die Zahlen am Rand verraten, wie viele Felder in jeder Zeile und Spalte hintereinander gefüllt sind. Wer alle richtigen Felder füllt, erhält ein Bild."}}, {"@type": "Question", "name": "Wie löst man ein Nonogramm am besten?", "acceptedAnswer": {"@type": "Answer", "text": "Beginne mit Zeilen und Spalten, deren Zahlen fast die ganze Länge ausfüllen. Fülle die Felder, die durch Überlappung sicher sind, setze X für sichere Leerfelder und arbeite dann abwechselnd Zeilen und Spalten durch."}}, {"@type": "Question", "name": "Muss man bei Nonogrammen raten?", "acceptedAnswer": {"@type": "Answer", "text": "Bei einem gut gemachten Nonogramm nie. Es hat genau eine Lösung, und jeder Schritt folgt aus den Zahlen. Wenn du raten musst, hast du entweder einen Schritt übersehen oder das Rätsel ist nicht eindeutig."}}, {"@type": "Question", "name": "Welche Rätsel eignen sich für einen Adventskalender für Erwachsene?", "acceptedAnswer": {"@type": "Answer", "text": "Rätsel, die in fünf bis zwanzig Minuten lösbar sind und am Ende etwas zeigen. Nonogramme passen gut, weil jedes Türchen mit einem Bild belohnt und die Gitter mit dem Advent größer werden können."}}]}]}</script>
+</head>
+<body class="doc" style="--deep:#b64027;--lift:#d85438">
+<header class="top"><a class="mark" href="/">InfiV Labs</a><a class="trail" href="/apps/cellwise/">Cellwise – Nonogram</a></header>
+<header class="head"><p class="kicker"><img src="/apps/cellwise/icon.png" alt="">Ratgeber von Cellwise – Nonogram</p>
+<h1>Adventskalender-Rätsel für Erwachsene: 24 Nonogramme bis Heiligabend</h1>
+<p class="standfirst">Nonogramm-Adventskalender für Erwachsene: so löst du Nonogramme Schritt für Schritt, mit 5×5-Beispiel und einem 24-Tage-Plan zum Selbermachen.</p>
+<p class="meta"><span>Aktualisiert 26.11.2026</span><span>5 Min. Lesezeit</span></p></header>
+<div class="layout"><article class="prose">
+<p>Ein Nonogramm-Adventskalender ist ein Rätselkalender mit 24 Bilderrätseln, eins für jeden Tag vom 1. bis 24. Dezember. Jedes Rätsel ist ein Gitter mit Zahlen am Rand; wer es mit reiner Logik löst, sieht am Ende ein kleines Winterbild: einen Stern, eine Kerze, einen Schneemann. Unten findest du die Regeln, ein vollständig gelöstes Beispiel und einen Plan, wie du dir oder anderen so einen Kalender selbst zusammenstellst.</p>
+<h2 id="so-funktionieren-nonogramme">So funktionieren Nonogramme</h2>
+<p>Nonogramme heißen auch Griddlers, Hanjie oder japanische Kreuzworträtsel. Die Regeln sind schnell erklärt:</p>
+<ul><li>Die Zahlen links neben jeder Zeile und über jeder Spalte geben an, wie viele Felder hintereinander gefüllt sind. <b>3 1</b> heißt: ein Block aus drei Feldern, dann mindestens ein leeres Feld, dann ein einzelnes Feld.</li><li>Die Reihenfolge der Zahlen ist die Reihenfolge der Blöcke, von links nach rechts bzw. von oben nach unten.</li><li>Felder, die sicher leer bleiben, markierst du mit einem X. Das ist genauso wichtig wie das Ausfüllen.</li></ul>
+<p>Rechnen musst du kaum, Wortschatz brauchst du gar keinen. Ein gutes Nonogramm hat genau eine Lösung, und du kommst ohne Raten hin.</p>
+<h2 id="nonogramm-lösen-ein-beispiel-mit-tannenbaum">Nonogramm lösen: ein Beispiel mit Tannenbaum</h2>
+<p>Hier ein 5×5-Rätsel. Oben stehen die Spaltenzahlen, links die Zeilenzahlen.</p>
+<div class="table"><table><thead><tr><th></th><th>1</th><th>2 1</th><th>5</th><th>2 1</th><th>1</th></tr></thead><tbody><tr><td><b>1</b></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td><b>3</b></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td><b>5</b></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td><b>1</b></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td><b>3</b></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div>
+<ol><li><b>Zeile 3 (5)</b> füllt alle fünf Felder. <b>Spalte 3 (5)</b> ebenso.</li><li><b>Spalte 1 (1)</b> hat ihr einziges Feld schon in Zeile 3. Alle anderen Felder bekommen ein X. Spalte 5 genauso.</li><li><b>Zeile 1 (1)</b> und <b>Zeile 4 (1)</b> haben ihr Feld bereits in der Mitte (Spalte 3). Der Rest der beiden Zeilen wird X.</li><li><b>Spalte 2 (2 1)</b>: Zeile 3 ist gefüllt, Zeile 1 und Zeile 4 sind X. Über Zeile 3 ist nur noch Zeile 2 frei, also passt der Zweierblock nur in Zeile 2 und 3. Der Einzelblock bleibt für Zeile 5. Spalte 4 löst du genauso.</li><li>Zur Kontrolle: Zeile 2 und Zeile 5 haben jetzt je drei gefüllte Felder in der Mitte, passend zur 3.</li></ol>
+<p>Das Ergebnis:</p>
+<div class="table"><table><thead><tr><th></th><th>1</th><th>2 1</th><th>5</th><th>2 1</th><th>1</th></tr></thead><tbody><tr><td><b>1</b></td><td>×</td><td>×</td><td>■</td><td>×</td><td>×</td></tr><tr><td><b>3</b></td><td>×</td><td>■</td><td>■</td><td>■</td><td>×</td></tr><tr><td><b>5</b></td><td>■</td><td>■</td><td>■</td><td>■</td><td>■</td></tr><tr><td><b>1</b></td><td>×</td><td>×</td><td>■</td><td>×</td><td>×</td></tr><tr><td><b>3</b></td><td>×</td><td>■</td><td>■</td><td>■</td><td>×</td></tr></tbody></table></div>
+<p>Ein Tannenbaum mit Stamm und Topf. Kein Schritt war geraten: Jeder folgte aus einer Zahl und den Feldern, die schon feststanden.</p>
+<h2 id="zwei-tipps-für-größere-nonogramme">Zwei Tipps für größere Nonogramme</h2>
+<p><b>Die Überlappung.</b> Schieb einen Block in Gedanken ganz nach links und dann ganz nach rechts. Felder, die er in beiden Lagen bedeckt, sind sicher gefüllt. Bei einer <b>7</b> in einer Zeile mit 10 Feldern reicht der Block links von Feld 1 bis 7, rechts von Feld 4 bis 10. Die Felder 4 bis 7 kannst du sofort ausfüllen.</p>
+<p><b>Die Ränder.</b> Ist das erste Feld einer Zeile gefüllt, beginnt dort der erste Block. Du füllst ihn in voller Länge und setzt direkt dahinter ein X.</p>
+<p>Wenn nichts mehr geht, liegt es fast immer an einer Zeile, die du gerade verändert hast. Geh sie noch einmal durch, bevor du ein Feld auf Verdacht füllst.</p>
+<h2 id="ein-24-tage-plan-für-deinen-rätsel-adventskalender">Ein 24-Tage-Plan für deinen Rätsel-Adventskalender</h2>
+<p>Der Kalender macht mehr Spaß, wenn die Rätsel mit dem Advent wachsen. 2026 fallen die Adventssonntage auf den 29. November, den 6., 13. und 20. Dezember; Heiligabend ist ein Donnerstag. An den Sonntagen ist Zeit für ein größeres Gitter.</p>
+<div class="table"><table><thead><tr><th>Tage</th><th>Größe</th><th>Motiv-Ideen</th><th>Was geübt wird</th></tr></thead><tbody><tr><td>1 bis 5</td><td>5×5</td><td>Stern, Kerze, Glocke, Tannenbaum, Geschenk</td><td>Volle Zeilen, X setzen</td></tr><tr><td>6 (2. Advent)</td><td>10×10</td><td>Adventskranz</td><td>Erste Überlappungen</td></tr><tr><td>7 bis 12</td><td>8×8</td><td>Schneeflocke, Mütze, Handschuh, Tasse, Plätzchen, Vogel</td><td>Ränder, Blöcke trennen</td></tr><tr><td>13 (3. Advent)</td><td>15×15</td><td>Schneemann</td><td>Lange Zeilen in Durchgängen</td></tr><tr><td>14 bis 19</td><td>10×10</td><td>Schlitten, Rentier, Laterne, Teekanne, Tannenzapfen, Haus im Schnee</td><td>Alles kombinieren</td></tr><tr><td>20 (4. Advent)</td><td>15×15</td><td>Winterwald</td><td>Geduld</td></tr><tr><td>21 bis 23</td><td>10×10</td><td>Lebkuchen, Schal, Weihnachtskugel</td><td>Tempo</td></tr><tr><td>24 (Heiligabend)</td><td>20×20</td><td>Ein großes Bild nach Wahl</td><td>Das Finale</td></tr></tbody></table></div>
+<p>So stellst du die Rätsel selbst her:</p>
+<ol><li>Zeichne jedes Motiv auf Kästchenpapier oder in einer Tabellenkalkulation, ein Kästchen pro Feld. Einfache, kräftige Formen funktionieren besser als feine Linien.</li><li>Lies für jede Zeile und Spalte die Blöcke ab und schreib die Zahlen an den Rand eines leeren Gitters.</li><li>Lös das leere Gitter selbst, ohne aufs Bild zu schauen, oder lass es jemanden testen. Musst du irgendwo raten, ist das Rätsel nicht eindeutig oder zu knifflig. Dann änderst du ein, zwei Kästchen am Motiv und prüfst neu.</li><li>Druck die Rätsel aus, falte sie und steck sie in nummerierte Umschläge. Die Lösung kommt klein auf die Rückseite.</li></ol>
+<p>Für Paare, Familien oder das Büro: Alle bekommen dasselbe Rätsel, und wer zuerst fertig ist, darf das nächste Türchen öffnen.</p>
+<h2 id="der-adventskalender-in-cellwise">Der Adventskalender in Cellwise</h2>
+<p>Wer lieber am Handy rätselt: <a href="/apps/cellwise/">Cellwise</a> hat im Dezember einen eigenen Adventskalender. Vom 1. bis 24. Dezember öffnet jeden Tag ein Türchen mit einem Winterbild, insgesamt 24 Nonogramme in 10×10, 15×15 und 20×20, die meisten davon in Farbe. Verpasste Türchen kannst du bis zum 31. Dezember nachholen, und gelöste Bilder bleiben im Kalender sichtbar. Schon ab Anfang November kündigt der Heute-Tab den Start an. Jedes Rätsel in der App ist mit einem Löser geprüft und ohne Raten lösbar.</p>
+<h2 id="fragen">Fragen</h2>
+<h3>Was ist ein Nonogramm?</h3>
+<p>Ein Logikrätsel auf einem Gitter. Die Zahlen am Rand verraten, wie viele Felder in jeder Zeile und Spalte hintereinander gefüllt sind. Wer alle richtigen Felder füllt, erhält ein Bild.</p>
+<h3>Wie löst man ein Nonogramm am besten?</h3>
+<p>Beginne mit Zeilen und Spalten, deren Zahlen fast die ganze Länge ausfüllen. Fülle die Felder, die durch Überlappung sicher sind, setze X für sichere Leerfelder und arbeite dann abwechselnd Zeilen und Spalten durch.</p>
+<h3>Muss man bei Nonogrammen raten?</h3>
+<p>Bei einem gut gemachten Nonogramm nie. Es hat genau eine Lösung, und jeder Schritt folgt aus den Zahlen. Wenn du raten musst, hast du entweder einen Schritt übersehen oder das Rätsel ist nicht eindeutig.</p>
+<h3>Welche Rätsel eignen sich für einen Adventskalender für Erwachsene?</h3>
+<p>Rätsel, die in fünf bis zwanzig Minuten lösbar sind und am Ende etwas zeigen. Nonogramme passen gut, weil jedes Türchen mit einem Bild belohnt und die Gitter mit dem Advent größer werden können.</p>
+<h2 id="quellen">Quellen</h2>
+<p><a href="https://www.smart-rechner.de/feiertage/infothek/erster_advent.php">https://www.smart-rechner.de/feiertage/infothek/erster_advent.php</a></p>
+<p><a href="https://de.wikipedia.org/wiki/Nonogramm">https://de.wikipedia.org/wiki/Nonogramm</a></p>
+</article>
+<aside class="rail"><nav class="toc"><b>Auf dieser Seite</b><ol><li><a href="#so-funktionieren-nonogramme">So funktionieren Nonogramme</a></li><li><a href="#nonogramm-lösen-ein-beispiel-mit-tannenbaum">Nonogramm lösen: ein Beispiel mit Tannenbaum</a></li><li><a href="#zwei-tipps-für-größere-nonogramme">Zwei Tipps für größere Nonogramme</a></li><li><a href="#ein-24-tage-plan-für-deinen-rätsel-adventskalender">Ein 24-Tage-Plan für deinen Rätsel-Adventskalender</a></li><li><a href="#der-adventskalender-in-cellwise">Der Adventskalender in Cellwise</a></li><li><a href="#fragen">Fragen</a></li><li><a href="#quellen">Quellen</a></li></ol></nav><div class="get"><img class="icon" src="/apps/cellwise/icon.png" alt="" width="58" height="58"><b>Cellwise – Nonogram</b><small></small><p>Picture cross logic puzzles solved without guessing. Color, classic, offline.</p><a class="button" href="/go/cellwise/?s=guide-nonogramm-adventskalender">Cellwise bei Google Play laden</a></div></aside></div>
+<section class="cards"><h2>Mehr Ratgeber von Cellwise – Nonogram</h2><ul><li><a href="/apps/cellwise/how-to-solve-nonograms/" lang="en"><b>How to solve nonograms, step by step</b><span>How to solve nonograms step by step: what the clues mean, the overlap rule, crossing out squares, and a full 5×5 puzzle solved line by line.</span><i>Read the guide →</i></a></li><li><a href="/apps/cellwise/nonograms-without-guessing/" lang="en"><b>Nonograms without guessing: is every nonogram solvable by logic?</b><span>Can every nonogram be solved without guessing? How unique solutions work, why some puzzles force a guess, and how to tell when you have only missed a step.</span><i>Read the guide →</i></a></li><li><a href="/apps/cellwise/nonogram-tips/" lang="en"><b>Nonogram tips and advanced techniques for when you&#x27;re stuck</b><span>Nonogram tips for hard puzzles: edge forcing, reach, joining and splitting runs, color rules and a checklist for 15×15 and 20×20 grids when you&#x27;re stuck.</span><i>Read the guide →</i></a></li><li><a href="/apps/cellwise/nonogram-app/" lang="en"><b>Choosing a nonogram app: 10 things to test before you commit</b><span>Choosing a nonogram app for Android or iPhone? Ten things to test in your first ten minutes, from unique solutions and 20×20 controls to ads and prices.</span><i>Read the guide →</i></a></li></ul></section>
+
+<footer class="foot"><a href="/">InfiV Labs</a><a href="/apps/cellwise/privacy/">Privacy policy</a><a href="/apps/cellwise/terms/">Terms of use</a><a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></footer>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Evensies – Group Expense Split</title>
+<title>Split Expenses App and Bill Splitter | Evensies</title>
 <style>
 :root{--paper:#f4efe6;--shelf:#e9e1d3;--ink:#1d1b18;--muted:#5d564c;--accent:#c4421d;--line:#d6ccbb;
 --display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light dark}
@@ -59,12 +59,77 @@ translate:calc(var(--x)*var(--spread)*12%) var(--y);rotate:calc(var(--r)*(1 + va
 .poster{padding:0 1.4rem 1.4rem}.poster img{width:100%;height:auto;border-radius:12px}
 @media (hover:hover){.app:hover .fan{animation-play-state:paused;--spread:1}}
 @media (min-width:720px){.app{grid-template-columns:1fr 1.15fr;min-height:420px}.info{justify-content:center;padding:2.5rem}.info .icon{width:88px;height:88px}.info b{font-size:2.4rem}}
-tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
-.table{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px}
-th,td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
-th{font-size:.85rem;color:var(--muted)}
-@media (max-width:599px){table{min-width:0}thead{display:none}tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
-td{border:0;padding:0}td:first-child{grid-row:span 3}td:nth-child(2){grid-column:2/4;font-weight:600}td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}td:nth-child(5){grid-column:2/4}}td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}td .icon{width:40px;height:40px}
+.home tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
+.table{overflow-x:auto}.home table{border-collapse:collapse;width:100%;min-width:560px}
+.home th,.home td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.home th{font-size:.85rem;color:var(--muted)}
+@media (max-width:599px){.home table{min-width:0}.home thead{display:none}.home tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.home td{border:0;padding:0}.home td:first-child{grid-row:span 3}.home td:nth-child(2){grid-column:2/4;font-weight:600}.home td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}.home td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}.home td:nth-child(5){grid-column:2/4}}.home td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}.home td .icon{width:40px;height:40px}
+.doc{--card:#fbf8f2;--deep:#8f3417;--accent:var(--deep);max-width:1120px;margin:0 auto;padding:0 1.25rem 1rem}
+@media (prefers-color-scheme:dark){.doc{--card:#1f1c18;--accent:var(--lift,#f07a52)}}
+.top{display:flex;align-items:center;flex-wrap:wrap;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.top a{padding:.7rem 0;text-decoration:none}.mark{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.trail{color:var(--muted)}.trail::before{content:"/";margin:0 .7rem;color:var(--line)}
+.doc .button{background:var(--deep);color:#fff;border-radius:999px;padding:.85rem 1.5rem;box-shadow:0 10px 24px -12px var(--deep);transition:transform .2s ease}
+.doc .button:active{transform:scale(.97)}
+.hero-app{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding:2.5rem 0 1rem;align-items:center}
+.hero-app h1{font-size:clamp(2.1rem,5vw,3.5rem);letter-spacing:-.02em;margin:1rem 0 .7rem;max-width:18ch}
+.hero-app .icon{width:88px;height:88px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+.hero-app .lead{max-width:36rem;margin:0 0 1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin:0}
+.stage{border-radius:28px;background:radial-gradient(80% 70% at 50% 45%,color-mix(in oklab,var(--accent) 22%,transparent),transparent 72%)}
+.stage .fan{padding:2rem 1rem 3rem}
+@media (min-width:860px){.hero-app{grid-template-columns:1.05fr 1fr;min-height:480px}}
+.prose{max-width:68ch;font-size:1.075rem;line-height:1.72}
+.prose h2{font-size:1.8rem;letter-spacing:-.01em;margin:2.8rem 0 .8rem;scroll-margin-top:1rem}
+.prose h3{font-family:system-ui,sans-serif;font-size:1.13rem;margin:1.9rem 0 .35rem}
+.prose ul{padding-left:1.2rem}.prose li{margin:.45rem 0}.prose li::marker{color:var(--accent)}
+.prose ol{counter-reset:step;list-style:none;padding:0}
+.prose ol>li{counter-increment:step;position:relative;padding-left:2.7rem;margin:.9rem 0}
+.prose ol>li::before{content:counter(step);position:absolute;left:0;top:.15rem;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .88rem/1.85rem system-ui,sans-serif;text-align:center}
+.prose .table{margin:1.6rem 0;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.prose table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+.prose th{background:var(--shelf);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left}
+.prose th,.prose td{padding:.7rem .95rem;border-bottom:1px solid var(--line);vertical-align:top}
+.prose tbody tr:last-child td{border-bottom:0}.prose td:first-child{font-weight:600}
+.prose blockquote{margin:1.8rem 0;padding:1rem 1.25rem 1rem 3rem;position:relative;border-radius:14px;background:color-mix(in oklab,var(--accent) 9%,var(--card));border:1px solid color-mix(in oklab,var(--accent) 28%,transparent);font-size:.98rem}
+.prose blockquote::before{content:"i";position:absolute;left:1.05rem;top:1.15rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .8rem/1.3rem Georgia,serif;text-align:center}
+.prose blockquote p{margin:0}
+.prose b{color:var(--ink)}.prose code{font:.9em ui-monospace,Menlo,monospace;padding:.1em .35em;border-radius:5px;background:var(--shelf);overflow-wrap:anywhere}
+.head{padding:2.8rem 0 2rem;max-width:48rem}
+.kicker{display:flex;align-items:center;gap:.6rem;margin:0;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.kicker img{width:30px;height:30px;border-radius:22%}
+.head h1{font-size:clamp(2.05rem,4.8vw,3.4rem);letter-spacing:-.02em;margin:.8rem 0 .9rem}
+.standfirst{font-size:1.24rem;line-height:1.5;color:var(--muted);margin:0 0 1.1rem}
+.meta{margin:0;font-size:.9rem;color:var(--muted)}.meta span+span::before{content:"·";margin:0 .55rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;border-top:1px solid var(--line);padding-top:.5rem}
+.toc{display:none}
+@media (min-width:980px){.layout{grid-template-columns:minmax(0,1fr) 300px;gap:4rem}.rail{position:sticky;top:1.5rem;align-self:start;padding-top:2.4rem}
+.toc{display:block;margin-bottom:1.5rem}}
+.toc b{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.toc ol{list-style:none;padding:0;margin:.7rem 0 0;border-left:2px solid var(--line)}
+.toc a{display:block;margin-left:-2px;padding:.35rem 0 .35rem 1rem;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:.93rem;line-height:1.4}
+.toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+.get{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;align-items:center;padding:1.4rem;border-radius:22px;border:1px solid var(--line);
+background:linear-gradient(155deg,color-mix(in oklab,var(--accent) 16%,var(--card)),var(--card) 70%)}
+.get .icon{grid-row:span 2;width:58px;height:58px;box-shadow:0 10px 22px -12px rgba(0,0,0,.5)}
+.get b{font-family:var(--display);font-size:1.35rem;line-height:1.15}.get small{color:var(--muted)}
+.get p{grid-column:1/-1;margin:.8rem 0 1rem;color:var(--muted);font-size:.95rem;line-height:1.5}
+.get .button{grid-column:1/-1;text-align:center}
+.cards{margin:3.5rem 0 1rem}.cards h2{font-size:1.65rem;margin-bottom:1.1rem}
+.cards ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.cards a{display:flex;flex-direction:column;gap:.55rem;height:100%;box-sizing:border-box;padding:1.3rem 1.3rem 1.1rem;border-radius:18px;border:1px solid var(--line);
+background:var(--card);color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.cards b{font-family:var(--display);font-size:1.22rem;line-height:1.25}.cards span{color:var(--muted);font-size:.94rem;line-height:1.5}
+.cards i{margin-top:auto;padding-top:.4rem;font-style:normal;font-weight:700;font-size:.9rem;color:var(--accent)}
+@media (hover:hover){.cards a:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 18px 34px -22px rgba(0,0,0,.5)}}
+.foot{display:flex;flex-wrap:wrap;gap:0 1.4rem;margin:4rem 0 1rem;padding-top:.6rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.foot a{color:var(--muted);padding:.75rem 0;display:inline-block}
+.prose td:empty{height:2.3rem}
+@media (min-width:860px){.stage .fan img{max-width:230px}}
+@media print{.top,.rail,.cards,.foot,.stage,.actions,.kicker img{display:none!important}.doc{max-width:none;padding:0}
+.layout{display:block;border:0}.prose{max-width:none;font-size:11pt}.prose .table{break-inside:avoid}.prose td:empty{height:9mm}
+.prose a{color:inherit}*{animation:none!important;box-shadow:none!important}}
 footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted)}
 @keyframes rise{from{opacity:0;transform:translateY(.6em)}}
 @keyframes drift{to{transform:translate(4%,3%) scale(1.08)}}
@@ -77,13 +142,47 @@ footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);colo
 @keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-12deg)}60%{opacity:1;transform:scale(.94) rotate(-1deg)}100%{transform:rotate(-2deg)}}
 @media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
 </style>
+<meta name="description" content="Evensies is a split expenses app for trips, flatmates and dinners. Add unlimited expenses, see who owes who, and get even in the fewest payments.">
+<link rel="canonical" href="https://infivlabs.github.io/apps/evensies/">
+<meta property="og:site_name" content="InfiV Labs">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://infivlabs.github.io/apps/evensies/">
+<meta property="og:title" content="Split Expenses App and Bill Splitter | Evensies">
+<meta property="og:description" content="Evensies is a split expenses app for trips, flatmates and dinners. Add unlimited expenses, see who owes who, and get even in the fewest payments.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://infivlabs.github.io/apps/evensies/feature.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "MobileApplication", "@id": "https://infivlabs.github.io/apps/evensies/#app", "name": "Evensies – Group Expense Split", "description": "Evensies splits trip expenses and shared bills between friends, flatmates and anyone who pays for a group.", "url": "https://infivlabs.github.io/apps/evensies/", "operatingSystem": "Android", "publisher": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "applicationCategory": "Finance", "image": "https://infivlabs.github.io/apps/evensies/icon.png", "screenshot": ["https://infivlabs.github.io/apps/evensies/shot1.png", "https://infivlabs.github.io/apps/evensies/shot2.png", "https://infivlabs.github.io/apps/evensies/shot3.png"], "dateModified": "2026-11-05"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "InfiV Labs", "item": "https://infivlabs.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Evensies – Group Expense Split", "item": "https://infivlabs.github.io/apps/evensies/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is there a limit on how many expenses I can add?", "acceptedAnswer": {"@type": "Answer", "text": "No. Every user can add as many expenses as they like, in every group. The free version limits you to 3 active groups at a time; archived groups don't count toward that."}}, {"@type": "Question", "name": "Does everyone in the group need the app?", "acceptedAnswer": {"@type": "Answer", "text": "No. One person can keep the whole group and share the plan as an image or a message. Friends who want their own copy can install Evensies, open the group from a QR code or file, add their expenses and send it back to merge."}}, {"@type": "Question", "name": "Can Evensies split rent unevenly?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Use percent or shares for a split based on income or room size, or type the exact amount for each person, and set the expense to repeat every month."}}, {"@type": "Question", "name": "Does Evensies send or receive payments?", "acceptedAnswer": {"@type": "Answer", "text": "No. It moves no money and connects to no bank. It works out the payments; you make them yourselves and tap Mark paid."}}]}]}</script>
 </head>
-<body>
-<p class="back"><a href="/">InfiV Labs</a></p>
-<img class="icon" src="icon.png" alt="" width="96" height="96">
-<h1>Evensies – Group Expense Split</h1>
+<body class="doc" style="--deep:#796017;--lift:#f2c12e">
+<header class="top"><a class="mark" href="/">InfiV Labs</a><span class="trail">Evensies – Group Expense Split</span></header>
+<section class="hero-app"><div><img class="icon" src="icon.png" alt="" width="88" height="88">
+<h1>Evensies: a split expenses app for trips and shared bills</h1>
 <p class="lead">Split bills with friends. No sign-up, no daily limit, fewest payments to settle</p>
-<p class="links"><a href="privacy/">Privacy policy</a> · <a href="terms/">Terms of use</a></p>
-<p class="links">Support: <a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></p>
+<p class="actions"></p></div><div class="stage"><span class="fan"><img src="shot2.png" alt="Evensies – Group Expense Split screenshot" width="1080" height="1920" loading="lazy"><img src="shot1.png" alt="Evensies – Group Expense Split screenshot" width="1080" height="1920" loading="lazy"><img src="shot3.png" alt="Evensies – Group Expense Split screenshot" width="1080" height="1920" loading="lazy"></span></div></section>
+<div class="layout"><article class="prose">
+<p>Evensies is a split expenses app for Android. You add what each person paid for a trip, a shared flat or a dinner, and it works out who owes who and the smallest number of payments that makes everyone even. Nobody has to sign up, and there is no daily limit on how many expenses you can add.</p>
+<h2 id="what-you-can-do-with-it">What you can do with it</h2>
+<ul><li><b>Add a cost in a few taps.</b> Type the amount on a big keypad, pick who paid, and save. If two people covered the hotel, add both payers.</li><li><b>Split it the way it was really shared.</b> Equally, by exact amounts, by percent, or by shares (the bigger room pays two shares of the rent). Leave someone out of a bill they had no part in.</li><li><b>See the fewest payments.</b> The plan draws who pays whom and finds the shortest list of payments that clears every debt. When a payment has happened, tap Mark paid.</li><li><b>Check any balance.</b> Every balance opens into a plain sum: what that person paid, their share, and the payments made and received.</li><li><b>Send the plan to the group.</b> Share it as an image or as text ready for WhatsApp.</li><li><b>Let friends add their own costs.</b> Send the group as a QR code or a small .evensies file. A friend adds their expenses and sends it back, and the two copies merge. There are no accounts and no server.</li><li><b>Repeat the regular bills.</b> Rent and utilities can repeat every week or every month.</li></ul>
+<h2 id="who-it-is-for">Who it is for</h2>
+<p>Evensies suits the person in every group who ends up keeping track: the friend who booked the cabin, the flatmate who pays the internet bill, the couple who share a home but not a bank account.</p>
+<h2 id="how-it-is-different">How it is different</h2>
+<p>Your groups stay on your phone, with no account and no upload to a server; they leave it only when you share them. Expenses are unlimited for everyone. Free use includes 3 active groups with light ads, and ads never appear while you add an expense. Evensies Pro is one payment, not a subscription: unlimited groups, expenses in other currencies at a rate you type, PDF and spreadsheet export, no ads, and share images without the Evensies line.</p>
+<p>Evensies does not move money. It tells you who should pay whom and how much; you pay each other the way you normally do, by cash, bank transfer or a payment app, and then mark it paid.</p>
+<p>To see the numbers worked by hand, read <a href="/apps/evensies/split-trip-expenses/">how to split trip expenses with friends</a>.</p>
+<h2 id="questions">Questions</h2>
+<h3>Is there a limit on how many expenses I can add?</h3>
+<p>No. Every user can add as many expenses as they like, in every group. The free version limits you to 3 active groups at a time; archived groups don&#x27;t count toward that.</p>
+<h3>Does everyone in the group need the app?</h3>
+<p>No. One person can keep the whole group and share the plan as an image or a message. Friends who want their own copy can install Evensies, open the group from a QR code or file, add their expenses and send it back to merge.</p>
+<h3>Can Evensies split rent unevenly?</h3>
+<p>Yes. Use percent or shares for a split based on <a href="/apps/evensies/split-rent-by-income/">income</a> or <a href="/apps/evensies/split-rent-by-room-size/">room size</a>, or type the exact amount for each person, and set the expense to repeat every month.</p>
+<h3>Does Evensies send or receive payments?</h3>
+<p>No. It moves no money and connects to no bank. It works out the payments; you make them yourselves and tap Mark paid.</p>
+</article>
+<aside class="rail"><nav class="toc"><b>On this page</b><ol><li><a href="#what-you-can-do-with-it">What you can do with it</a></li><li><a href="#who-it-is-for">Who it is for</a></li><li><a href="#how-it-is-different">How it is different</a></li><li><a href="#questions">Questions</a></li></ol></nav></aside></div>
+<section class="cards"><h2>Guides</h2><ul><li><a href="/apps/evensies/split-trip-expenses/" lang="en"><b>How to split trip expenses with friends</b><span>Split trip expenses fairly: work out each person&#x27;s balance, then who owes who in the fewest payments, shown with a real four-friend trip and table.</span><i>Read the guide →</i></a></li><li><a href="/apps/evensies/split-rent-by-income/" lang="en"><b>How to split rent based on income</b><span>How to split rent based on income: the one-line formula, worked examples for a couple and three roommates, and when an income split stops being fair.</span><i>Read the guide →</i></a></li><li><a href="/apps/evensies/split-rent-by-room-size/" lang="en"><b>How to split rent by room size</b><span>Split rent by room size the fair way: shared space split equally, bedrooms by square footage, with worked numbers, a couple-in-one-room case and extras.</span><i>Read the guide →</i></a></li><li><a href="/apps/evensies/choose-bill-splitting-app/" lang="en"><b>How to choose a bill splitting app</b><span>Choosing a bill splitting app for trips, roommates or a couple: nine things to check, from daily limits and sign-ups to split types, sync and price.</span><i>Read the guide →</i></a></li></ul></section>
+
+<footer class="foot"><a href="/">InfiV Labs</a><a href="/apps/evensies/privacy/">Privacy policy</a><a href="/apps/evensies/terms/">Terms of use</a><a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></footer>
 </body>
 </html>

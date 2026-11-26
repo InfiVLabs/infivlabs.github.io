@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Moodvane</title>
+<title>Moodvane: Mood Tracker App and Private Mood Diary</title>
 <style>
 :root{--paper:#f4efe6;--shelf:#e9e1d3;--ink:#1d1b18;--muted:#5d564c;--accent:#c4421d;--line:#d6ccbb;
 --display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light dark}
@@ -59,12 +59,77 @@ translate:calc(var(--x)*var(--spread)*12%) var(--y);rotate:calc(var(--r)*(1 + va
 .poster{padding:0 1.4rem 1.4rem}.poster img{width:100%;height:auto;border-radius:12px}
 @media (hover:hover){.app:hover .fan{animation-play-state:paused;--spread:1}}
 @media (min-width:720px){.app{grid-template-columns:1fr 1.15fr;min-height:420px}.info{justify-content:center;padding:2.5rem}.info .icon{width:88px;height:88px}.info b{font-size:2.4rem}}
-tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
-.table{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px}
-th,td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
-th{font-size:.85rem;color:var(--muted)}
-@media (max-width:599px){table{min-width:0}thead{display:none}tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
-td{border:0;padding:0}td:first-child{grid-row:span 3}td:nth-child(2){grid-column:2/4;font-weight:600}td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}td:nth-child(5){grid-column:2/4}}td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}td .icon{width:40px;height:40px}
+.home tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
+.table{overflow-x:auto}.home table{border-collapse:collapse;width:100%;min-width:560px}
+.home th,.home td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.home th{font-size:.85rem;color:var(--muted)}
+@media (max-width:599px){.home table{min-width:0}.home thead{display:none}.home tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.home td{border:0;padding:0}.home td:first-child{grid-row:span 3}.home td:nth-child(2){grid-column:2/4;font-weight:600}.home td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}.home td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}.home td:nth-child(5){grid-column:2/4}}.home td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}.home td .icon{width:40px;height:40px}
+.doc{--card:#fbf8f2;--deep:#8f3417;--accent:var(--deep);max-width:1120px;margin:0 auto;padding:0 1.25rem 1rem}
+@media (prefers-color-scheme:dark){.doc{--card:#1f1c18;--accent:var(--lift,#f07a52)}}
+.top{display:flex;align-items:center;flex-wrap:wrap;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.top a{padding:.7rem 0;text-decoration:none}.mark{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.trail{color:var(--muted)}.trail::before{content:"/";margin:0 .7rem;color:var(--line)}
+.doc .button{background:var(--deep);color:#fff;border-radius:999px;padding:.85rem 1.5rem;box-shadow:0 10px 24px -12px var(--deep);transition:transform .2s ease}
+.doc .button:active{transform:scale(.97)}
+.hero-app{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding:2.5rem 0 1rem;align-items:center}
+.hero-app h1{font-size:clamp(2.1rem,5vw,3.5rem);letter-spacing:-.02em;margin:1rem 0 .7rem;max-width:18ch}
+.hero-app .icon{width:88px;height:88px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+.hero-app .lead{max-width:36rem;margin:0 0 1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin:0}
+.stage{border-radius:28px;background:radial-gradient(80% 70% at 50% 45%,color-mix(in oklab,var(--accent) 22%,transparent),transparent 72%)}
+.stage .fan{padding:2rem 1rem 3rem}
+@media (min-width:860px){.hero-app{grid-template-columns:1.05fr 1fr;min-height:480px}}
+.prose{max-width:68ch;font-size:1.075rem;line-height:1.72}
+.prose h2{font-size:1.8rem;letter-spacing:-.01em;margin:2.8rem 0 .8rem;scroll-margin-top:1rem}
+.prose h3{font-family:system-ui,sans-serif;font-size:1.13rem;margin:1.9rem 0 .35rem}
+.prose ul{padding-left:1.2rem}.prose li{margin:.45rem 0}.prose li::marker{color:var(--accent)}
+.prose ol{counter-reset:step;list-style:none;padding:0}
+.prose ol>li{counter-increment:step;position:relative;padding-left:2.7rem;margin:.9rem 0}
+.prose ol>li::before{content:counter(step);position:absolute;left:0;top:.15rem;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .88rem/1.85rem system-ui,sans-serif;text-align:center}
+.prose .table{margin:1.6rem 0;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.prose table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+.prose th{background:var(--shelf);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left}
+.prose th,.prose td{padding:.7rem .95rem;border-bottom:1px solid var(--line);vertical-align:top}
+.prose tbody tr:last-child td{border-bottom:0}.prose td:first-child{font-weight:600}
+.prose blockquote{margin:1.8rem 0;padding:1rem 1.25rem 1rem 3rem;position:relative;border-radius:14px;background:color-mix(in oklab,var(--accent) 9%,var(--card));border:1px solid color-mix(in oklab,var(--accent) 28%,transparent);font-size:.98rem}
+.prose blockquote::before{content:"i";position:absolute;left:1.05rem;top:1.15rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .8rem/1.3rem Georgia,serif;text-align:center}
+.prose blockquote p{margin:0}
+.prose b{color:var(--ink)}.prose code{font:.9em ui-monospace,Menlo,monospace;padding:.1em .35em;border-radius:5px;background:var(--shelf);overflow-wrap:anywhere}
+.head{padding:2.8rem 0 2rem;max-width:48rem}
+.kicker{display:flex;align-items:center;gap:.6rem;margin:0;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.kicker img{width:30px;height:30px;border-radius:22%}
+.head h1{font-size:clamp(2.05rem,4.8vw,3.4rem);letter-spacing:-.02em;margin:.8rem 0 .9rem}
+.standfirst{font-size:1.24rem;line-height:1.5;color:var(--muted);margin:0 0 1.1rem}
+.meta{margin:0;font-size:.9rem;color:var(--muted)}.meta span+span::before{content:"·";margin:0 .55rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;border-top:1px solid var(--line);padding-top:.5rem}
+.toc{display:none}
+@media (min-width:980px){.layout{grid-template-columns:minmax(0,1fr) 300px;gap:4rem}.rail{position:sticky;top:1.5rem;align-self:start;padding-top:2.4rem}
+.toc{display:block;margin-bottom:1.5rem}}
+.toc b{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.toc ol{list-style:none;padding:0;margin:.7rem 0 0;border-left:2px solid var(--line)}
+.toc a{display:block;margin-left:-2px;padding:.35rem 0 .35rem 1rem;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:.93rem;line-height:1.4}
+.toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+.get{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;align-items:center;padding:1.4rem;border-radius:22px;border:1px solid var(--line);
+background:linear-gradient(155deg,color-mix(in oklab,var(--accent) 16%,var(--card)),var(--card) 70%)}
+.get .icon{grid-row:span 2;width:58px;height:58px;box-shadow:0 10px 22px -12px rgba(0,0,0,.5)}
+.get b{font-family:var(--display);font-size:1.35rem;line-height:1.15}.get small{color:var(--muted)}
+.get p{grid-column:1/-1;margin:.8rem 0 1rem;color:var(--muted);font-size:.95rem;line-height:1.5}
+.get .button{grid-column:1/-1;text-align:center}
+.cards{margin:3.5rem 0 1rem}.cards h2{font-size:1.65rem;margin-bottom:1.1rem}
+.cards ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.cards a{display:flex;flex-direction:column;gap:.55rem;height:100%;box-sizing:border-box;padding:1.3rem 1.3rem 1.1rem;border-radius:18px;border:1px solid var(--line);
+background:var(--card);color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.cards b{font-family:var(--display);font-size:1.22rem;line-height:1.25}.cards span{color:var(--muted);font-size:.94rem;line-height:1.5}
+.cards i{margin-top:auto;padding-top:.4rem;font-style:normal;font-weight:700;font-size:.9rem;color:var(--accent)}
+@media (hover:hover){.cards a:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 18px 34px -22px rgba(0,0,0,.5)}}
+.foot{display:flex;flex-wrap:wrap;gap:0 1.4rem;margin:4rem 0 1rem;padding-top:.6rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.foot a{color:var(--muted);padding:.75rem 0;display:inline-block}
+.prose td:empty{height:2.3rem}
+@media (min-width:860px){.stage .fan img{max-width:230px}}
+@media print{.top,.rail,.cards,.foot,.stage,.actions,.kicker img{display:none!important}.doc{max-width:none;padding:0}
+.layout{display:block;border:0}.prose{max-width:none;font-size:11pt}.prose .table{break-inside:avoid}.prose td:empty{height:9mm}
+.prose a{color:inherit}*{animation:none!important;box-shadow:none!important}}
 footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted)}
 @keyframes rise{from{opacity:0;transform:translateY(.6em)}}
 @keyframes drift{to{transform:translate(4%,3%) scale(1.08)}}
@@ -77,13 +142,53 @@ footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);colo
 @keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-12deg)}60%{opacity:1;transform:scale(.94) rotate(-1deg)}100%{transform:rotate(-2deg)}}
 @media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
 </style>
+<meta name="description" content="A mood tracker app and mood diary: log how you feel in two taps on a barometer dial and see which activities go with your better days. No account.">
+<link rel="canonical" href="https://infivlabs.github.io/apps/moodvane/">
+<meta property="og:site_name" content="InfiV Labs">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://infivlabs.github.io/apps/moodvane/">
+<meta property="og:title" content="Moodvane: Mood Tracker App and Private Mood Diary">
+<meta property="og:description" content="A mood tracker app and mood diary: log how you feel in two taps on a barometer dial and see which activities go with your better days. No account.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://infivlabs.github.io/apps/moodvane/feature.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "MobileApplication", "@id": "https://infivlabs.github.io/apps/moodvane/#app", "name": "Moodvane", "description": "Moodvane is a mood tracker and mood diary for people who want to know what lifts their days.", "url": "https://infivlabs.github.io/apps/moodvane/", "operatingSystem": "Android", "publisher": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "applicationCategory": "Health And Fitness", "image": "https://infivlabs.github.io/apps/moodvane/icon.png", "screenshot": ["https://infivlabs.github.io/apps/moodvane/shot1.png", "https://infivlabs.github.io/apps/moodvane/shot2.png", "https://infivlabs.github.io/apps/moodvane/shot3.png"], "dateModified": "2026-11-06"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "InfiV Labs", "item": "https://infivlabs.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Moodvane", "item": "https://infivlabs.github.io/apps/moodvane/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I track my mood?", "acceptedAnswer": {"@type": "Answer", "text": "Pick a simple scale, log at the same time each day, and note two or three things you did. After a few weeks, compare your better days with the rest. Our guide on how to track your mood goes step by step."}}, {"@type": "Question", "name": "Is there a printable mood calendar?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Our 2027 mood calendar is a year in pixels grid you can print and fill in by hand, with a color key."}}, {"@type": "Question", "name": "Can I write gratitude notes too?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Each entry has an optional gratitude line, with a new prompt each day from a set of 120. You can also browse our gratitude journal prompts."}}, {"@type": "Question", "name": "Is Moodvane a mental health app?", "acceptedAnswer": {"@type": "Answer", "text": "No. It is a self-reflection tool, not a medical or mental-health service, and it does not diagnose or treat anything. If you are struggling, you don't have to wait for a pattern. In the US, call or text 988 (Suicide & Crisis Lifeline), free and open 24/7. In Canada, call or text 9-8-8. In the UK and Ireland, call Samaritans free on 116 123. In Australia, call Lifeline on 13 11 14. If you are in danger, call your local emergency number."}}]}]}</script>
 </head>
-<body>
-<p class="back"><a href="/">InfiV Labs</a></p>
-<img class="icon" src="icon.png" alt="" width="96" height="96">
-<h1>Moodvane</h1>
+<body class="doc" style="--deep:#a2581a;--lift:#b0713c">
+<header class="top"><a class="mark" href="/">InfiV Labs</a><span class="trail">Moodvane</span></header>
+<section class="hero-app"><div><img class="icon" src="icon.png" alt="" width="88" height="88">
+<h1>Moodvane: a mood tracker app that shows what lifts your days</h1>
 <p class="lead">Log your mood in two taps and see which habits go with your better days</p>
-<p class="links"><a href="privacy/">Privacy policy</a> · <a href="terms/">Terms of use</a></p>
-<p class="links">Support: <a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></p>
+<p class="actions"></p></div><div class="stage"><span class="fan"><img src="shot2.png" alt="Moodvane screenshot" width="1080" height="1920" loading="lazy"><img src="shot1.png" alt="Moodvane screenshot" width="1080" height="1920" loading="lazy"><img src="shot3.png" alt="Moodvane screenshot" width="1080" height="1920" loading="lazy"></span></div></section>
+<div class="layout"><article class="prose">
+<p>Moodvane is a mood tracker and mood diary app. You log how you feel in two taps on a barometer dial, mark what you did that day, and after a week it starts showing which activities go with your better days.</p>
+<p>It is for people who want to understand their moods without writing pages every night: students in exam season, people with busy jobs, anyone who has started to wonder why some weeks feel heavier than others.</p>
+<h2 id="how-mood-tracking-works-in-moodvane">How mood tracking works in Moodvane</h2>
+<ol><li><b>Swing the needle.</b> Five readings run from Stormy through Rain, Change and Fair to Very dry. A brass hand stays on your last reading, so you see the change: &quot;Fair, up from Rain&quot;.</li><li><b>Tap what you did.</b> Activities such as a walk, friends, a deadline or good sleep come in seven groups, and you can add your own.</li><li><b>Add a line if you like.</b> A short note, or something you are grateful for with a prompt to start you off. Or skip it.</li></ol>
+<p>You can log several times a day, from the app, the evening reminder or, on Android, a home-screen widget. Night owls can set the day to end at 1, 2, 3 or 4 am.</p>
+<h2 id="what-lifts-you-patterns-not-guesses">What lifts you: patterns, not guesses</h2>
+<p>Moodvane compares the days with an activity against the days without it, and only shows a pattern when both sides have enough days. Each card says how much stands behind it, for example: on days with Walk, mood was higher, +0.8 (18 days with, 42 without, strong pattern). These are patterns, not causes, and the app says so.</p>
+<p>You also get a month calendar in weather colors, a trend line, the mix of readings and the weekdays that read highest and lowest. A month can be shared as a climate card that shows colors only, never notes.</p>
+<h2 id="private-by-design">Private by design</h2>
+<p>There is no account. The journal stays on your phone. A PIN or fingerprint lock, CSV and JSON export and a password-encrypted backup are free. If you are coming from another mood app, you can import its CSV or JSON export.</p>
+<h2 id="on-a-hard-day">On a hard day</h2>
+<p>After a Stormy reading or a few low ones in a row, Moodvane offers a minute of slow breathing and the crisis lines for your country.</p>
+<h2 id="free-and-pro">Free and Pro</h2>
+<p>Logging, activities, notes, gratitude prompts, the month calendar, the top pattern, the lock, export and backup are free. Moodvane Pro adds every pattern (including pairs of activities and the day-after effect), the Year view, a one-page monthly PDF you can take to a therapist, more reminders and unlimited activities. Pro comes as a lifetime option, or yearly with a 7-day free trial, or monthly.</p>
+<h2 id="questions">Questions</h2>
+<h3>How do I track my mood?</h3>
+<p>Pick a simple scale, log at the same time each day, and note two or three things you did. After a few weeks, compare your better days with the rest. Our guide on <a href="/apps/moodvane/how-to-track-your-mood/">how to track your mood</a> goes step by step.</p>
+<h3>Is there a printable mood calendar?</h3>
+<p>Yes. Our <a href="/apps/moodvane/mood-calendar-2027/">2027 mood calendar</a> is a year in pixels grid you can print and fill in by hand, with a color key.</p>
+<h3>Can I write gratitude notes too?</h3>
+<p>Yes. Each entry has an optional gratitude line, with a new prompt each day from a set of 120. You can also browse our <a href="/apps/moodvane/gratitude-journal-prompts/">gratitude journal prompts</a>.</p>
+<h3>Is Moodvane a mental health app?</h3>
+<p>No. It is a self-reflection tool, not a medical or mental-health service, and it does not diagnose or treat anything.</p>
+<blockquote><p>If you are struggling, you don&#x27;t have to wait for a pattern. In the US, call or text 988 (Suicide &amp; Crisis Lifeline), free and open 24/7. In Canada, call or text 9-8-8. In the UK and Ireland, call Samaritans free on 116 123. In Australia, call Lifeline on 13 11 14. If you are in danger, call your local emergency number.</p></blockquote>
+</article>
+<aside class="rail"><nav class="toc"><b>On this page</b><ol><li><a href="#how-mood-tracking-works-in-moodvane">How mood tracking works in Moodvane</a></li><li><a href="#what-lifts-you-patterns-not-guesses">What lifts you: patterns, not guesses</a></li><li><a href="#private-by-design">Private by design</a></li><li><a href="#on-a-hard-day">On a hard day</a></li><li><a href="#free-and-pro">Free and Pro</a></li><li><a href="#questions">Questions</a></li></ol></nav></aside></div>
+<section class="cards"><h2>Guides</h2><ul><li><a href="/apps/moodvane/mood-calendar-2027/" lang="en"><b>Mood calendar 2027: a printable year in pixels you fill in by hand</b><span>A printable 2027 mood calendar: a year in pixels grid with 12 months by 31 days, a five-color key, and how to read your year when it&#x27;s full.</span><i>Read the guide →</i></a></li><li><a href="/apps/moodvane/gratitude-journal-prompts/" lang="en"><b>Gratitude journal prompts: 60 questions for adults</b><span>60 gratitude journal prompts for adults, for mornings, evenings and hard days, plus how to keep a gratitude journal so it doesn&#x27;t turn into a chore.</span><i>Read the guide →</i></a></li><li><a href="/apps/moodvane/feelings-list/" lang="en"><b>List of feelings and emotions: 120 words to name how you feel</b><span>A list of feelings and emotions for adults, grouped from mild to strong, plus how to name an emotion and how to draw your own feelings wheel.</span><i>Read the guide →</i></a></li><li><a href="/apps/moodvane/how-to-track-your-mood/" lang="en"><b>How to track your mood and find what lifts your days</b><span>How to track your mood in under a minute a day: pick a scale, log what you did, then compare your better days with the rest. With a worked example.</span><i>Read the guide →</i></a></li></ul></section>
+
+<footer class="foot"><a href="/">InfiV Labs</a><a href="/apps/moodvane/privacy/">Privacy policy</a><a href="/apps/moodvane/terms/">Terms of use</a><a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></footer>
 </body>
 </html>

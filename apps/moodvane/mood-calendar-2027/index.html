@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mood Calendar 2027: Printable Year in Pixels Mood Tracker</title>
+<style>
+:root{--paper:#f4efe6;--shelf:#e9e1d3;--ink:#1d1b18;--muted:#5d564c;--accent:#c4421d;--line:#d6ccbb;
+--display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#171512;--shelf:#221f1a;--ink:#ede6da;--muted:#a89f92;--accent:#f07a52;--line:#3a352d}}
+body{font-family:system-ui,sans-serif;max-width:680px;margin:2rem auto;padding:0 1.25rem;line-height:1.55;color:var(--ink);background:var(--paper);overflow-wrap:break-word}
+a{overflow-wrap:anywhere}
+h1,h2,h3{font-family:var(--display);line-height:1.15}a{color:var(--accent)}
+.back a{color:var(--muted);text-decoration:none;display:inline-block;padding:.75rem 0}.back a::before{content:"← "}
+.icon{border-radius:22%;display:block}
+.lead{font-size:1.15rem;color:var(--muted)}
+.links a,footer a{display:inline-block;padding:.75rem 0}
+.button{display:inline-block;padding:.75rem 1.25rem;border-radius:6px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600}
+.stamp{display:inline-block;padding:.15rem .55rem;border:2px solid currentColor;border-radius:3px;font-size:.8rem;font-weight:700;color:var(--muted)}
+.stamp-live{color:#2f7a4a}.stamp-review{color:#8a5a00}.stamp-testing{color:var(--accent)}
+@media (prefers-color-scheme:dark){.stamp-live{color:#7cc89a}.stamp-review{color:#e2b45c}}
+.home{--paper:#0f0e0c;--surface:#1a1815;--ink:#f2ede4;--muted:#b0a797;--accent:#ff7a50;--line:#2e2a24;
+max-width:1100px;color-scheme:dark;margin-top:0}
+html:has(.home){overflow-x:clip}
+.hero{position:relative;padding:2.5rem 0 2rem;isolation:isolate}
+.home::before{content:"";position:fixed;inset:-10%;z-index:-1;pointer-events:none;
+background:radial-gradient(70vmax 55vmax at 10% 5%,rgba(255,122,80,.26),transparent 60%),radial-gradient(60vmax 50vmax at 100% 50%,rgba(63,179,154,.18),transparent 60%),
+radial-gradient(70vmax 45vmax at 15% 100%,rgba(255,196,107,.1),transparent 60%);animation:drift 20s ease-in-out infinite alternate}
+.wordmark{font-weight:800;letter-spacing:-.02em;font-size:1.05rem;margin:0}
+.hero h1{font-size:clamp(2.2rem,min(11vw,13vh),5.4rem);font-weight:700;letter-spacing:-.025em;line-height:1.02;margin:.7rem 0 1rem;max-width:14ch}
+.hero h1 span{display:inline-block;animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both}
+.hero h1 span:nth-child(n+5){background:linear-gradient(90deg,#ff7a50,#ffc46b,#ff7a50) 0 0/200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both,shimmer 5s 1.2s linear infinite}
+.hero .lead{max-width:34rem;margin:0;animation:rise .7s .5s cubic-bezier(.2,.7,.2,1) both}
+.ticker{overflow:hidden;border-block:1px solid var(--line);margin:0 calc(50% - 50vw);padding:.7rem 0;font-weight:700;font-size:.9rem;color:var(--muted);white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.ticker p{display:inline-block;margin:0;animation:ticker 78s linear infinite}
+.ticker span{padding:0 1.1rem}.ticker span::after{content:"✦";color:var(--accent);padding-left:2.2rem}
+section h2{font-size:1.5rem;margin:2.2rem 0 1rem}
+.shelf{list-style:none;padding:0;margin:0;display:grid;gap:1.5rem}
+.shelf li{animation:rise .8s calc(.6s + var(--i)*140ms) cubic-bezier(.2,.7,.2,1) both}
+@property --spread{syntax:"<number>";inherits:true;initial-value:0}
+.app{position:relative;isolation:isolate;display:grid;overflow:hidden;border-radius:24px;color:inherit;text-decoration:none;
+transition:transform .2s ease;-webkit-tap-highlight-color:transparent}
+.app::before{content:"";position:absolute;inset:-100%;z-index:-2;background:conic-gradient(var(--line) 0 55%,#ff7a50 72%,#ffc46b 82%,var(--line) 100%);animation:turn 7s linear infinite}
+.app::after{content:"";position:absolute;inset:2px;z-index:-1;border-radius:22px;background:var(--surface)}
+.app:active{transform:scale(.98)}
+.info{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;padding:1.5rem 1.4rem .5rem}
+.info .icon{width:72px;height:72px;box-shadow:0 10px 24px -8px rgba(0,0,0,.6);animation:bob 5s ease-in-out infinite alternate}
+.info b{font-family:var(--display);font-size:1.9rem;line-height:1.1;color:var(--ink)}
+.info>span:not(.stamp){color:var(--muted)}
+.home .stamp-live{color:#7cc89a}.home .stamp-review{color:#e2b45c}
+.app .stamp{animation:stamp .5s calc(1.2s + var(--i)*140ms) cubic-bezier(.3,1.4,.5,1) both}
+.fan{display:flex;justify-content:center;align-items:center;padding:1.5rem 1rem 2.5rem;animation:breathe 7s 2s ease-in-out infinite;transition:--spread .5s}
+.fan img{position:relative;width:29%;max-width:190px;height:auto;margin-inline:-2%;border-radius:18px;box-shadow:0 18px 36px -10px rgba(0,0,0,.65);
+translate:calc(var(--x)*var(--spread)*12%) var(--y);rotate:calc(var(--r)*(1 + var(--spread)*.5));animation:bob 4.5s ease-in-out infinite alternate}
+.fan img:nth-child(1){--x:-1;--y:16px;--r:-8deg;animation-delay:-1.5s}
+.fan img:nth-child(2){--x:0;--y:-8px;--r:0deg;z-index:1}
+.fan img:nth-child(3){--x:1;--y:16px;--r:8deg;animation-delay:-3s}
+.poster{padding:0 1.4rem 1.4rem}.poster img{width:100%;height:auto;border-radius:12px}
+@media (hover:hover){.app:hover .fan{animation-play-state:paused;--spread:1}}
+@media (min-width:720px){.app{grid-template-columns:1fr 1.15fr;min-height:420px}.info{justify-content:center;padding:2.5rem}.info .icon{width:88px;height:88px}.info b{font-size:2.4rem}}
+.home tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
+.table{overflow-x:auto}.home table{border-collapse:collapse;width:100%;min-width:560px}
+.home th,.home td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.home th{font-size:.85rem;color:var(--muted)}
+@media (max-width:599px){.home table{min-width:0}.home thead{display:none}.home tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.home td{border:0;padding:0}.home td:first-child{grid-row:span 3}.home td:nth-child(2){grid-column:2/4;font-weight:600}.home td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}.home td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}.home td:nth-child(5){grid-column:2/4}}.home td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}.home td .icon{width:40px;height:40px}
+.doc{--card:#fbf8f2;--deep:#8f3417;--accent:var(--deep);max-width:1120px;margin:0 auto;padding:0 1.25rem 1rem}
+@media (prefers-color-scheme:dark){.doc{--card:#1f1c18;--accent:var(--lift,#f07a52)}}
+.top{display:flex;align-items:center;flex-wrap:wrap;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.top a{padding:.7rem 0;text-decoration:none}.mark{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.trail{color:var(--muted)}.trail::before{content:"/";margin:0 .7rem;color:var(--line)}
+.doc .button{background:var(--deep);color:#fff;border-radius:999px;padding:.85rem 1.5rem;box-shadow:0 10px 24px -12px var(--deep);transition:transform .2s ease}
+.doc .button:active{transform:scale(.97)}
+.hero-app{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding:2.5rem 0 1rem;align-items:center}
+.hero-app h1{font-size:clamp(2.1rem,5vw,3.5rem);letter-spacing:-.02em;margin:1rem 0 .7rem;max-width:18ch}
+.hero-app .icon{width:88px;height:88px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+.hero-app .lead{max-width:36rem;margin:0 0 1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin:0}
+.stage{border-radius:28px;background:radial-gradient(80% 70% at 50% 45%,color-mix(in oklab,var(--accent) 22%,transparent),transparent 72%)}
+.stage .fan{padding:2rem 1rem 3rem}
+@media (min-width:860px){.hero-app{grid-template-columns:1.05fr 1fr;min-height:480px}}
+.prose{max-width:68ch;font-size:1.075rem;line-height:1.72}
+.prose h2{font-size:1.8rem;letter-spacing:-.01em;margin:2.8rem 0 .8rem;scroll-margin-top:1rem}
+.prose h3{font-family:system-ui,sans-serif;font-size:1.13rem;margin:1.9rem 0 .35rem}
+.prose ul{padding-left:1.2rem}.prose li{margin:.45rem 0}.prose li::marker{color:var(--accent)}
+.prose ol{counter-reset:step;list-style:none;padding:0}
+.prose ol>li{counter-increment:step;position:relative;padding-left:2.7rem;margin:.9rem 0}
+.prose ol>li::before{content:counter(step);position:absolute;left:0;top:.15rem;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .88rem/1.85rem system-ui,sans-serif;text-align:center}
+.prose .table{margin:1.6rem 0;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.prose table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+.prose th{background:var(--shelf);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left}
+.prose th,.prose td{padding:.7rem .95rem;border-bottom:1px solid var(--line);vertical-align:top}
+.prose tbody tr:last-child td{border-bottom:0}.prose td:first-child{font-weight:600}
+.prose blockquote{margin:1.8rem 0;padding:1rem 1.25rem 1rem 3rem;position:relative;border-radius:14px;background:color-mix(in oklab,var(--accent) 9%,var(--card));border:1px solid color-mix(in oklab,var(--accent) 28%,transparent);font-size:.98rem}
+.prose blockquote::before{content:"i";position:absolute;left:1.05rem;top:1.15rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .8rem/1.3rem Georgia,serif;text-align:center}
+.prose blockquote p{margin:0}
+.prose b{color:var(--ink)}.prose code{font:.9em ui-monospace,Menlo,monospace;padding:.1em .35em;border-radius:5px;background:var(--shelf);overflow-wrap:anywhere}
+.head{padding:2.8rem 0 2rem;max-width:48rem}
+.kicker{display:flex;align-items:center;gap:.6rem;margin:0;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.kicker img{width:30px;height:30px;border-radius:22%}
+.head h1{font-size:clamp(2.05rem,4.8vw,3.4rem);letter-spacing:-.02em;margin:.8rem 0 .9rem}
+.standfirst{font-size:1.24rem;line-height:1.5;color:var(--muted);margin:0 0 1.1rem}
+.meta{margin:0;font-size:.9rem;color:var(--muted)}.meta span+span::before{content:"·";margin:0 .55rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;border-top:1px solid var(--line);padding-top:.5rem}
+.toc{display:none}
+@media (min-width:980px){.layout{grid-template-columns:minmax(0,1fr) 300px;gap:4rem}.rail{position:sticky;top:1.5rem;align-self:start;padding-top:2.4rem}
+.toc{display:block;margin-bottom:1.5rem}}
+.toc b{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.toc ol{list-style:none;padding:0;margin:.7rem 0 0;border-left:2px solid var(--line)}
+.toc a{display:block;margin-left:-2px;padding:.35rem 0 .35rem 1rem;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:.93rem;line-height:1.4}
+.toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+.get{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;align-items:center;padding:1.4rem;border-radius:22px;border:1px solid var(--line);
+background:linear-gradient(155deg,color-mix(in oklab,var(--accent) 16%,var(--card)),var(--card) 70%)}
+.get .icon{grid-row:span 2;width:58px;height:58px;box-shadow:0 10px 22px -12px rgba(0,0,0,.5)}
+.get b{font-family:var(--display);font-size:1.35rem;line-height:1.15}.get small{color:var(--muted)}
+.get p{grid-column:1/-1;margin:.8rem 0 1rem;color:var(--muted);font-size:.95rem;line-height:1.5}
+.get .button{grid-column:1/-1;text-align:center}
+.cards{margin:3.5rem 0 1rem}.cards h2{font-size:1.65rem;margin-bottom:1.1rem}
+.cards ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.cards a{display:flex;flex-direction:column;gap:.55rem;height:100%;box-sizing:border-box;padding:1.3rem 1.3rem 1.1rem;border-radius:18px;border:1px solid var(--line);
+background:var(--card);color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.cards b{font-family:var(--display);font-size:1.22rem;line-height:1.25}.cards span{color:var(--muted);font-size:.94rem;line-height:1.5}
+.cards i{margin-top:auto;padding-top:.4rem;font-style:normal;font-weight:700;font-size:.9rem;color:var(--accent)}
+@media (hover:hover){.cards a:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 18px 34px -22px rgba(0,0,0,.5)}}
+.foot{display:flex;flex-wrap:wrap;gap:0 1.4rem;margin:4rem 0 1rem;padding-top:.6rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.foot a{color:var(--muted);padding:.75rem 0;display:inline-block}
+.prose td:empty{height:2.3rem}
+@media (min-width:860px){.stage .fan img{max-width:230px}}
+@media print{.top,.rail,.cards,.foot,.stage,.actions,.kicker img{display:none!important}.doc{max-width:none;padding:0}
+.layout{display:block;border:0}.prose{max-width:none;font-size:11pt}.prose .table{break-inside:avoid}.prose td:empty{height:9mm}
+.prose a{color:inherit}*{animation:none!important;box-shadow:none!important}}
+footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted)}
+@keyframes rise{from{opacity:0;transform:translateY(.6em)}}
+@keyframes drift{to{transform:translate(4%,3%) scale(1.08)}}
+@keyframes shimmer{to{background-position:-200% 0}}
+@keyframes ticker{to{transform:translateX(-50%)}}
+@keyframes turn{to{transform:rotate(1turn)}}
+@keyframes bob{to{transform:translateY(-10px)}}
+@keyframes breathe{0%,30%,100%{--spread:0}50%,80%{--spread:1}}
+@keyframes draw{from{transform:scaleX(0)}}
+@keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-12deg)}60%{opacity:1;transform:scale(.94) rotate(-1deg)}100%{transform:rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
+</style>
+<meta name="description" content="A printable 2027 mood calendar: a year in pixels grid with 12 months by 31 days, a five-color key, and how to read your year when it&#x27;s full.">
+<link rel="canonical" href="https://infivlabs.github.io/apps/moodvane/mood-calendar-2027/">
+<meta property="og:site_name" content="InfiV Labs">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://infivlabs.github.io/apps/moodvane/mood-calendar-2027/">
+<meta property="og:title" content="Mood Calendar 2027: Printable Year in Pixels Mood Tracker">
+<meta property="og:description" content="A printable 2027 mood calendar: a year in pixels grid with 12 months by 31 days, a five-color key, and how to read your year when it&#x27;s full.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://infivlabs.github.io/apps/moodvane/feature.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "Mood calendar 2027: a printable year in pixels you fill in by hand", "description": "A printable 2027 mood calendar: a year in pixels grid with 12 months by 31 days, a five-color key, and how to read your year when it's full.", "inLanguage": "en", "url": "https://infivlabs.github.io/apps/moodvane/mood-calendar-2027/", "mainEntityOfPage": "https://infivlabs.github.io/apps/moodvane/mood-calendar-2027/", "author": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "publisher": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "about": {"@id": "https://infivlabs.github.io/apps/moodvane/#app", "name": "Moodvane"}, "image": "https://infivlabs.github.io/apps/moodvane/feature.png", "datePublished": "2026-11-26", "dateModified": "2026-11-26"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "InfiV Labs", "item": "https://infivlabs.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Moodvane", "item": "https://infivlabs.github.io/apps/moodvane/"}, {"@type": "ListItem", "position": 3, "name": "Mood calendar 2027: a printable year in pixels you fill in by hand", "item": "https://infivlabs.github.io/apps/moodvane/mood-calendar-2027/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a year in pixels?", "acceptedAnswer": {"@type": "Answer", "text": "It is a mood calendar with one square for each day of the year, colored for that day's overall mood. Filled in daily, it shows a whole year of moods on one page."}}, {"@type": "Question", "name": "How many squares are in the 2027 year in pixels?", "acceptedAnswer": {"@type": "Answer", "text": "There are 365. The grid has 372 positions (12 by 31), and the seven that don't exist in 2027 are marked x: February 29, 30 and 31, plus the 31st of April, June, September and November."}}, {"@type": "Question", "name": "What colors should I use for a mood tracker?", "acceptedAnswer": {"@type": "Answer", "text": "Any five you can tell apart at a glance. One easy choice runs from dark blue for very low days to yellow for great days. Color the key first and keep it the same all year."}}, {"@type": "Question", "name": "Can I start a mood calendar in the middle of the year?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Start today and leave the earlier squares blank. A few months of honest squares are more useful than a perfect grid you never begin."}}]}]}</script>
+</head>
+<body class="doc" style="--deep:#a2581a;--lift:#b0713c">
+<header class="top"><a class="mark" href="/">InfiV Labs</a><a class="trail" href="/apps/moodvane/">Moodvane</a></header>
+<header class="head"><p class="kicker"><img src="/apps/moodvane/icon.png" alt="">Moodvane guide</p>
+<h1>Mood calendar 2027: a printable year in pixels you fill in by hand</h1>
+<p class="standfirst">A printable 2027 mood calendar: a year in pixels grid with 12 months by 31 days, a five-color key, and how to read your year when it&#x27;s full.</p>
+<p class="meta"><span>Updated 26 Nov 2026</span><span>5 min read</span></p></header>
+<div class="layout"><article class="prose">
+<p>A year in pixels is a mood calendar with one small square for every day of the year. Each evening you color that day&#x27;s square for your overall mood, using a short color key. By December, the 365 squares of 2027 show your year at a glance: the heavy weeks, the bright stretches and the patterns you would never see day to day.</p>
+<p>The grid below has 12 columns (January to December) and 31 rows (the day of the month). Squares marked x don&#x27;t exist in 2027: there is no February 29, 30 or 31 (2027 is not a leap year), and April, June, September and November have 30 days.</p>
+<h2 id="how-to-use-this-year-in-pixels-template">How to use this year in pixels template</h2>
+<ol><li><b>Print the page</b> (landscape fits best), or copy the grid into a notebook. Drawn by hand, a grid of 12 columns by 31 squares fits on one sheet of US Letter or A4.</li><li><b>Pick your five colors</b> from the key below and color the key itself first, so you never have to guess.</li><li><b>Fill in one square each evening,</b> for the day as a whole, not the last hour. If you miss a day, fill it the next morning or leave it blank: a blank square is honest data too.</li><li><b>Write a word in the margin on unusual days,</b> such as &quot;exam&quot;, &quot;flu&quot; or &quot;vacation&quot;. Those notes are what make the pattern readable later.</li></ol>
+<h2 id="color-key-a-five-point-mood-scale">Color key: a five-point mood scale</h2>
+<div class="table"><table><thead><tr><th>Score</th><th>Mood</th><th>Suggested color</th><th>Black-and-white mark</th></tr></thead><tbody><tr><td>5</td><td>Great: energetic, happy, at ease</td><td>Yellow</td><td>Fill the square solid</td></tr><tr><td>4</td><td>Good: a pleasant, steady day</td><td>Green</td><td>Cross (X)</td></tr><tr><td>3</td><td>Okay: neutral, mixed or flat</td><td>Light blue</td><td>Single diagonal line</td></tr><tr><td>2</td><td>Low: tired, irritable, sad or worried</td><td>Gray</td><td>Dot in the center</td></tr><tr><td>1</td><td>Very low: a hard day</td><td>Dark blue or purple</td><td>Small circle</td></tr></tbody></table></div>
+<p>Five levels are enough to see a pattern without agonizing over each square. If you want more detail, keep the color for overall mood and add a tiny mark for one other thing, such as a dot for a bad night&#x27;s sleep.</p>
+<h2 id="the-2027-mood-calendar-grid">The 2027 mood calendar grid</h2>
+<div class="table"><table><thead><tr><th>Day</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead><tbody><tr><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>5</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>6</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>7</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>8</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>9</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>10</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>11</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>12</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>13</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>14</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>15</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>16</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>17</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>18</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>19</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>20</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>21</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>22</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>23</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>24</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>25</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>26</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>27</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>28</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>29</td><td></td><td>x</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>30</td><td></td><td>x</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>31</td><td></td><td>x</td><td></td><td>x</td><td></td><td>x</td><td></td><td></td><td>x</td><td></td><td>x</td><td></td></tr></tbody></table></div>
+<h2 id="2027-at-a-glance-what-day-each-month-starts">2027 at a glance: what day each month starts</h2>
+<p>Handy if you want to mark weekends or count weekdays as you fill in the grid.</p>
+<div class="table"><table><thead><tr><th>Month</th><th>Starts on</th><th>Days</th></tr></thead><tbody><tr><td>January</td><td>Friday</td><td>31</td></tr><tr><td>February</td><td>Monday</td><td>28</td></tr><tr><td>March</td><td>Monday</td><td>31</td></tr><tr><td>April</td><td>Thursday</td><td>30</td></tr><tr><td>May</td><td>Saturday</td><td>31</td></tr><tr><td>June</td><td>Tuesday</td><td>30</td></tr><tr><td>July</td><td>Thursday</td><td>31</td></tr><tr><td>August</td><td>Sunday</td><td>31</td></tr><tr><td>September</td><td>Wednesday</td><td>30</td></tr><tr><td>October</td><td>Friday</td><td>31</td></tr><tr><td>November</td><td>Monday</td><td>30</td></tr><tr><td>December</td><td>Wednesday</td><td>31</td></tr></tbody></table></div>
+<h2 id="monthly-check-in">Monthly check-in</h2>
+<p>At the end of each month, take two minutes to fill one row:</p>
+<div class="table"><table><thead><tr><th>Month</th><th>Most common color</th><th>Best stretch</th><th>Hardest stretch</th><th>One thing that seemed to help</th></tr></thead><tbody><tr><td>Jan</td><td></td><td></td><td></td><td></td></tr><tr><td>Feb</td><td></td><td></td><td></td><td></td></tr><tr><td>Mar</td><td></td><td></td><td></td><td></td></tr><tr><td>Apr</td><td></td><td></td><td></td><td></td></tr><tr><td>May</td><td></td><td></td><td></td><td></td></tr><tr><td>Jun</td><td></td><td></td><td></td><td></td></tr><tr><td>Jul</td><td></td><td></td><td></td><td></td></tr><tr><td>Aug</td><td></td><td></td><td></td><td></td></tr><tr><td>Sep</td><td></td><td></td><td></td><td></td></tr><tr><td>Oct</td><td></td><td></td><td></td><td></td></tr><tr><td>Nov</td><td></td><td></td><td></td><td></td></tr><tr><td>Dec</td><td></td><td></td><td></td><td></td></tr></tbody></table></div>
+<h2 id="how-to-read-your-year-in-pixels">How to read your year in pixels</h2>
+<p>When a few months are filled in, look for:</p>
+<ul><li><b>Clusters,</b> such as three gray days every month, or a run of yellow in summer.</li><li><b>Weekdays,</b> such as Sundays that are often lower than Fridays.</li><li><b>Before-and-after,</b> such as how the week after a big deadline looks compared with the week before.</li><li><b>Seasons,</b> such as whether the darker months look different from the lighter ones.</li></ul>
+<p>Treat what you see as a question, not a verdict. A gray cluster before every exam tells you something; it doesn&#x27;t tell you why. Our guide on <a href="/apps/moodvane/how-to-track-your-mood/">how to track your mood</a> covers how to add a little context so the patterns mean more.</p>
+<h2 id="common-mistakes-with-a-mood-calendar">Common mistakes with a mood calendar</h2>
+<ul><li><b>Scoring the moment you fill it in</b> instead of the whole day. A bad final hour can paint a good day gray.</li><li><b>Using too many colors.</b> Ten shades look lovely and are hard to read in December.</li><li><b>Skipping hard days.</b> The low squares are the ones you&#x27;ll most want to understand later.</li><li><b>Changing the key mid-year.</b> If you must, start the change on the 1st of a month and note it.</li></ul>
+<h2 id="questions">Questions</h2>
+<h3>What is a year in pixels?</h3>
+<p>It is a mood calendar with one square for each day of the year, colored for that day&#x27;s overall mood. Filled in daily, it shows a whole year of moods on one page.</p>
+<h3>How many squares are in the 2027 year in pixels?</h3>
+<p>There are 365. The grid has 372 positions (12 by 31), and the seven that don&#x27;t exist in 2027 are marked x: February 29, 30 and 31, plus the 31st of April, June, September and November.</p>
+<h3>What colors should I use for a mood tracker?</h3>
+<p>Any five you can tell apart at a glance. One easy choice runs from dark blue for very low days to yellow for great days. Color the key first and keep it the same all year.</p>
+<h3>Can I start a mood calendar in the middle of the year?</h3>
+<p>Yes. Start today and leave the earlier squares blank. A few months of honest squares are more useful than a perfect grid you never begin.</p>
+<h2 id="doing-this-in-moodvane">Doing this in Moodvane</h2>
+<p>Moodvane keeps the same kind of record on your phone. Each reading on its five-step barometer dial colors the day in the month calendar, and the Year view in Pro lays out the whole year like the grid above: one column per month, one square per day, each in its reading&#x27;s color. Because you also tap what you did each day, the app can compare days with and without each activity and show which ones go with your better days.</p>
+<blockquote><p>A mood calendar is a self-reflection tool, not a diagnosis. If you notice a long run of low days, or you feel unsafe, talk to a doctor or someone you trust. In the US, call or text 988, free and open 24/7. In the UK and Ireland, call Samaritans free on 116 123. In Australia, call Lifeline on 13 11 14.</p></blockquote>
+<h2 id="sources">Sources</h2>
+<ul><li><a href="https://988lifeline.org/">https://988lifeline.org/</a></li><li><a href="https://www.samaritans.org/how-we-can-help/contact-samaritan/">https://www.samaritans.org/how-we-can-help/contact-samaritan/</a></li></ul>
+</article>
+<aside class="rail"><nav class="toc"><b>On this page</b><ol><li><a href="#how-to-use-this-year-in-pixels-template">How to use this year in pixels template</a></li><li><a href="#color-key-a-five-point-mood-scale">Color key: a five-point mood scale</a></li><li><a href="#the-2027-mood-calendar-grid">The 2027 mood calendar grid</a></li><li><a href="#2027-at-a-glance-what-day-each-month-starts">2027 at a glance: what day each month starts</a></li><li><a href="#monthly-check-in">Monthly check-in</a></li><li><a href="#how-to-read-your-year-in-pixels">How to read your year in pixels</a></li><li><a href="#common-mistakes-with-a-mood-calendar">Common mistakes with a mood calendar</a></li><li><a href="#questions">Questions</a></li><li><a href="#doing-this-in-moodvane">Doing this in Moodvane</a></li><li><a href="#sources">Sources</a></li></ol></nav><div class="get"><img class="icon" src="/apps/moodvane/icon.png" alt="" width="58" height="58"><b>Moodvane</b><small></small><p>Log your mood in two taps and see which habits go with your better days</p><a class="button" href="/apps/moodvane/">See Moodvane</a></div></aside></div>
+<section class="cards"><h2>More guides from Moodvane</h2><ul><li><a href="/apps/moodvane/gratitude-journal-prompts/" lang="en"><b>Gratitude journal prompts: 60 questions for adults</b><span>60 gratitude journal prompts for adults, for mornings, evenings and hard days, plus how to keep a gratitude journal so it doesn&#x27;t turn into a chore.</span><i>Read the guide →</i></a></li><li><a href="/apps/moodvane/feelings-list/" lang="en"><b>List of feelings and emotions: 120 words to name how you feel</b><span>A list of feelings and emotions for adults, grouped from mild to strong, plus how to name an emotion and how to draw your own feelings wheel.</span><i>Read the guide →</i></a></li><li><a href="/apps/moodvane/how-to-track-your-mood/" lang="en"><b>How to track your mood and find what lifts your days</b><span>How to track your mood in under a minute a day: pick a scale, log what you did, then compare your better days with the rest. With a worked example.</span><i>Read the guide →</i></a></li></ul></section>
+
+<footer class="foot"><a href="/">InfiV Labs</a><a href="/apps/moodvane/privacy/">Privacy policy</a><a href="/apps/moodvane/terms/">Terms of use</a><a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></footer>
+</body>
+</html>

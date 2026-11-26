@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Offline Idle Games for Android: What Offline Really Means</title>
+<style>
+:root{--paper:#f4efe6;--shelf:#e9e1d3;--ink:#1d1b18;--muted:#5d564c;--accent:#c4421d;--line:#d6ccbb;
+--display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#171512;--shelf:#221f1a;--ink:#ede6da;--muted:#a89f92;--accent:#f07a52;--line:#3a352d}}
+body{font-family:system-ui,sans-serif;max-width:680px;margin:2rem auto;padding:0 1.25rem;line-height:1.55;color:var(--ink);background:var(--paper);overflow-wrap:break-word}
+a{overflow-wrap:anywhere}
+h1,h2,h3{font-family:var(--display);line-height:1.15}a{color:var(--accent)}
+.back a{color:var(--muted);text-decoration:none;display:inline-block;padding:.75rem 0}.back a::before{content:"← "}
+.icon{border-radius:22%;display:block}
+.lead{font-size:1.15rem;color:var(--muted)}
+.links a,footer a{display:inline-block;padding:.75rem 0}
+.button{display:inline-block;padding:.75rem 1.25rem;border-radius:6px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600}
+.stamp{display:inline-block;padding:.15rem .55rem;border:2px solid currentColor;border-radius:3px;font-size:.8rem;font-weight:700;color:var(--muted)}
+.stamp-live{color:#2f7a4a}.stamp-review{color:#8a5a00}.stamp-testing{color:var(--accent)}
+@media (prefers-color-scheme:dark){.stamp-live{color:#7cc89a}.stamp-review{color:#e2b45c}}
+.home{--paper:#0f0e0c;--surface:#1a1815;--ink:#f2ede4;--muted:#b0a797;--accent:#ff7a50;--line:#2e2a24;
+max-width:1100px;color-scheme:dark;margin-top:0}
+html:has(.home){overflow-x:clip}
+.hero{position:relative;padding:2.5rem 0 2rem;isolation:isolate}
+.home::before{content:"";position:fixed;inset:-10%;z-index:-1;pointer-events:none;
+background:radial-gradient(70vmax 55vmax at 10% 5%,rgba(255,122,80,.26),transparent 60%),radial-gradient(60vmax 50vmax at 100% 50%,rgba(63,179,154,.18),transparent 60%),
+radial-gradient(70vmax 45vmax at 15% 100%,rgba(255,196,107,.1),transparent 60%);animation:drift 20s ease-in-out infinite alternate}
+.wordmark{font-weight:800;letter-spacing:-.02em;font-size:1.05rem;margin:0}
+.hero h1{font-size:clamp(2.2rem,min(11vw,13vh),5.4rem);font-weight:700;letter-spacing:-.025em;line-height:1.02;margin:.7rem 0 1rem;max-width:14ch}
+.hero h1 span{display:inline-block;animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both}
+.hero h1 span:nth-child(n+5){background:linear-gradient(90deg,#ff7a50,#ffc46b,#ff7a50) 0 0/200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both,shimmer 5s 1.2s linear infinite}
+.hero .lead{max-width:34rem;margin:0;animation:rise .7s .5s cubic-bezier(.2,.7,.2,1) both}
+.ticker{overflow:hidden;border-block:1px solid var(--line);margin:0 calc(50% - 50vw);padding:.7rem 0;font-weight:700;font-size:.9rem;color:var(--muted);white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.ticker p{display:inline-block;margin:0;animation:ticker 78s linear infinite}
+.ticker span{padding:0 1.1rem}.ticker span::after{content:"✦";color:var(--accent);padding-left:2.2rem}
+section h2{font-size:1.5rem;margin:2.2rem 0 1rem}
+.shelf{list-style:none;padding:0;margin:0;display:grid;gap:1.5rem}
+.shelf li{animation:rise .8s calc(.6s + var(--i)*140ms) cubic-bezier(.2,.7,.2,1) both}
+@property --spread{syntax:"<number>";inherits:true;initial-value:0}
+.app{position:relative;isolation:isolate;display:grid;overflow:hidden;border-radius:24px;color:inherit;text-decoration:none;
+transition:transform .2s ease;-webkit-tap-highlight-color:transparent}
+.app::before{content:"";position:absolute;inset:-100%;z-index:-2;background:conic-gradient(var(--line) 0 55%,#ff7a50 72%,#ffc46b 82%,var(--line) 100%);animation:turn 7s linear infinite}
+.app::after{content:"";position:absolute;inset:2px;z-index:-1;border-radius:22px;background:var(--surface)}
+.app:active{transform:scale(.98)}
+.info{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;padding:1.5rem 1.4rem .5rem}
+.info .icon{width:72px;height:72px;box-shadow:0 10px 24px -8px rgba(0,0,0,.6);animation:bob 5s ease-in-out infinite alternate}
+.info b{font-family:var(--display);font-size:1.9rem;line-height:1.1;color:var(--ink)}
+.info>span:not(.stamp){color:var(--muted)}
+.home .stamp-live{color:#7cc89a}.home .stamp-review{color:#e2b45c}
+.app .stamp{animation:stamp .5s calc(1.2s + var(--i)*140ms) cubic-bezier(.3,1.4,.5,1) both}
+.fan{display:flex;justify-content:center;align-items:center;padding:1.5rem 1rem 2.5rem;animation:breathe 7s 2s ease-in-out infinite;transition:--spread .5s}
+.fan img{position:relative;width:29%;max-width:190px;height:auto;margin-inline:-2%;border-radius:18px;box-shadow:0 18px 36px -10px rgba(0,0,0,.65);
+translate:calc(var(--x)*var(--spread)*12%) var(--y);rotate:calc(var(--r)*(1 + var(--spread)*.5));animation:bob 4.5s ease-in-out infinite alternate}
+.fan img:nth-child(1){--x:-1;--y:16px;--r:-8deg;animation-delay:-1.5s}
+.fan img:nth-child(2){--x:0;--y:-8px;--r:0deg;z-index:1}
+.fan img:nth-child(3){--x:1;--y:16px;--r:8deg;animation-delay:-3s}
+.poster{padding:0 1.4rem 1.4rem}.poster img{width:100%;height:auto;border-radius:12px}
+@media (hover:hover){.app:hover .fan{animation-play-state:paused;--spread:1}}
+@media (min-width:720px){.app{grid-template-columns:1fr 1.15fr;min-height:420px}.info{justify-content:center;padding:2.5rem}.info .icon{width:88px;height:88px}.info b{font-size:2.4rem}}
+.home tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
+.table{overflow-x:auto}.home table{border-collapse:collapse;width:100%;min-width:560px}
+.home th,.home td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.home th{font-size:.85rem;color:var(--muted)}
+@media (max-width:599px){.home table{min-width:0}.home thead{display:none}.home tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.home td{border:0;padding:0}.home td:first-child{grid-row:span 3}.home td:nth-child(2){grid-column:2/4;font-weight:600}.home td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}.home td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}.home td:nth-child(5){grid-column:2/4}}.home td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}.home td .icon{width:40px;height:40px}
+.doc{--card:#fbf8f2;--deep:#8f3417;--accent:var(--deep);max-width:1120px;margin:0 auto;padding:0 1.25rem 1rem}
+@media (prefers-color-scheme:dark){.doc{--card:#1f1c18;--accent:var(--lift,#f07a52)}}
+.top{display:flex;align-items:center;flex-wrap:wrap;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.top a{padding:.7rem 0;text-decoration:none}.mark{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.trail{color:var(--muted)}.trail::before{content:"/";margin:0 .7rem;color:var(--line)}
+.doc .button{background:var(--deep);color:#fff;border-radius:999px;padding:.85rem 1.5rem;box-shadow:0 10px 24px -12px var(--deep);transition:transform .2s ease}
+.doc .button:active{transform:scale(.97)}
+.hero-app{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding:2.5rem 0 1rem;align-items:center}
+.hero-app h1{font-size:clamp(2.1rem,5vw,3.5rem);letter-spacing:-.02em;margin:1rem 0 .7rem;max-width:18ch}
+.hero-app .icon{width:88px;height:88px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+.hero-app .lead{max-width:36rem;margin:0 0 1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin:0}
+.stage{border-radius:28px;background:radial-gradient(80% 70% at 50% 45%,color-mix(in oklab,var(--accent) 22%,transparent),transparent 72%)}
+.stage .fan{padding:2rem 1rem 3rem}
+@media (min-width:860px){.hero-app{grid-template-columns:1.05fr 1fr;min-height:480px}}
+.prose{max-width:68ch;font-size:1.075rem;line-height:1.72}
+.prose h2{font-size:1.8rem;letter-spacing:-.01em;margin:2.8rem 0 .8rem;scroll-margin-top:1rem}
+.prose h3{font-family:system-ui,sans-serif;font-size:1.13rem;margin:1.9rem 0 .35rem}
+.prose ul{padding-left:1.2rem}.prose li{margin:.45rem 0}.prose li::marker{color:var(--accent)}
+.prose ol{counter-reset:step;list-style:none;padding:0}
+.prose ol>li{counter-increment:step;position:relative;padding-left:2.7rem;margin:.9rem 0}
+.prose ol>li::before{content:counter(step);position:absolute;left:0;top:.15rem;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .88rem/1.85rem system-ui,sans-serif;text-align:center}
+.prose .table{margin:1.6rem 0;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.prose table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+.prose th{background:var(--shelf);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left}
+.prose th,.prose td{padding:.7rem .95rem;border-bottom:1px solid var(--line);vertical-align:top}
+.prose tbody tr:last-child td{border-bottom:0}.prose td:first-child{font-weight:600}
+.prose blockquote{margin:1.8rem 0;padding:1rem 1.25rem 1rem 3rem;position:relative;border-radius:14px;background:color-mix(in oklab,var(--accent) 9%,var(--card));border:1px solid color-mix(in oklab,var(--accent) 28%,transparent);font-size:.98rem}
+.prose blockquote::before{content:"i";position:absolute;left:1.05rem;top:1.15rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .8rem/1.3rem Georgia,serif;text-align:center}
+.prose blockquote p{margin:0}
+.prose b{color:var(--ink)}.prose code{font:.9em ui-monospace,Menlo,monospace;padding:.1em .35em;border-radius:5px;background:var(--shelf);overflow-wrap:anywhere}
+.head{padding:2.8rem 0 2rem;max-width:48rem}
+.kicker{display:flex;align-items:center;gap:.6rem;margin:0;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.kicker img{width:30px;height:30px;border-radius:22%}
+.head h1{font-size:clamp(2.05rem,4.8vw,3.4rem);letter-spacing:-.02em;margin:.8rem 0 .9rem}
+.standfirst{font-size:1.24rem;line-height:1.5;color:var(--muted);margin:0 0 1.1rem}
+.meta{margin:0;font-size:.9rem;color:var(--muted)}.meta span+span::before{content:"·";margin:0 .55rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;border-top:1px solid var(--line);padding-top:.5rem}
+.toc{display:none}
+@media (min-width:980px){.layout{grid-template-columns:minmax(0,1fr) 300px;gap:4rem}.rail{position:sticky;top:1.5rem;align-self:start;padding-top:2.4rem}
+.toc{display:block;margin-bottom:1.5rem}}
+.toc b{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.toc ol{list-style:none;padding:0;margin:.7rem 0 0;border-left:2px solid var(--line)}
+.toc a{display:block;margin-left:-2px;padding:.35rem 0 .35rem 1rem;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:.93rem;line-height:1.4}
+.toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+.get{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;align-items:center;padding:1.4rem;border-radius:22px;border:1px solid var(--line);
+background:linear-gradient(155deg,color-mix(in oklab,var(--accent) 16%,var(--card)),var(--card) 70%)}
+.get .icon{grid-row:span 2;width:58px;height:58px;box-shadow:0 10px 22px -12px rgba(0,0,0,.5)}
+.get b{font-family:var(--display);font-size:1.35rem;line-height:1.15}.get small{color:var(--muted)}
+.get p{grid-column:1/-1;margin:.8rem 0 1rem;color:var(--muted);font-size:.95rem;line-height:1.5}
+.get .button{grid-column:1/-1;text-align:center}
+.cards{margin:3.5rem 0 1rem}.cards h2{font-size:1.65rem;margin-bottom:1.1rem}
+.cards ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.cards a{display:flex;flex-direction:column;gap:.55rem;height:100%;box-sizing:border-box;padding:1.3rem 1.3rem 1.1rem;border-radius:18px;border:1px solid var(--line);
+background:var(--card);color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.cards b{font-family:var(--display);font-size:1.22rem;line-height:1.25}.cards span{color:var(--muted);font-size:.94rem;line-height:1.5}
+.cards i{margin-top:auto;padding-top:.4rem;font-style:normal;font-weight:700;font-size:.9rem;color:var(--accent)}
+@media (hover:hover){.cards a:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 18px 34px -22px rgba(0,0,0,.5)}}
+.foot{display:flex;flex-wrap:wrap;gap:0 1.4rem;margin:4rem 0 1rem;padding-top:.6rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.foot a{color:var(--muted);padding:.75rem 0;display:inline-block}
+.prose td:empty{height:2.3rem}
+@media (min-width:860px){.stage .fan img{max-width:230px}}
+@media print{.top,.rail,.cards,.foot,.stage,.actions,.kicker img{display:none!important}.doc{max-width:none;padding:0}
+.layout{display:block;border:0}.prose{max-width:none;font-size:11pt}.prose .table{break-inside:avoid}.prose td:empty{height:9mm}
+.prose a{color:inherit}*{animation:none!important;box-shadow:none!important}}
+footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted)}
+@keyframes rise{from{opacity:0;transform:translateY(.6em)}}
+@keyframes drift{to{transform:translate(4%,3%) scale(1.08)}}
+@keyframes shimmer{to{background-position:-200% 0}}
+@keyframes ticker{to{transform:translateX(-50%)}}
+@keyframes turn{to{transform:rotate(1turn)}}
+@keyframes bob{to{transform:translateY(-10px)}}
+@keyframes breathe{0%,30%,100%{--spread:0}50%,80%{--spread:1}}
+@keyframes draw{from{transform:scaleX(0)}}
+@keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-12deg)}60%{opacity:1;transform:scale(.94) rotate(-1deg)}100%{transform:rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
+</style>
+<meta name="description" content="Offline idle games for Android: the difference between playing without Wi-Fi and earning while closed, a two-minute test, and what to expect from ads.">
+<link rel="canonical" href="https://infivlabs.github.io/apps/dustronauts/offline-idle-games-android/">
+<meta property="og:site_name" content="InfiV Labs">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://infivlabs.github.io/apps/dustronauts/offline-idle-games-android/">
+<meta property="og:title" content="Offline Idle Games for Android: What Offline Really Means">
+<meta property="og:description" content="Offline idle games for Android: the difference between playing without Wi-Fi and earning while closed, a two-minute test, and what to expect from ads.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://infivlabs.github.io/apps/dustronauts/feature.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "Offline idle games for Android: what \"offline\" really means", "description": "Offline idle games for Android: the difference between playing without Wi-Fi and earning while closed, a two-minute test, and what to expect from ads.", "inLanguage": "en", "url": "https://infivlabs.github.io/apps/dustronauts/offline-idle-games-android/", "mainEntityOfPage": "https://infivlabs.github.io/apps/dustronauts/offline-idle-games-android/", "author": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "publisher": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "about": {"@id": "https://infivlabs.github.io/apps/dustronauts/#app", "name": "Dustronauts"}, "image": "https://infivlabs.github.io/apps/dustronauts/feature.png", "datePublished": "2026-11-26", "dateModified": "2026-11-26"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "InfiV Labs", "item": "https://infivlabs.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Dustronauts", "item": "https://infivlabs.github.io/apps/dustronauts/"}, {"@type": "ListItem", "position": 3, "name": "Offline idle games for Android: what \"offline\" really means", "item": "https://infivlabs.github.io/apps/dustronauts/offline-idle-games-android/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does \"offline\" mean in an idle game?", "acceptedAnswer": {"@type": "Answer", "text": "Usually one of two things: the game plays without an internet connection, or it keeps earning while it is closed (offline progress). These are separate features, so check which one a game has."}}, {"@type": "Question", "name": "Do idle games work without Wi-Fi?", "acceptedAnswer": {"@type": "Answer", "text": "Many do. The quickest way to know is to open the game in airplane mode with Wi-Fi off. Ads, purchases and cloud saves will still need a connection."}}, {"@type": "Question", "name": "Do offline idle games still show ads?", "acceptedAnswer": {"@type": "Answer", "text": "Not while you are offline, because ads need a connection to load. They return when you reconnect, and rewards that require watching a video are unavailable until then."}}, {"@type": "Question", "name": "How long do idle games earn while closed?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the game. Many cap offline progress at a few hours and pay a reduced rate. Some games have no offline progress at all and only run while open."}}]}]}</script>
+</head>
+<body class="doc">
+<header class="top"><a class="mark" href="/">InfiV Labs</a><a class="trail" href="/apps/dustronauts/">Dustronauts</a></header>
+<header class="head"><p class="kicker"><img src="/apps/dustronauts/icon.png" alt="">Dustronauts guide</p>
+<h1>Offline idle games for Android: what &quot;offline&quot; really means</h1>
+<p class="standfirst">Offline idle games for Android: the difference between playing without Wi-Fi and earning while closed, a two-minute test, and what to expect from ads.</p>
+<p class="meta"><span>Updated 26 Nov 2026</span><span>4 min read</span></p></header>
+<div class="layout"><article class="prose">
+<p>An offline idle game on Android is one you can play with no internet connection: on a plane, underground, or with mobile data off. That is a different thing from &quot;offline progress&quot;, where the game keeps earning for you while it is closed. Many idle games do one but not the other, and store pages rarely say which, so it pays to know the difference and test a game for two minutes before you rely on it.</p>
+<h2 id="two-meanings-of-quot-offline-quot-in-idle-games">Two meanings of &quot;offline&quot; in idle games</h2>
+<div class="table"><table><thead><tr><th></th><th>Plays offline</th><th>Offline progress</th></tr></thead><tbody><tr><td>What it means</td><td>the game opens and runs with no internet</td><td>the game credits you for time it was closed</td></tr><tr><td>How you notice</td><td>it works in airplane mode</td><td>a &quot;welcome back&quot; screen with earnings</td></tr><tr><td>Usually limited by</td><td>ads and purchases that need a connection</td><td>a cap, often a few hours, and a reduced rate</td></tr><tr><td>Needs internet?</td><td>no</td><td>usually not; most games work it out from the phone&#x27;s clock</td></tr></tbody></table></div>
+<p>Some games have both, some have only one. A game can have offline progress yet refuse to start without internet, which is the worst combination for a commute.</p>
+<h2 id="idle-incremental-clicker-what-x27-s-the-difference">Idle, incremental, clicker: what&#x27;s the difference?</h2>
+<p>People use the three words loosely, but roughly:</p>
+<ul><li><b>Clicker games</b> start with tapping for every point, then add automatic income.</li><li><b>Idle games</b> lean on income that runs by itself, often while the game is closed.</li><li><b>Incremental games</b> are the wider family: numbers that grow, upgrades that make them grow faster, and often a &quot;prestige&quot; reset that trades your progress for a permanent bonus.</li></ul>
+<p>Plenty of incremental games are played actively, with automation that only works while the game is open. That isn&#x27;t worse; it is a different rhythm. It just means &quot;idle&quot; in the description doesn&#x27;t guarantee earnings while you sleep.</p>
+<h2 id="the-two-minute-offline-test">The two-minute offline test</h2>
+<p>Do this at home, before a trip:</p>
+<ol><li><b>Open the game once with internet,</b> so it can finish any first-launch downloads and the tutorial.</li><li><b>Close it completely</b> (swipe it away from recent apps).</li><li><b>Turn on airplane mode,</b> and make sure Wi-Fi is off too.</li><li><b>Open the game.</b> If it plays, it works offline. If it shows a connection error or a spinning loader, it doesn&#x27;t.</li><li><b>Play for a minute, close it, wait ten minutes, and reopen</b> (still offline). A welcome-back screen means it has offline progress.</li></ol>
+<h2 id="what-stops-working-without-internet">What stops working without internet</h2>
+<p>Even in a game that plays fully offline, expect these to need a connection:</p>
+<ul><li><b>Ads.</b> No connection means no ad can load. Any reward that requires watching a video (double income, a free crate) won&#x27;t be available until you are back online.</li><li><b>Purchases and restoring purchases.</b> Buying anything, or restoring a purchase after reinstalling, needs the store.</li><li><b>Cloud saves.</b> Progress saved to an account syncs only online. A local save keeps working.</li><li><b>Live events and leaderboards.</b> Anything shared between players waits for a connection.</li></ul>
+<h2 id="why-games-cap-offline-progress">Why games cap offline progress</h2>
+<p>Most idle games with offline progress pay less than active play and stop counting after a limit, often a few hours. The reason is balance: if closing the game paid as much as playing it, there would be no reason to play. A cap and a lower rate make coming back feel good without replacing play.</p>
+<h2 id="keeping-an-idle-game-offline-friendly">Keeping an idle game offline-friendly</h2>
+<ul><li><b>Turn off cloud sync prompts</b> you don&#x27;t need, so the game doesn&#x27;t nag you when there is no signal.</li><li><b>Don&#x27;t change the phone&#x27;s clock</b> to fake offline time. Some games detect it and pay nothing for the gap.</li><li><b>Back up before reinstalling.</b> Uninstalling removes the game&#x27;s local data unless the game or your phone backed it up.</li></ul>
+<h2 id="questions">Questions</h2>
+<h3>What does &quot;offline&quot; mean in an idle game?</h3>
+<p>Usually one of two things: the game plays without an internet connection, or it keeps earning while it is closed (offline progress). These are separate features, so check which one a game has.</p>
+<h3>Do idle games work without Wi-Fi?</h3>
+<p>Many do. The quickest way to know is to open the game in airplane mode with Wi-Fi off. Ads, purchases and cloud saves will still need a connection.</p>
+<h3>Do offline idle games still show ads?</h3>
+<p>Not while you are offline, because ads need a connection to load. They return when you reconnect, and rewards that require watching a video are unavailable until then.</p>
+<h3>How long do idle games earn while closed?</h3>
+<p>It depends on the game. Many cap offline progress at a few hours and pay a reduced rate. Some games have no offline progress at all and only run while open.</p>
+<h2 id="where-dustronauts-fits">Where Dustronauts fits</h2>
+<p>Dustronauts is an incremental cleaning game on the Moon that plays without an internet connection. It is played actively: you sweep, sell and upgrade, and its three kinds of robot sweep and haul dust on their own only while the game is open. It does not pay out earnings for time the game was closed, though a rocket already in flight still lands. Ads and the one-time Remove ads purchase need a connection; full-screen ads never show in the first three minutes. See the <a href="/apps/dustronauts/">Dustronauts page</a>, or <a href="/apps/dustronauts/satisfying-cleaning-games/">satisfying cleaning games</a> for more on the cleaning side.</p>
+</article>
+<aside class="rail"><nav class="toc"><b>On this page</b><ol><li><a href="#two-meanings-of-quot-offline-quot-in-idle-games">Two meanings of &quot;offline&quot; in idle games</a></li><li><a href="#idle-incremental-clicker-what-x27-s-the-difference">Idle, incremental, clicker: what&#x27;s the difference?</a></li><li><a href="#the-two-minute-offline-test">The two-minute offline test</a></li><li><a href="#what-stops-working-without-internet">What stops working without internet</a></li><li><a href="#why-games-cap-offline-progress">Why games cap offline progress</a></li><li><a href="#keeping-an-idle-game-offline-friendly">Keeping an idle game offline-friendly</a></li><li><a href="#questions">Questions</a></li><li><a href="#where-dustronauts-fits">Where Dustronauts fits</a></li></ol></nav><div class="get"><img class="icon" src="/apps/dustronauts/icon.png" alt="" width="58" height="58"><b>Dustronauts</b><small>In closed testing</small><p>Sweep the Moon clean with a tiny duster, then robots, rides and a whole base.</p><a class="button" href="/apps/dustronauts/">See Dustronauts</a></div></aside></div>
+<section class="cards"><h2>More guides from Dustronauts</h2><ul><li><a href="/apps/dustronauts/what-is-moon-dust-made-of/" lang="en"><b>What is moon dust made of?</b><span>What moon dust is made of: crushed rock, minerals, glass and agglutinates, why the grains are sharp and clingy, and why NASA treats lunar dust as a hazard.</span><i>Read the guide →</i></a></li><li><a href="/apps/dustronauts/cleaning-simulator-games-android/" lang="en"><b>Cleaning simulator games on Android: the PC hits and what to play instead</b><span>Cleaning simulator games on Android: which PC cleaning hits have a phone version, which don&#x27;t, and what to play on Android instead.</span><i>Read the guide →</i></a></li><li><a href="/apps/dustronauts/satisfying-cleaning-games/" lang="en"><b>Satisfying cleaning games: why they work and what to look for</b><span>Satisfying cleaning games turn grime into clean surface you can see. What makes them relaxing, the kinds on Android, and the warning signs of a bad one.</span><i>Read the guide →</i></a></li></ul></section>
+
+<footer class="foot"><a href="/">InfiV Labs</a><a href="/apps/dustronauts/privacy/">Privacy policy</a><a href="/apps/dustronauts/terms/">Terms of use</a><a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></footer>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wi-Fi Hotspot Multiplayer Games for Android: How It Works</title>
+<style>
+:root{--paper:#f4efe6;--shelf:#e9e1d3;--ink:#1d1b18;--muted:#5d564c;--accent:#c4421d;--line:#d6ccbb;
+--display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#171512;--shelf:#221f1a;--ink:#ede6da;--muted:#a89f92;--accent:#f07a52;--line:#3a352d}}
+body{font-family:system-ui,sans-serif;max-width:680px;margin:2rem auto;padding:0 1.25rem;line-height:1.55;color:var(--ink);background:var(--paper);overflow-wrap:break-word}
+a{overflow-wrap:anywhere}
+h1,h2,h3{font-family:var(--display);line-height:1.15}a{color:var(--accent)}
+.back a{color:var(--muted);text-decoration:none;display:inline-block;padding:.75rem 0}.back a::before{content:"← "}
+.icon{border-radius:22%;display:block}
+.lead{font-size:1.15rem;color:var(--muted)}
+.links a,footer a{display:inline-block;padding:.75rem 0}
+.button{display:inline-block;padding:.75rem 1.25rem;border-radius:6px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600}
+.stamp{display:inline-block;padding:.15rem .55rem;border:2px solid currentColor;border-radius:3px;font-size:.8rem;font-weight:700;color:var(--muted)}
+.stamp-live{color:#2f7a4a}.stamp-review{color:#8a5a00}.stamp-testing{color:var(--accent)}
+@media (prefers-color-scheme:dark){.stamp-live{color:#7cc89a}.stamp-review{color:#e2b45c}}
+.home{--paper:#0f0e0c;--surface:#1a1815;--ink:#f2ede4;--muted:#b0a797;--accent:#ff7a50;--line:#2e2a24;
+max-width:1100px;color-scheme:dark;margin-top:0}
+html:has(.home){overflow-x:clip}
+.hero{position:relative;padding:2.5rem 0 2rem;isolation:isolate}
+.home::before{content:"";position:fixed;inset:-10%;z-index:-1;pointer-events:none;
+background:radial-gradient(70vmax 55vmax at 10% 5%,rgba(255,122,80,.26),transparent 60%),radial-gradient(60vmax 50vmax at 100% 50%,rgba(63,179,154,.18),transparent 60%),
+radial-gradient(70vmax 45vmax at 15% 100%,rgba(255,196,107,.1),transparent 60%);animation:drift 20s ease-in-out infinite alternate}
+.wordmark{font-weight:800;letter-spacing:-.02em;font-size:1.05rem;margin:0}
+.hero h1{font-size:clamp(2.2rem,min(11vw,13vh),5.4rem);font-weight:700;letter-spacing:-.025em;line-height:1.02;margin:.7rem 0 1rem;max-width:14ch}
+.hero h1 span{display:inline-block;animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both}
+.hero h1 span:nth-child(n+5){background:linear-gradient(90deg,#ff7a50,#ffc46b,#ff7a50) 0 0/200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both,shimmer 5s 1.2s linear infinite}
+.hero .lead{max-width:34rem;margin:0;animation:rise .7s .5s cubic-bezier(.2,.7,.2,1) both}
+.ticker{overflow:hidden;border-block:1px solid var(--line);margin:0 calc(50% - 50vw);padding:.7rem 0;font-weight:700;font-size:.9rem;color:var(--muted);white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.ticker p{display:inline-block;margin:0;animation:ticker 78s linear infinite}
+.ticker span{padding:0 1.1rem}.ticker span::after{content:"✦";color:var(--accent);padding-left:2.2rem}
+section h2{font-size:1.5rem;margin:2.2rem 0 1rem}
+.shelf{list-style:none;padding:0;margin:0;display:grid;gap:1.5rem}
+.shelf li{animation:rise .8s calc(.6s + var(--i)*140ms) cubic-bezier(.2,.7,.2,1) both}
+@property --spread{syntax:"<number>";inherits:true;initial-value:0}
+.app{position:relative;isolation:isolate;display:grid;overflow:hidden;border-radius:24px;color:inherit;text-decoration:none;
+transition:transform .2s ease;-webkit-tap-highlight-color:transparent}
+.app::before{content:"";position:absolute;inset:-100%;z-index:-2;background:conic-gradient(var(--line) 0 55%,#ff7a50 72%,#ffc46b 82%,var(--line) 100%);animation:turn 7s linear infinite}
+.app::after{content:"";position:absolute;inset:2px;z-index:-1;border-radius:22px;background:var(--surface)}
+.app:active{transform:scale(.98)}
+.info{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;padding:1.5rem 1.4rem .5rem}
+.info .icon{width:72px;height:72px;box-shadow:0 10px 24px -8px rgba(0,0,0,.6);animation:bob 5s ease-in-out infinite alternate}
+.info b{font-family:var(--display);font-size:1.9rem;line-height:1.1;color:var(--ink)}
+.info>span:not(.stamp){color:var(--muted)}
+.home .stamp-live{color:#7cc89a}.home .stamp-review{color:#e2b45c}
+.app .stamp{animation:stamp .5s calc(1.2s + var(--i)*140ms) cubic-bezier(.3,1.4,.5,1) both}
+.fan{display:flex;justify-content:center;align-items:center;padding:1.5rem 1rem 2.5rem;animation:breathe 7s 2s ease-in-out infinite;transition:--spread .5s}
+.fan img{position:relative;width:29%;max-width:190px;height:auto;margin-inline:-2%;border-radius:18px;box-shadow:0 18px 36px -10px rgba(0,0,0,.65);
+translate:calc(var(--x)*var(--spread)*12%) var(--y);rotate:calc(var(--r)*(1 + var(--spread)*.5));animation:bob 4.5s ease-in-out infinite alternate}
+.fan img:nth-child(1){--x:-1;--y:16px;--r:-8deg;animation-delay:-1.5s}
+.fan img:nth-child(2){--x:0;--y:-8px;--r:0deg;z-index:1}
+.fan img:nth-child(3){--x:1;--y:16px;--r:8deg;animation-delay:-3s}
+.poster{padding:0 1.4rem 1.4rem}.poster img{width:100%;height:auto;border-radius:12px}
+@media (hover:hover){.app:hover .fan{animation-play-state:paused;--spread:1}}
+@media (min-width:720px){.app{grid-template-columns:1fr 1.15fr;min-height:420px}.info{justify-content:center;padding:2.5rem}.info .icon{width:88px;height:88px}.info b{font-size:2.4rem}}
+.home tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
+.table{overflow-x:auto}.home table{border-collapse:collapse;width:100%;min-width:560px}
+.home th,.home td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.home th{font-size:.85rem;color:var(--muted)}
+@media (max-width:599px){.home table{min-width:0}.home thead{display:none}.home tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.home td{border:0;padding:0}.home td:first-child{grid-row:span 3}.home td:nth-child(2){grid-column:2/4;font-weight:600}.home td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}.home td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}.home td:nth-child(5){grid-column:2/4}}.home td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}.home td .icon{width:40px;height:40px}
+.doc{--card:#fbf8f2;--deep:#8f3417;--accent:var(--deep);max-width:1120px;margin:0 auto;padding:0 1.25rem 1rem}
+@media (prefers-color-scheme:dark){.doc{--card:#1f1c18;--accent:var(--lift,#f07a52)}}
+.top{display:flex;align-items:center;flex-wrap:wrap;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.top a{padding:.7rem 0;text-decoration:none}.mark{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.trail{color:var(--muted)}.trail::before{content:"/";margin:0 .7rem;color:var(--line)}
+.doc .button{background:var(--deep);color:#fff;border-radius:999px;padding:.85rem 1.5rem;box-shadow:0 10px 24px -12px var(--deep);transition:transform .2s ease}
+.doc .button:active{transform:scale(.97)}
+.hero-app{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding:2.5rem 0 1rem;align-items:center}
+.hero-app h1{font-size:clamp(2.1rem,5vw,3.5rem);letter-spacing:-.02em;margin:1rem 0 .7rem;max-width:18ch}
+.hero-app .icon{width:88px;height:88px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+.hero-app .lead{max-width:36rem;margin:0 0 1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin:0}
+.stage{border-radius:28px;background:radial-gradient(80% 70% at 50% 45%,color-mix(in oklab,var(--accent) 22%,transparent),transparent 72%)}
+.stage .fan{padding:2rem 1rem 3rem}
+@media (min-width:860px){.hero-app{grid-template-columns:1.05fr 1fr;min-height:480px}}
+.prose{max-width:68ch;font-size:1.075rem;line-height:1.72}
+.prose h2{font-size:1.8rem;letter-spacing:-.01em;margin:2.8rem 0 .8rem;scroll-margin-top:1rem}
+.prose h3{font-family:system-ui,sans-serif;font-size:1.13rem;margin:1.9rem 0 .35rem}
+.prose ul{padding-left:1.2rem}.prose li{margin:.45rem 0}.prose li::marker{color:var(--accent)}
+.prose ol{counter-reset:step;list-style:none;padding:0}
+.prose ol>li{counter-increment:step;position:relative;padding-left:2.7rem;margin:.9rem 0}
+.prose ol>li::before{content:counter(step);position:absolute;left:0;top:.15rem;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .88rem/1.85rem system-ui,sans-serif;text-align:center}
+.prose .table{margin:1.6rem 0;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.prose table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+.prose th{background:var(--shelf);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left}
+.prose th,.prose td{padding:.7rem .95rem;border-bottom:1px solid var(--line);vertical-align:top}
+.prose tbody tr:last-child td{border-bottom:0}.prose td:first-child{font-weight:600}
+.prose blockquote{margin:1.8rem 0;padding:1rem 1.25rem 1rem 3rem;position:relative;border-radius:14px;background:color-mix(in oklab,var(--accent) 9%,var(--card));border:1px solid color-mix(in oklab,var(--accent) 28%,transparent);font-size:.98rem}
+.prose blockquote::before{content:"i";position:absolute;left:1.05rem;top:1.15rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .8rem/1.3rem Georgia,serif;text-align:center}
+.prose blockquote p{margin:0}
+.prose b{color:var(--ink)}.prose code{font:.9em ui-monospace,Menlo,monospace;padding:.1em .35em;border-radius:5px;background:var(--shelf);overflow-wrap:anywhere}
+.head{padding:2.8rem 0 2rem;max-width:48rem}
+.kicker{display:flex;align-items:center;gap:.6rem;margin:0;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.kicker img{width:30px;height:30px;border-radius:22%}
+.head h1{font-size:clamp(2.05rem,4.8vw,3.4rem);letter-spacing:-.02em;margin:.8rem 0 .9rem}
+.standfirst{font-size:1.24rem;line-height:1.5;color:var(--muted);margin:0 0 1.1rem}
+.meta{margin:0;font-size:.9rem;color:var(--muted)}.meta span+span::before{content:"·";margin:0 .55rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;border-top:1px solid var(--line);padding-top:.5rem}
+.toc{display:none}
+@media (min-width:980px){.layout{grid-template-columns:minmax(0,1fr) 300px;gap:4rem}.rail{position:sticky;top:1.5rem;align-self:start;padding-top:2.4rem}
+.toc{display:block;margin-bottom:1.5rem}}
+.toc b{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.toc ol{list-style:none;padding:0;margin:.7rem 0 0;border-left:2px solid var(--line)}
+.toc a{display:block;margin-left:-2px;padding:.35rem 0 .35rem 1rem;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:.93rem;line-height:1.4}
+.toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+.get{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;align-items:center;padding:1.4rem;border-radius:22px;border:1px solid var(--line);
+background:linear-gradient(155deg,color-mix(in oklab,var(--accent) 16%,var(--card)),var(--card) 70%)}
+.get .icon{grid-row:span 2;width:58px;height:58px;box-shadow:0 10px 22px -12px rgba(0,0,0,.5)}
+.get b{font-family:var(--display);font-size:1.35rem;line-height:1.15}.get small{color:var(--muted)}
+.get p{grid-column:1/-1;margin:.8rem 0 1rem;color:var(--muted);font-size:.95rem;line-height:1.5}
+.get .button{grid-column:1/-1;text-align:center}
+.cards{margin:3.5rem 0 1rem}.cards h2{font-size:1.65rem;margin-bottom:1.1rem}
+.cards ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.cards a{display:flex;flex-direction:column;gap:.55rem;height:100%;box-sizing:border-box;padding:1.3rem 1.3rem 1.1rem;border-radius:18px;border:1px solid var(--line);
+background:var(--card);color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.cards b{font-family:var(--display);font-size:1.22rem;line-height:1.25}.cards span{color:var(--muted);font-size:.94rem;line-height:1.5}
+.cards i{margin-top:auto;padding-top:.4rem;font-style:normal;font-weight:700;font-size:.9rem;color:var(--accent)}
+@media (hover:hover){.cards a:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 18px 34px -22px rgba(0,0,0,.5)}}
+.foot{display:flex;flex-wrap:wrap;gap:0 1.4rem;margin:4rem 0 1rem;padding-top:.6rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.foot a{color:var(--muted);padding:.75rem 0;display:inline-block}
+.prose td:empty{height:2.3rem}
+@media (min-width:860px){.stage .fan img{max-width:230px}}
+@media print{.top,.rail,.cards,.foot,.stage,.actions,.kicker img{display:none!important}.doc{max-width:none;padding:0}
+.layout{display:block;border:0}.prose{max-width:none;font-size:11pt}.prose .table{break-inside:avoid}.prose td:empty{height:9mm}
+.prose a{color:inherit}*{animation:none!important;box-shadow:none!important}}
+footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted)}
+@keyframes rise{from{opacity:0;transform:translateY(.6em)}}
+@keyframes drift{to{transform:translate(4%,3%) scale(1.08)}}
+@keyframes shimmer{to{background-position:-200% 0}}
+@keyframes ticker{to{transform:translateX(-50%)}}
+@keyframes turn{to{transform:rotate(1turn)}}
+@keyframes bob{to{transform:translateY(-10px)}}
+@keyframes breathe{0%,30%,100%{--spread:0}50%,80%{--spread:1}}
+@keyframes draw{from{transform:scaleX(0)}}
+@keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-12deg)}60%{opacity:1;transform:scale(.94) rotate(-1deg)}100%{transform:rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
+</style>
+<meta name="description" content="Wi-Fi hotspot multiplayer games on Android: how hotspot play works, setup steps, games that still support it, and fixes when friends can&#x27;t join.">
+<link rel="canonical" href="https://infivlabs.github.io/apps/fartchaos/wifi-hotspot-multiplayer-games/">
+<meta property="og:site_name" content="InfiV Labs">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://infivlabs.github.io/apps/fartchaos/wifi-hotspot-multiplayer-games/">
+<meta property="og:title" content="Wi-Fi Hotspot Multiplayer Games for Android: How It Works">
+<meta property="og:description" content="Wi-Fi hotspot multiplayer games on Android: how hotspot play works, setup steps, games that still support it, and fixes when friends can&#x27;t join.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://infivlabs.github.io/apps/fartchaos/feature.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "Wi-Fi hotspot multiplayer games on Android, and how to set them up", "description": "Wi-Fi hotspot multiplayer games on Android: how hotspot play works, setup steps, games that still support it, and fixes when friends can't join.", "inLanguage": "en", "url": "https://infivlabs.github.io/apps/fartchaos/wifi-hotspot-multiplayer-games/", "mainEntityOfPage": "https://infivlabs.github.io/apps/fartchaos/wifi-hotspot-multiplayer-games/", "author": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "publisher": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "about": {"@id": "https://infivlabs.github.io/apps/fartchaos/#app", "name": "Fart Chaos"}, "image": "https://infivlabs.github.io/apps/fartchaos/feature.png", "datePublished": "2026-11-26", "dateModified": "2026-11-26"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "InfiV Labs", "item": "https://infivlabs.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Fart Chaos", "item": "https://infivlabs.github.io/apps/fartchaos/"}, {"@type": "ListItem", "position": 3, "name": "Wi-Fi hotspot multiplayer games on Android, and how to set them up", "item": "https://infivlabs.github.io/apps/fartchaos/wifi-hotspot-multiplayer-games/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does hotspot multiplayer use mobile data?", "acceptedAnswer": {"@type": "Answer", "text": "The game traffic between phones stays on the hotspot's local network, so it doesn't count against anyone's data. A game may still try to load ads or check for updates over the internet if the host's mobile data is on. Switch mobile data off on the host if you want to be sure."}}, {"@type": "Question", "name": "How many phones can join an Android hotspot?", "acceptedAnswer": {"@type": "Answer", "text": "Google's Android help says up to 10 other devices can share a phone's connection over a Wi-Fi hotspot. Some phone makers and carriers set their own limits, so check your phone's hotspot settings."}}, {"@type": "Question", "name": "Can iPhones and Android phones play together over a hotspot?", "acceptedAnswer": {"@type": "Answer", "text": "Only if the game exists on both systems and its local mode allows mixing them. Many don't, so check the game's own help pages first."}}, {"@type": "Question", "name": "Is Bluetooth multiplayer the same thing?", "acceptedAnswer": {"@type": "Answer", "text": "No. Bluetooth multiplayer is a separate feature that a game has to support on its own, and it usually allows fewer players. A game with hotspot play won't automatically work over Bluetooth."}}]}]}</script>
+</head>
+<body class="doc">
+<header class="top"><a class="mark" href="/">InfiV Labs</a><a class="trail" href="/apps/fartchaos/">Fart Chaos</a></header>
+<header class="head"><p class="kicker"><img src="/apps/fartchaos/icon.png" alt="">Fart Chaos guide</p>
+<h1>Wi-Fi hotspot multiplayer games on Android, and how to set them up</h1>
+<p class="standfirst">Wi-Fi hotspot multiplayer games on Android: how hotspot play works, setup steps, games that still support it, and fixes when friends can&#x27;t join.</p>
+<p class="meta"><span>Updated 26 Nov 2026</span><span>4 min read</span></p></header>
+<div class="layout"><article class="prose">
+<p>A Wi-Fi hotspot multiplayer game lets friends in the same room play together over a hotspot that one phone switches on. No router and no internet are needed: the phones talk to each other directly over the hotspot&#x27;s local network. The catch is that the game has to support local or LAN play, and many games that once did have dropped it.</p>
+<p>That is why so many &quot;hotspot games&quot; lists you find are years out of date. Before your group spends ten minutes setting up, check that the game still has a local mode in its current version.</p>
+<h2 id="how-hotspot-multiplayer-works">How hotspot multiplayer works</h2>
+<p>When you switch on a hotspot, your phone becomes a small Wi-Fi router. Every phone that joins it is on the same local network, just like phones on one home Wi-Fi.</p>
+<p>A game with local play then does two things:</p>
+<ul><li><b>One phone hosts.</b> It opens a room and announces it on the network.</li><li><b>The others find the room</b> in a list or join with a code, and from then on the game&#x27;s data goes phone to phone.</li></ul>
+<p>That traffic never leaves the room, so the game itself doesn&#x27;t use the host&#x27;s mobile data. Google&#x27;s Android help says a phone can share its connection with up to 10 other devices over a hotspot, so the hotspot is rarely the limit. The game&#x27;s own player cap usually is.</p>
+<h2 id="setting-it-up-step-by-step">Setting it up, step by step</h2>
+<ol><li><b>Update the game on every phone first</b>, while you still have internet. Most local modes refuse to connect phones on different versions.</li><li><b>Pick the host.</b> Use the phone with the most battery: running a hotspot and hosting a game both drain it faster.</li><li><b>Turn on the hotspot</b> on the host phone (Settings, then Network or Connections, then Hotspot). Note the network name and password.</li><li><b>Connect the other phones</b> to that hotspot in their Wi-Fi settings. If a phone warns that the network has no internet and offers to switch to mobile data, choose to stay connected.</li><li><b>Open the game on the host first</b> and create the room or lobby.</li><li><b>Join from the other phones</b> through the game&#x27;s local, LAN or &quot;nearby&quot; option.</li></ol>
+<p>If the room doesn&#x27;t appear within half a minute, go to the fixes below before trying anything else.</p>
+<h2 id="android-games-that-still-support-hotspot-or-local-wi-fi-play">Android games that still support hotspot or local Wi-Fi play</h2>
+<p>Local modes change between versions, so treat this as a starting point and check each game&#x27;s current store listing.</p>
+<div class="table"><table><thead><tr><th>Game</th><th>Local players</th><th>What to know</th></tr></thead><tbody><tr><td>BombSquad</td><td>up to 8</td><td>Party mini-games. Phones can also act as wireless gamepads with the free BombSquad Remote app.</td></tr><tr><td>Mini Militia Classic</td><td>6-12 per arena</td><td>The Classic edition is the one with LAN Wi-Fi mode, which needs no internet.</td></tr><tr><td>Among Us</td><td>a room of friends</td><td>Its local mode runs over one shared Wi-Fi; there is no solo mode.</td></tr><tr><td>Fart Chaos</td><td>up to 8</td><td>A raft racing party game. Phones on one Wi-Fi or hotspot find each other&#x27;s races.</td></tr></tbody></table></div>
+<p>A few genres travel well over a hotspot: short rounds (two to five minutes), simple controls, and games where losing is funny rather than frustrating. Long strategy games and anything that needs an account check at startup tend to struggle.</p>
+<h2 id="when-friends-can-x27-t-see-your-room">When friends can&#x27;t see your room</h2>
+<p>Most hotspot problems come down to one of these:</p>
+<ul><li><b>Different versions.</b> One phone updated, another didn&#x27;t. Update everyone and restart the game.</li><li><b>Phone left the hotspot.</b> Android sometimes drops a Wi-Fi network with no internet and goes back to mobile data. Check each phone&#x27;s Wi-Fi icon and reconnect.</li><li><b>The room is announced but not received.</b> Some phones handle discovery on their own hotspot poorly. If the game offers it, join by the host&#x27;s IP address or a room code instead of the list.</li><li><b>Battery saver on the host.</b> Some phones turn the hotspot off when idle or in power saving. Plug the host in or switch saver off for the session.</li><li><b>Too many players.</b> The game&#x27;s cap counts the host. An 8-player game means the host plus seven friends.</li></ul>
+<p>There is a longer list, covering routers without internet and Bluetooth too, in <a href="/apps/fartchaos/play-with-friends-without-internet/">how to play games with friends without internet</a>.</p>
+<h2 id="questions">Questions</h2>
+<h3>Does hotspot multiplayer use mobile data?</h3>
+<p>The game traffic between phones stays on the hotspot&#x27;s local network, so it doesn&#x27;t count against anyone&#x27;s data. A game may still try to load ads or check for updates over the internet if the host&#x27;s mobile data is on. Switch mobile data off on the host if you want to be sure.</p>
+<h3>How many phones can join an Android hotspot?</h3>
+<p>Google&#x27;s Android help says up to 10 other devices can share a phone&#x27;s connection over a Wi-Fi hotspot. Some phone makers and carriers set their own limits, so check your phone&#x27;s hotspot settings.</p>
+<h3>Can iPhones and Android phones play together over a hotspot?</h3>
+<p>Only if the game exists on both systems and its local mode allows mixing them. Many don&#x27;t, so check the game&#x27;s own help pages first.</p>
+<h3>Is Bluetooth multiplayer the same thing?</h3>
+<p>No. Bluetooth multiplayer is a separate feature that a game has to support on its own, and it usually allows fewer players. A game with hotspot play won&#x27;t automatically work over Bluetooth.</p>
+<h2 id="playing-fart-chaos-over-a-hotspot">Playing Fart Chaos over a hotspot</h2>
+<p>Fart Chaos is a party racing game where four critters on a round raft steer by farting. Over one Wi-Fi network or a phone hotspot:</p>
+<ul><li><b>QUICK MATCH</b> puts phones on the same network into the same race, and bots fill any empty seats.</li><li><b>LOCAL TEAM</b> opens a room that friends join with a four-letter code; up to 8 players share four rafts.</li><li>If a network blocks room discovery, friends can join by the host&#x27;s IP address, shown in the host&#x27;s room.</li></ul>
+<p>For more ways to play together, see <a href="/apps/fartchaos/offline-multiplayer-games-android/">offline multiplayer games for Android</a> or the <a href="/apps/fartchaos/">Fart Chaos page</a>.</p>
+<h2 id="sources">Sources</h2>
+<ul><li><a href="https://support.google.com/android/answer/9059108">https://support.google.com/android/answer/9059108</a></li><li><a href="https://developer.android.com/develop/connectivity/wifi/localonlyhotspot">https://developer.android.com/develop/connectivity/wifi/localonlyhotspot</a></li><li><a href="https://lutris.net/games/bombsquad/">https://lutris.net/games/bombsquad/</a></li><li><a href="https://kotaku.com/games/mini-militia-doodle-army-2">https://kotaku.com/games/mini-militia-doodle-army-2</a></li><li><a href="https://www.pocketgamer.com/among-us/how-to-solve-among-us-connection-issues-and-set-up-games-on-android-ios-and-stea">https://www.pocketgamer.com/among-us/how-to-solve-among-us-connection-issues-and-set-up-games-on-android-ios-and-stea</a></li></ul>
+</article>
+<aside class="rail"><nav class="toc"><b>On this page</b><ol><li><a href="#how-hotspot-multiplayer-works">How hotspot multiplayer works</a></li><li><a href="#setting-it-up-step-by-step">Setting it up, step by step</a></li><li><a href="#android-games-that-still-support-hotspot-or-local-wi-fi-play">Android games that still support hotspot or local Wi-Fi play</a></li><li><a href="#when-friends-can-x27-t-see-your-room">When friends can&#x27;t see your room</a></li><li><a href="#questions">Questions</a></li><li><a href="#playing-fart-chaos-over-a-hotspot">Playing Fart Chaos over a hotspot</a></li><li><a href="#sources">Sources</a></li></ol></nav><div class="get"><img class="icon" src="/apps/fartchaos/icon.png" alt="" width="58" height="58"><b>Fart Chaos</b><small>In closed testing</small><p>Silly party boat racing powered by toots! Play offline or with friends on Wi-Fi.</p><a class="button" href="/apps/fartchaos/">See Fart Chaos</a></div></aside></div>
+<section class="cards"><h2>More guides from Fart Chaos</h2><ul><li><a href="/apps/fartchaos/offline-multiplayer-games-android/" lang="en"><b>Offline multiplayer games on Android: the three ways they work</b><span>Offline multiplayer games on Android: how one-phone, local Wi-Fi and hotspot play work, how to check a game before you rely on it, and picks by group size.</span><i>Read the guide →</i></a></li><li><a href="/apps/fartchaos/phone-games-with-friends-same-room/" lang="en"><b>Phone games to play with friends in the same room</b><span>Phone games to play with friends in the same room: which kinds work for 2, 4 or 8 people, quick setup, and ideas for hostels, trips and parties.</span><i>Read the guide →</i></a></li><li><a href="/apps/fartchaos/play-with-friends-without-internet/" lang="en"><b>How to play games with friends without internet</b><span>How to play games with friends without internet: four ways that work on Android, what to do before going offline, and fixes when phones can&#x27;t connect.</span><i>Read the guide →</i></a></li></ul></section>
+
+<footer class="foot"><a href="/">InfiV Labs</a><a href="/apps/fartchaos/privacy/">Privacy policy</a><a href="/apps/fartchaos/terms/">Terms of use</a><a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></footer>
+</body>
+</html>

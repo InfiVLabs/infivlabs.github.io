@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Start Running When You&#x27;re Out of Shape</title>
+<style>
+:root{--paper:#f4efe6;--shelf:#e9e1d3;--ink:#1d1b18;--muted:#5d564c;--accent:#c4421d;--line:#d6ccbb;
+--display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#171512;--shelf:#221f1a;--ink:#ede6da;--muted:#a89f92;--accent:#f07a52;--line:#3a352d}}
+body{font-family:system-ui,sans-serif;max-width:680px;margin:2rem auto;padding:0 1.25rem;line-height:1.55;color:var(--ink);background:var(--paper);overflow-wrap:break-word}
+a{overflow-wrap:anywhere}
+h1,h2,h3{font-family:var(--display);line-height:1.15}a{color:var(--accent)}
+.back a{color:var(--muted);text-decoration:none;display:inline-block;padding:.75rem 0}.back a::before{content:"← "}
+.icon{border-radius:22%;display:block}
+.lead{font-size:1.15rem;color:var(--muted)}
+.links a,footer a{display:inline-block;padding:.75rem 0}
+.button{display:inline-block;padding:.75rem 1.25rem;border-radius:6px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600}
+.stamp{display:inline-block;padding:.15rem .55rem;border:2px solid currentColor;border-radius:3px;font-size:.8rem;font-weight:700;color:var(--muted)}
+.stamp-live{color:#2f7a4a}.stamp-review{color:#8a5a00}.stamp-testing{color:var(--accent)}
+@media (prefers-color-scheme:dark){.stamp-live{color:#7cc89a}.stamp-review{color:#e2b45c}}
+.home{--paper:#0f0e0c;--surface:#1a1815;--ink:#f2ede4;--muted:#b0a797;--accent:#ff7a50;--line:#2e2a24;
+max-width:1100px;color-scheme:dark;margin-top:0}
+html:has(.home){overflow-x:clip}
+.hero{position:relative;padding:2.5rem 0 2rem;isolation:isolate}
+.home::before{content:"";position:fixed;inset:-10%;z-index:-1;pointer-events:none;
+background:radial-gradient(70vmax 55vmax at 10% 5%,rgba(255,122,80,.26),transparent 60%),radial-gradient(60vmax 50vmax at 100% 50%,rgba(63,179,154,.18),transparent 60%),
+radial-gradient(70vmax 45vmax at 15% 100%,rgba(255,196,107,.1),transparent 60%);animation:drift 20s ease-in-out infinite alternate}
+.wordmark{font-weight:800;letter-spacing:-.02em;font-size:1.05rem;margin:0}
+.hero h1{font-size:clamp(2.2rem,min(11vw,13vh),5.4rem);font-weight:700;letter-spacing:-.025em;line-height:1.02;margin:.7rem 0 1rem;max-width:14ch}
+.hero h1 span{display:inline-block;animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both}
+.hero h1 span:nth-child(n+5){background:linear-gradient(90deg,#ff7a50,#ffc46b,#ff7a50) 0 0/200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both,shimmer 5s 1.2s linear infinite}
+.hero .lead{max-width:34rem;margin:0;animation:rise .7s .5s cubic-bezier(.2,.7,.2,1) both}
+.ticker{overflow:hidden;border-block:1px solid var(--line);margin:0 calc(50% - 50vw);padding:.7rem 0;font-weight:700;font-size:.9rem;color:var(--muted);white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.ticker p{display:inline-block;margin:0;animation:ticker 78s linear infinite}
+.ticker span{padding:0 1.1rem}.ticker span::after{content:"✦";color:var(--accent);padding-left:2.2rem}
+section h2{font-size:1.5rem;margin:2.2rem 0 1rem}
+.shelf{list-style:none;padding:0;margin:0;display:grid;gap:1.5rem}
+.shelf li{animation:rise .8s calc(.6s + var(--i)*140ms) cubic-bezier(.2,.7,.2,1) both}
+@property --spread{syntax:"<number>";inherits:true;initial-value:0}
+.app{position:relative;isolation:isolate;display:grid;overflow:hidden;border-radius:24px;color:inherit;text-decoration:none;
+transition:transform .2s ease;-webkit-tap-highlight-color:transparent}
+.app::before{content:"";position:absolute;inset:-100%;z-index:-2;background:conic-gradient(var(--line) 0 55%,#ff7a50 72%,#ffc46b 82%,var(--line) 100%);animation:turn 7s linear infinite}
+.app::after{content:"";position:absolute;inset:2px;z-index:-1;border-radius:22px;background:var(--surface)}
+.app:active{transform:scale(.98)}
+.info{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;padding:1.5rem 1.4rem .5rem}
+.info .icon{width:72px;height:72px;box-shadow:0 10px 24px -8px rgba(0,0,0,.6);animation:bob 5s ease-in-out infinite alternate}
+.info b{font-family:var(--display);font-size:1.9rem;line-height:1.1;color:var(--ink)}
+.info>span:not(.stamp){color:var(--muted)}
+.home .stamp-live{color:#7cc89a}.home .stamp-review{color:#e2b45c}
+.app .stamp{animation:stamp .5s calc(1.2s + var(--i)*140ms) cubic-bezier(.3,1.4,.5,1) both}
+.fan{display:flex;justify-content:center;align-items:center;padding:1.5rem 1rem 2.5rem;animation:breathe 7s 2s ease-in-out infinite;transition:--spread .5s}
+.fan img{position:relative;width:29%;max-width:190px;height:auto;margin-inline:-2%;border-radius:18px;box-shadow:0 18px 36px -10px rgba(0,0,0,.65);
+translate:calc(var(--x)*var(--spread)*12%) var(--y);rotate:calc(var(--r)*(1 + var(--spread)*.5));animation:bob 4.5s ease-in-out infinite alternate}
+.fan img:nth-child(1){--x:-1;--y:16px;--r:-8deg;animation-delay:-1.5s}
+.fan img:nth-child(2){--x:0;--y:-8px;--r:0deg;z-index:1}
+.fan img:nth-child(3){--x:1;--y:16px;--r:8deg;animation-delay:-3s}
+.poster{padding:0 1.4rem 1.4rem}.poster img{width:100%;height:auto;border-radius:12px}
+@media (hover:hover){.app:hover .fan{animation-play-state:paused;--spread:1}}
+@media (min-width:720px){.app{grid-template-columns:1fr 1.15fr;min-height:420px}.info{justify-content:center;padding:2.5rem}.info .icon{width:88px;height:88px}.info b{font-size:2.4rem}}
+.home tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
+.table{overflow-x:auto}.home table{border-collapse:collapse;width:100%;min-width:560px}
+.home th,.home td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.home th{font-size:.85rem;color:var(--muted)}
+@media (max-width:599px){.home table{min-width:0}.home thead{display:none}.home tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.home td{border:0;padding:0}.home td:first-child{grid-row:span 3}.home td:nth-child(2){grid-column:2/4;font-weight:600}.home td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}.home td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}.home td:nth-child(5){grid-column:2/4}}.home td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}.home td .icon{width:40px;height:40px}
+.doc{--card:#fbf8f2;--deep:#8f3417;--accent:var(--deep);max-width:1120px;margin:0 auto;padding:0 1.25rem 1rem}
+@media (prefers-color-scheme:dark){.doc{--card:#1f1c18;--accent:var(--lift,#f07a52)}}
+.top{display:flex;align-items:center;flex-wrap:wrap;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.top a{padding:.7rem 0;text-decoration:none}.mark{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.trail{color:var(--muted)}.trail::before{content:"/";margin:0 .7rem;color:var(--line)}
+.doc .button{background:var(--deep);color:#fff;border-radius:999px;padding:.85rem 1.5rem;box-shadow:0 10px 24px -12px var(--deep);transition:transform .2s ease}
+.doc .button:active{transform:scale(.97)}
+.hero-app{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding:2.5rem 0 1rem;align-items:center}
+.hero-app h1{font-size:clamp(2.1rem,5vw,3.5rem);letter-spacing:-.02em;margin:1rem 0 .7rem;max-width:18ch}
+.hero-app .icon{width:88px;height:88px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+.hero-app .lead{max-width:36rem;margin:0 0 1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin:0}
+.stage{border-radius:28px;background:radial-gradient(80% 70% at 50% 45%,color-mix(in oklab,var(--accent) 22%,transparent),transparent 72%)}
+.stage .fan{padding:2rem 1rem 3rem}
+@media (min-width:860px){.hero-app{grid-template-columns:1.05fr 1fr;min-height:480px}}
+.prose{max-width:68ch;font-size:1.075rem;line-height:1.72}
+.prose h2{font-size:1.8rem;letter-spacing:-.01em;margin:2.8rem 0 .8rem;scroll-margin-top:1rem}
+.prose h3{font-family:system-ui,sans-serif;font-size:1.13rem;margin:1.9rem 0 .35rem}
+.prose ul{padding-left:1.2rem}.prose li{margin:.45rem 0}.prose li::marker{color:var(--accent)}
+.prose ol{counter-reset:step;list-style:none;padding:0}
+.prose ol>li{counter-increment:step;position:relative;padding-left:2.7rem;margin:.9rem 0}
+.prose ol>li::before{content:counter(step);position:absolute;left:0;top:.15rem;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .88rem/1.85rem system-ui,sans-serif;text-align:center}
+.prose .table{margin:1.6rem 0;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.prose table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+.prose th{background:var(--shelf);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left}
+.prose th,.prose td{padding:.7rem .95rem;border-bottom:1px solid var(--line);vertical-align:top}
+.prose tbody tr:last-child td{border-bottom:0}.prose td:first-child{font-weight:600}
+.prose blockquote{margin:1.8rem 0;padding:1rem 1.25rem 1rem 3rem;position:relative;border-radius:14px;background:color-mix(in oklab,var(--accent) 9%,var(--card));border:1px solid color-mix(in oklab,var(--accent) 28%,transparent);font-size:.98rem}
+.prose blockquote::before{content:"i";position:absolute;left:1.05rem;top:1.15rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .8rem/1.3rem Georgia,serif;text-align:center}
+.prose blockquote p{margin:0}
+.prose b{color:var(--ink)}.prose code{font:.9em ui-monospace,Menlo,monospace;padding:.1em .35em;border-radius:5px;background:var(--shelf);overflow-wrap:anywhere}
+.head{padding:2.8rem 0 2rem;max-width:48rem}
+.kicker{display:flex;align-items:center;gap:.6rem;margin:0;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.kicker img{width:30px;height:30px;border-radius:22%}
+.head h1{font-size:clamp(2.05rem,4.8vw,3.4rem);letter-spacing:-.02em;margin:.8rem 0 .9rem}
+.standfirst{font-size:1.24rem;line-height:1.5;color:var(--muted);margin:0 0 1.1rem}
+.meta{margin:0;font-size:.9rem;color:var(--muted)}.meta span+span::before{content:"·";margin:0 .55rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;border-top:1px solid var(--line);padding-top:.5rem}
+.toc{display:none}
+@media (min-width:980px){.layout{grid-template-columns:minmax(0,1fr) 300px;gap:4rem}.rail{position:sticky;top:1.5rem;align-self:start;padding-top:2.4rem}
+.toc{display:block;margin-bottom:1.5rem}}
+.toc b{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.toc ol{list-style:none;padding:0;margin:.7rem 0 0;border-left:2px solid var(--line)}
+.toc a{display:block;margin-left:-2px;padding:.35rem 0 .35rem 1rem;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:.93rem;line-height:1.4}
+.toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+.get{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;align-items:center;padding:1.4rem;border-radius:22px;border:1px solid var(--line);
+background:linear-gradient(155deg,color-mix(in oklab,var(--accent) 16%,var(--card)),var(--card) 70%)}
+.get .icon{grid-row:span 2;width:58px;height:58px;box-shadow:0 10px 22px -12px rgba(0,0,0,.5)}
+.get b{font-family:var(--display);font-size:1.35rem;line-height:1.15}.get small{color:var(--muted)}
+.get p{grid-column:1/-1;margin:.8rem 0 1rem;color:var(--muted);font-size:.95rem;line-height:1.5}
+.get .button{grid-column:1/-1;text-align:center}
+.cards{margin:3.5rem 0 1rem}.cards h2{font-size:1.65rem;margin-bottom:1.1rem}
+.cards ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.cards a{display:flex;flex-direction:column;gap:.55rem;height:100%;box-sizing:border-box;padding:1.3rem 1.3rem 1.1rem;border-radius:18px;border:1px solid var(--line);
+background:var(--card);color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.cards b{font-family:var(--display);font-size:1.22rem;line-height:1.25}.cards span{color:var(--muted);font-size:.94rem;line-height:1.5}
+.cards i{margin-top:auto;padding-top:.4rem;font-style:normal;font-weight:700;font-size:.9rem;color:var(--accent)}
+@media (hover:hover){.cards a:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 18px 34px -22px rgba(0,0,0,.5)}}
+.foot{display:flex;flex-wrap:wrap;gap:0 1.4rem;margin:4rem 0 1rem;padding-top:.6rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.foot a{color:var(--muted);padding:.75rem 0;display:inline-block}
+.prose td:empty{height:2.3rem}
+@media (min-width:860px){.stage .fan img{max-width:230px}}
+@media print{.top,.rail,.cards,.foot,.stage,.actions,.kicker img{display:none!important}.doc{max-width:none;padding:0}
+.layout{display:block;border:0}.prose{max-width:none;font-size:11pt}.prose .table{break-inside:avoid}.prose td:empty{height:9mm}
+.prose a{color:inherit}*{animation:none!important;box-shadow:none!important}}
+footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted)}
+@keyframes rise{from{opacity:0;transform:translateY(.6em)}}
+@keyframes drift{to{transform:translate(4%,3%) scale(1.08)}}
+@keyframes shimmer{to{background-position:-200% 0}}
+@keyframes ticker{to{transform:translateX(-50%)}}
+@keyframes turn{to{transform:rotate(1turn)}}
+@keyframes bob{to{transform:translateY(-10px)}}
+@keyframes breathe{0%,30%,100%{--spread:0}50%,80%{--spread:1}}
+@keyframes draw{from{transform:scaleX(0)}}
+@keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-12deg)}60%{opacity:1;transform:scale(.94) rotate(-1deg)}100%{transform:rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
+</style>
+<meta name="description" content="How to start running when you&#x27;re out of shape or haven&#x27;t exercised in years: when to see a doctor first, walking before running, and a slow first week.">
+<link rel="canonical" href="https://infivlabs.github.io/apps/runstarter/start-running-out-of-shape/">
+<meta property="og:site_name" content="InfiV Labs">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://infivlabs.github.io/apps/runstarter/start-running-out-of-shape/">
+<meta property="og:title" content="How to Start Running When You&#x27;re Out of Shape">
+<meta property="og:description" content="How to start running when you&#x27;re out of shape or haven&#x27;t exercised in years: when to see a doctor first, walking before running, and a slow first week.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://infivlabs.github.io/apps/runstarter/feature.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "How to start running when you're out of shape", "description": "How to start running when you're out of shape or haven't exercised in years: when to see a doctor first, walking before running, and a slow first week.", "inLanguage": "en", "url": "https://infivlabs.github.io/apps/runstarter/start-running-out-of-shape/", "mainEntityOfPage": "https://infivlabs.github.io/apps/runstarter/start-running-out-of-shape/", "author": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "publisher": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "about": {"@id": "https://infivlabs.github.io/apps/runstarter/#app", "name": "Runstarter"}, "image": "https://infivlabs.github.io/apps/runstarter/feature.png", "datePublished": "2026-11-26", "dateModified": "2026-11-26"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "InfiV Labs", "item": "https://infivlabs.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Runstarter", "item": "https://infivlabs.github.io/apps/runstarter/"}, {"@type": "ListItem", "position": 3, "name": "How to start running when you're out of shape", "item": "https://infivlabs.github.io/apps/runstarter/start-running-out-of-shape/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I start running if I'm out of shape?", "acceptedAnswer": {"@type": "Answer", "text": "Walk first if 30 minutes of brisk walking is hard, then start with one-minute runs and walking breaks three times a week. Keep the runs slow enough to talk."}}, {"@type": "Question", "name": "Should I see a doctor before I start running?", "acceptedAnswer": {"@type": "Answer", "text": "Check with a doctor first if you have a heart condition, high blood pressure, chest pain, dizziness, a chronic condition, or a joint problem that activity could make worse. The PAR-Q+ questionnaire is a quick way to check."}}, {"@type": "Question", "name": "How slow should a beginner run?", "acceptedAnswer": {"@type": "Answer", "text": "Slow enough to speak a full sentence. If you can only say a few words, slow down or walk until your breathing settles."}}, {"@type": "Question", "name": "Is it normal to be sore after my first run?", "acceptedAnswer": {"@type": "Answer", "text": "Mild muscle soreness for a day or two is common. Sharp pain, pain that makes you limp, chest pain or dizziness are reasons to stop and get medical advice."}}]}]}</script>
+</head>
+<body class="doc" style="--deep:#c8283c;--lift:#d35363">
+<header class="top"><a class="mark" href="/">InfiV Labs</a><a class="trail" href="/apps/runstarter/">Runstarter</a></header>
+<header class="head"><p class="kicker"><img src="/apps/runstarter/icon.png" alt="">Runstarter guide</p>
+<h1>How to start running when you&#x27;re out of shape</h1>
+<p class="standfirst">How to start running when you&#x27;re out of shape or haven&#x27;t exercised in years: when to see a doctor first, walking before running, and a slow first week.</p>
+<p class="meta"><span>Updated 26 Nov 2026</span><span>5 min read</span></p></header>
+<div class="layout"><article class="prose">
+<p>To start running when you&#x27;re out of shape, begin by walking, then add very short runs of about a minute with walking breaks in between, three times a week. Run slowly enough to talk in full sentences. Check with a doctor first if you have a heart condition, chest pain, dizziness or another health condition. Most of the work in the first weeks is getting your legs used to the impact, so going slower than you think is the plan, not a weakness.</p>
+<blockquote><p>This page is general information about starting to exercise, not medical advice. If you have a health condition, take medication for your heart or blood pressure, are pregnant, or are unsure whether running is safe for you, talk to a doctor first.</p></blockquote>
+<h2 id="before-your-first-run-when-to-see-a-doctor-first">Before your first run: when to see a doctor first</h2>
+<p>Most adults can start walking and gentle jogging without a check-up. The PAR-Q+, a widely used screening questionnaire, suggests talking to a doctor or a qualified exercise professional before becoming much more active if, for example:</p>
+<ul><li>a doctor has told you that you have a heart condition or high blood pressure</li><li>you feel chest pain at rest, during daily activities or when you are active</li><li>you lose balance because of dizziness, or have lost consciousness, in the last 12 months</li><li>you have another chronic medical condition, such as diabetes, or take prescribed medication for one</li><li>a bone, joint or soft-tissue problem could be made worse by being more active</li><li>a doctor has said you should only do medically supervised activity</li></ul>
+<p>A &quot;yes&quot; does not mean you can&#x27;t run. It means getting advice on how to start safely. The official questionnaire is published at <a href="https://eparmedx.com.">https://eparmedx.com.</a></p>
+<h2 id="step-1-walk-first-if-you-need-to">Step 1: walk first if you need to</h2>
+<p>If a 30-minute walk at a brisk pace leaves you very out of breath or sore the next day, start with walking for a few weeks. A simple walking base:</p>
+<div class="table"><table><thead><tr><th>Week</th><th>Each session, three times a week</th></tr></thead><tbody><tr><td>1</td><td>4 times: brisk walk 3 min, easy walk 2 min</td></tr><tr><td>2</td><td>4 times: brisk walk 4 min, easy walk 2 min</td></tr><tr><td>3</td><td>3 times: brisk walk 6 min, easy walk 2 min</td></tr><tr><td>4</td><td>Twice: brisk walk 10 min, easy walk 2 min</td></tr><tr><td>5</td><td>Brisk walk 15 min, easy 2 min, brisk 10 min</td></tr><tr><td>6</td><td>Brisk walk 30 min</td></tr></tbody></table></div>
+<p>Add a five-minute easy walk before and after each session. &quot;Brisk&quot; means walking like you&#x27;re late for a bus while still able to talk. Once week 6 feels comfortable, you are ready for short runs.</p>
+<h2 id="step-2-run-one-minute-at-a-time">Step 2: run one minute at a time</h2>
+<p>Your first running week should look like this: a five-minute walk, then one minute of slow jogging and a minute and a half of walking, eight times, then a five-minute walk. That is 8 minutes of running in a 30-minute session. Each week adds a little. The full nine weeks are in the <a href="/apps/runstarter/beginner-running-plan/">beginner running plan</a>.</p>
+<h2 id="step-3-use-the-talk-test">Step 3: use the talk test</h2>
+<p>Run at a pace where you can still say a whole sentence. The CDC describes moderate effort as being able to talk but not sing, and vigorous effort as not being able to say more than a few words without pausing for breath. For a new runner, the running intervals should feel closer to moderate. If you can&#x27;t finish a sentence, slow down. If you&#x27;re already jogging as slowly as you can, walk.</p>
+<p>This feels too slow to many beginners. It isn&#x27;t. A slow jog lets you finish the session, and finishing sessions is what builds fitness.</p>
+<h2 id="what-to-expect-in-the-first-weeks">What to expect in the first weeks</h2>
+<ul><li><b>Heavy legs and breathlessness</b> in the first runs are normal. They ease over the first two or three weeks.</li><li><b>Mild muscle soreness</b> a day or two after a run is common at the start. It should fade within a few days.</li><li><b>Some sessions feel harder than others</b> for no clear reason: sleep, heat, stress and food all play a part.</li></ul>
+<p>Stop and walk, and get medical advice, if you feel chest pain or pressure, dizziness, faintness, unusual shortness of breath, or a sharp or worsening pain in a joint or bone. Pain that makes you limp is a reason to stop running until a professional has looked at it.</p>
+<h2 id="starting-at-a-higher-body-weight">Starting at a higher body weight</h2>
+<p>Running at any size works the same way: start with walking, keep runs short and slow, and build gradually. A few things make it more comfortable:</p>
+<ul><li><b>Choose softer, even ground</b> where you can, such as a park path or a running track.</li><li><b>Get shoes that feel comfortable when you jog in the shop</b>, and replace them when they are clearly worn.</li><li><b>Wear clothing that doesn&#x27;t rub</b>, such as close-fitting shorts or leggings, and fix any chafing spot before the next run.</li><li><b>Stay longer in the walking plan</b> if your knees or feet complain. There is no deadline.</li></ul>
+<h2 id="if-you-hate-running">If you hate running</h2>
+<p>Many people who &quot;hate running&quot; have only tried running too fast. Try a session at walking-plus pace with music or a podcast, on a route you like, with a friend if possible. Set a goal you can see, such as a local 5K in three months. Track sessions, not speed.</p>
+<h2 id="common-mistakes">Common mistakes</h2>
+<ul><li><b>Starting too fast</b>, then stopping after a few minutes.</li><li><b>Running on consecutive days</b> in the first weeks. Rest days are when your body adapts.</li><li><b>Jumping ahead</b> because a week felt easy. The step after an easy week is often the hard one.</li><li><b>Quitting after a missed week.</b> Go back one week and carry on.</li></ul>
+<h2 id="how-runstarter-helps">How Runstarter helps</h2>
+<p><a href="/apps/runstarter/">Runstarter</a> has a six-week walking plan to build a base, then the nine-week walk-run plan. A voice coach tells you when to run and walk, and after each session you say how it felt. After a hard one it offers to repeat it, and after two in a row, to step back. If you miss a few days, it suggests where to pick up again. For a January start, see the <a href="/apps/runstarter/new-year-running-plan/">New Year running plan</a>.</p>
+<h2 id="questions">Questions</h2>
+<h3>How do I start running if I&#x27;m out of shape?</h3>
+<p>Walk first if 30 minutes of brisk walking is hard, then start with one-minute runs and walking breaks three times a week. Keep the runs slow enough to talk.</p>
+<h3>Should I see a doctor before I start running?</h3>
+<p>Check with a doctor first if you have a heart condition, high blood pressure, chest pain, dizziness, a chronic condition, or a joint problem that activity could make worse. The PAR-Q+ questionnaire is a quick way to check.</p>
+<h3>How slow should a beginner run?</h3>
+<p>Slow enough to speak a full sentence. If you can only say a few words, slow down or walk until your breathing settles.</p>
+<h3>Is it normal to be sore after my first run?</h3>
+<p>Mild muscle soreness for a day or two is common. Sharp pain, pain that makes you limp, chest pain or dizziness are reasons to stop and get medical advice.</p>
+<h2 id="sources">Sources</h2>
+<ul><li><a href="https://eparmedx.com/">https://eparmedx.com/</a></li><li><a href="https://www.cdc.gov/physical-activity-basics/measuring/index.html">https://www.cdc.gov/physical-activity-basics/measuring/index.html</a></li><li><a href="https://www.cdc.gov/physical-activity-basics/guidelines/adults.html">https://www.cdc.gov/physical-activity-basics/guidelines/adults.html</a></li></ul>
+</article>
+<aside class="rail"><nav class="toc"><b>On this page</b><ol><li><a href="#before-your-first-run-when-to-see-a-doctor-first">Before your first run: when to see a doctor first</a></li><li><a href="#step-1-walk-first-if-you-need-to">Step 1: walk first if you need to</a></li><li><a href="#step-2-run-one-minute-at-a-time">Step 2: run one minute at a time</a></li><li><a href="#step-3-use-the-talk-test">Step 3: use the talk test</a></li><li><a href="#what-to-expect-in-the-first-weeks">What to expect in the first weeks</a></li><li><a href="#starting-at-a-higher-body-weight">Starting at a higher body weight</a></li><li><a href="#if-you-hate-running">If you hate running</a></li><li><a href="#common-mistakes">Common mistakes</a></li><li><a href="#how-runstarter-helps">How Runstarter helps</a></li><li><a href="#questions">Questions</a></li><li><a href="#sources">Sources</a></li></ol></nav><div class="get"><img class="icon" src="/apps/runstarter/icon.png" alt="" width="58" height="58"><b>Runstarter</b><small></small><p>Learn to run 5K: a walk-run plan that adapts to you, with a voice coach</p><a class="button" href="/apps/runstarter/">See Runstarter</a></div></aside></div>
+<section class="cards"><h2>More guides from Runstarter</h2><ul><li><a href="/apps/runstarter/beginner-running-plan/" lang="en"><b>Beginner running plan: 9 weeks from walking to running 5K</b><span>A 9-week beginner running plan: three walk-run sessions a week, from 1-minute runs to 30 minutes nonstop, with the full week-by-week table.</span><i>Read the guide →</i></a></li><li><a href="/apps/runstarter/average-5k-time/" lang="en"><b>Average 5K time by age, gender and for beginners</b><span>The average 5K time for US race finishers in 2018 was 39:02 (men 35:22, women 41:21). Times by age group, beginner times and a pace table.</span><i>Read the guide →</i></a></li><li><a href="/apps/runstarter/new-year-running-plan/" lang="en"><b>New Year running plan 2027: start running in January</b><span>A New Year running plan for 2027: nine weeks of walk-run sessions from January 4 to March 7, with dates, winter tips and a spring 5K goal.</span><i>Read the guide →</i></a></li></ul></section>
+
+<footer class="foot"><a href="/">InfiV Labs</a><a href="/apps/runstarter/privacy/">Privacy policy</a><a href="/apps/runstarter/terms/">Terms of use</a><a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></footer>
+</body>
+</html>

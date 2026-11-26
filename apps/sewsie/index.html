@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sewsie – Doll Coloring &amp; Dress Up</title>
+<title>Sewsie: Doll Coloring and Dress Up Game for Kids</title>
 <style>
 :root{--paper:#f4efe6;--shelf:#e9e1d3;--ink:#1d1b18;--muted:#5d564c;--accent:#c4421d;--line:#d6ccbb;
 --display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light dark}
@@ -59,12 +59,77 @@ translate:calc(var(--x)*var(--spread)*12%) var(--y);rotate:calc(var(--r)*(1 + va
 .poster{padding:0 1.4rem 1.4rem}.poster img{width:100%;height:auto;border-radius:12px}
 @media (hover:hover){.app:hover .fan{animation-play-state:paused;--spread:1}}
 @media (min-width:720px){.app{grid-template-columns:1fr 1.15fr;min-height:420px}.info{justify-content:center;padding:2.5rem}.info .icon{width:88px;height:88px}.info b{font-size:2.4rem}}
-tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
-.table{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px}
-th,td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
-th{font-size:.85rem;color:var(--muted)}
-@media (max-width:599px){table{min-width:0}thead{display:none}tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
-td{border:0;padding:0}td:first-child{grid-row:span 3}td:nth-child(2){grid-column:2/4;font-weight:600}td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}td:nth-child(5){grid-column:2/4}}td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}td .icon{width:40px;height:40px}
+.home tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
+.table{overflow-x:auto}.home table{border-collapse:collapse;width:100%;min-width:560px}
+.home th,.home td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.home th{font-size:.85rem;color:var(--muted)}
+@media (max-width:599px){.home table{min-width:0}.home thead{display:none}.home tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.home td{border:0;padding:0}.home td:first-child{grid-row:span 3}.home td:nth-child(2){grid-column:2/4;font-weight:600}.home td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}.home td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}.home td:nth-child(5){grid-column:2/4}}.home td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}.home td .icon{width:40px;height:40px}
+.doc{--card:#fbf8f2;--deep:#8f3417;--accent:var(--deep);max-width:1120px;margin:0 auto;padding:0 1.25rem 1rem}
+@media (prefers-color-scheme:dark){.doc{--card:#1f1c18;--accent:var(--lift,#f07a52)}}
+.top{display:flex;align-items:center;flex-wrap:wrap;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.top a{padding:.7rem 0;text-decoration:none}.mark{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.trail{color:var(--muted)}.trail::before{content:"/";margin:0 .7rem;color:var(--line)}
+.doc .button{background:var(--deep);color:#fff;border-radius:999px;padding:.85rem 1.5rem;box-shadow:0 10px 24px -12px var(--deep);transition:transform .2s ease}
+.doc .button:active{transform:scale(.97)}
+.hero-app{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding:2.5rem 0 1rem;align-items:center}
+.hero-app h1{font-size:clamp(2.1rem,5vw,3.5rem);letter-spacing:-.02em;margin:1rem 0 .7rem;max-width:18ch}
+.hero-app .icon{width:88px;height:88px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+.hero-app .lead{max-width:36rem;margin:0 0 1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin:0}
+.stage{border-radius:28px;background:radial-gradient(80% 70% at 50% 45%,color-mix(in oklab,var(--accent) 22%,transparent),transparent 72%)}
+.stage .fan{padding:2rem 1rem 3rem}
+@media (min-width:860px){.hero-app{grid-template-columns:1.05fr 1fr;min-height:480px}}
+.prose{max-width:68ch;font-size:1.075rem;line-height:1.72}
+.prose h2{font-size:1.8rem;letter-spacing:-.01em;margin:2.8rem 0 .8rem;scroll-margin-top:1rem}
+.prose h3{font-family:system-ui,sans-serif;font-size:1.13rem;margin:1.9rem 0 .35rem}
+.prose ul{padding-left:1.2rem}.prose li{margin:.45rem 0}.prose li::marker{color:var(--accent)}
+.prose ol{counter-reset:step;list-style:none;padding:0}
+.prose ol>li{counter-increment:step;position:relative;padding-left:2.7rem;margin:.9rem 0}
+.prose ol>li::before{content:counter(step);position:absolute;left:0;top:.15rem;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .88rem/1.85rem system-ui,sans-serif;text-align:center}
+.prose .table{margin:1.6rem 0;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.prose table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+.prose th{background:var(--shelf);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left}
+.prose th,.prose td{padding:.7rem .95rem;border-bottom:1px solid var(--line);vertical-align:top}
+.prose tbody tr:last-child td{border-bottom:0}.prose td:first-child{font-weight:600}
+.prose blockquote{margin:1.8rem 0;padding:1rem 1.25rem 1rem 3rem;position:relative;border-radius:14px;background:color-mix(in oklab,var(--accent) 9%,var(--card));border:1px solid color-mix(in oklab,var(--accent) 28%,transparent);font-size:.98rem}
+.prose blockquote::before{content:"i";position:absolute;left:1.05rem;top:1.15rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .8rem/1.3rem Georgia,serif;text-align:center}
+.prose blockquote p{margin:0}
+.prose b{color:var(--ink)}.prose code{font:.9em ui-monospace,Menlo,monospace;padding:.1em .35em;border-radius:5px;background:var(--shelf);overflow-wrap:anywhere}
+.head{padding:2.8rem 0 2rem;max-width:48rem}
+.kicker{display:flex;align-items:center;gap:.6rem;margin:0;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.kicker img{width:30px;height:30px;border-radius:22%}
+.head h1{font-size:clamp(2.05rem,4.8vw,3.4rem);letter-spacing:-.02em;margin:.8rem 0 .9rem}
+.standfirst{font-size:1.24rem;line-height:1.5;color:var(--muted);margin:0 0 1.1rem}
+.meta{margin:0;font-size:.9rem;color:var(--muted)}.meta span+span::before{content:"·";margin:0 .55rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;border-top:1px solid var(--line);padding-top:.5rem}
+.toc{display:none}
+@media (min-width:980px){.layout{grid-template-columns:minmax(0,1fr) 300px;gap:4rem}.rail{position:sticky;top:1.5rem;align-self:start;padding-top:2.4rem}
+.toc{display:block;margin-bottom:1.5rem}}
+.toc b{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.toc ol{list-style:none;padding:0;margin:.7rem 0 0;border-left:2px solid var(--line)}
+.toc a{display:block;margin-left:-2px;padding:.35rem 0 .35rem 1rem;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:.93rem;line-height:1.4}
+.toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+.get{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;align-items:center;padding:1.4rem;border-radius:22px;border:1px solid var(--line);
+background:linear-gradient(155deg,color-mix(in oklab,var(--accent) 16%,var(--card)),var(--card) 70%)}
+.get .icon{grid-row:span 2;width:58px;height:58px;box-shadow:0 10px 22px -12px rgba(0,0,0,.5)}
+.get b{font-family:var(--display);font-size:1.35rem;line-height:1.15}.get small{color:var(--muted)}
+.get p{grid-column:1/-1;margin:.8rem 0 1rem;color:var(--muted);font-size:.95rem;line-height:1.5}
+.get .button{grid-column:1/-1;text-align:center}
+.cards{margin:3.5rem 0 1rem}.cards h2{font-size:1.65rem;margin-bottom:1.1rem}
+.cards ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.cards a{display:flex;flex-direction:column;gap:.55rem;height:100%;box-sizing:border-box;padding:1.3rem 1.3rem 1.1rem;border-radius:18px;border:1px solid var(--line);
+background:var(--card);color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.cards b{font-family:var(--display);font-size:1.22rem;line-height:1.25}.cards span{color:var(--muted);font-size:.94rem;line-height:1.5}
+.cards i{margin-top:auto;padding-top:.4rem;font-style:normal;font-weight:700;font-size:.9rem;color:var(--accent)}
+@media (hover:hover){.cards a:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 18px 34px -22px rgba(0,0,0,.5)}}
+.foot{display:flex;flex-wrap:wrap;gap:0 1.4rem;margin:4rem 0 1rem;padding-top:.6rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.foot a{color:var(--muted);padding:.75rem 0;display:inline-block}
+.prose td:empty{height:2.3rem}
+@media (min-width:860px){.stage .fan img{max-width:230px}}
+@media print{.top,.rail,.cards,.foot,.stage,.actions,.kicker img{display:none!important}.doc{max-width:none;padding:0}
+.layout{display:block;border:0}.prose{max-width:none;font-size:11pt}.prose .table{break-inside:avoid}.prose td:empty{height:9mm}
+.prose a{color:inherit}*{animation:none!important;box-shadow:none!important}}
 footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted)}
 @keyframes rise{from{opacity:0;transform:translateY(.6em)}}
 @keyframes drift{to{transform:translate(4%,3%) scale(1.08)}}
@@ -77,13 +142,47 @@ footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);colo
 @keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-12deg)}60%{opacity:1;transform:scale(.94) rotate(-1deg)}100%{transform:rotate(-2deg)}}
 @media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
 </style>
+<meta name="description" content="Sewsie is a doll coloring and dress up game for kids aged 4 to 10: color a dress, sew it onto the doll and dress her up. Plays offline, no account.">
+<link rel="canonical" href="https://infivlabs.github.io/apps/sewsie/">
+<meta property="og:site_name" content="InfiV Labs">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://infivlabs.github.io/apps/sewsie/">
+<meta property="og:title" content="Sewsie: Doll Coloring and Dress Up Game for Kids">
+<meta property="og:description" content="Sewsie is a doll coloring and dress up game for kids aged 4 to 10: color a dress, sew it onto the doll and dress her up. Plays offline, no account.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://infivlabs.github.io/apps/sewsie/feature.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "MobileApplication", "@id": "https://infivlabs.github.io/apps/sewsie/#app", "name": "Sewsie – Doll Coloring & Dress Up", "description": "Sewsie is a doll coloring and dress up game for kids aged 4 to 10: color a dress with glitter, blends and fabric prints, sew it onto your doll and dress her…", "url": "https://infivlabs.github.io/apps/sewsie/", "operatingSystem": "Android", "publisher": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "applicationCategory": "Educational", "image": "https://infivlabs.github.io/apps/sewsie/icon.png", "screenshot": ["https://infivlabs.github.io/apps/sewsie/shot1.png", "https://infivlabs.github.io/apps/sewsie/shot2.png", "https://infivlabs.github.io/apps/sewsie/shot3.png"], "dateModified": "2026-11-25"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "InfiV Labs", "item": "https://infivlabs.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Sewsie – Doll Coloring & Dress Up", "item": "https://infivlabs.github.io/apps/sewsie/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What age is Sewsie for?", "acceptedAnswer": {"@type": "Answer", "text": "Children aged about 4 to 10. Younger ones can tap-fill and dress the doll without reading; older ones spend longer on blends, prints and matching outfits."}}, {"@type": "Question", "name": "Does Sewsie work offline?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Coloring, dressing, scenes and the lookbook all work without a connection. Ads in the Google Play version only load when the device is online."}}, {"@type": "Question", "name": "Are there ads in Sewsie?", "acceptedAnswer": {"@type": "Answer", "text": "On Google Play, the free version shows child-safe, non-personalized ads, and buying the unlock removes them. Ads never appear when the app opens or while your child is coloring or dressing the doll."}}, {"@type": "Question", "name": "Can my child buy things by accident?", "acceptedAnswer": {"@type": "Answer", "text": "Purchases sit behind a grown-ups' question, and there is only one item to buy: a one-time unlock with no subscription."}}]}]}</script>
 </head>
-<body>
-<p class="back"><a href="/">InfiV Labs</a></p>
-<img class="icon" src="icon.png" alt="" width="96" height="96">
-<h1>Sewsie – Doll Coloring &amp; Dress Up</h1>
+<body class="doc" style="--deep:#0b7a72;--lift:#308e87">
+<header class="top"><a class="mark" href="/">InfiV Labs</a><span class="trail">Sewsie – Doll Coloring &amp; Dress Up</span></header>
+<section class="hero-app"><div><img class="icon" src="icon.png" alt="" width="88" height="88">
+<h1>Sewsie: a doll coloring and dress up game for kids</h1>
 <p class="lead">Color glitter dresses, sew them onto your doll, dress up and play offline</p>
-<p class="links"><a href="privacy/">Privacy policy</a> · <a href="terms/">Terms of use</a></p>
-<p class="links">Support: <a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></p>
+<p class="actions"></p></div><div class="stage"><span class="fan"><img src="shot2.png" alt="Sewsie – Doll Coloring &amp; Dress Up screenshot" width="1080" height="1920" loading="lazy"><img src="shot1.png" alt="Sewsie – Doll Coloring &amp; Dress Up screenshot" width="1080" height="1920" loading="lazy"><img src="shot3.png" alt="Sewsie – Doll Coloring &amp; Dress Up screenshot" width="1080" height="1920" loading="lazy"></span></div></section>
+<div class="layout"><article class="prose">
+<p>Sewsie is a coloring and dress-up game for children aged about 4 to 10. Your child colors a garment, taps &quot;Sew it on&quot;, and watches a running stitch fix it onto the doll. Then she dresses the doll, picks a scene and keeps the look in a lookbook. It works without internet and needs no account.</p>
+<h2 id="what-your-child-does-in-sewsie">What your child does in Sewsie</h2>
+<ul><li><b>Colors a garment.</b> Tap a part of a dress, coat or skirt to fill it with a plain color, a soft blend, glitter, or a print: dots, stripes, checks, hearts, stars or flowers. Undo is one tap away.</li><li><b>Sews it on.</b> The finished piece flies to the doll and a stitch line runs around it as it lands.</li><li><b>Dresses the doll.</b> Racks hold dresses, tops, skirts, coats, shoes, bags, hats and necklaces to mix and match. Tap the doll and she twirls, with the skirt and hair swinging like real fabric.</li><li><b>Makes the doll her own.</b> Eight skin tones, thirteen hair colors and nineteen hairstyles, plus touches such as freckles, glasses, vitiligo and hearing aids, so children can make a doll that looks like them.</li><li><b>Chooses a scene.</b> The atelier, a garden party or the runway, then a photo for the lookbook.</li></ul>
+<p>Every outfit and look saves by itself, and a new design is free to color each day.</p>
+<h2 id="what-grown-ups-should-know">What grown-ups should know</h2>
+<ul><li><b>Offline.</b> All coloring and dressing works with no connection, which makes it a good fit for car rides and flights.</li><li><b>No account, no sign-up.</b> Drawings and looks are stored on the device. The <a href="/apps/sewsie/privacy/">privacy policy</a> lists exactly what is and is not collected.</li><li><b>A grown-ups&#x27; question.</b> Purchases, sharing a picture, settings and links out of the app sit behind a simple multiplication question.</li><li><b>What is free.</b> Twenty garments, three scenes and the daily design. One payment, with no subscription, opens every garment and scene, including the Winter Ball, and the seasonal packs that follow.</li><li><b>Ads on Google Play.</b> The free Android version shows a few child-safe, non-personalized ads. A child can choose to watch a short video to open one garment for good, and a full-screen ad can follow a finished creation, never when the app opens and never while coloring or dressing. The one-time unlock removes all ads.</li></ul>
+<h2 id="how-sewsie-differs-from-other-coloring-games">How Sewsie differs from other coloring games</h2>
+<p>In most coloring apps the game ends when the picture is filled. In Sewsie the dress your child colored is the one the doll wears, twirls in and poses in for a photo. The doll is an original character, and the app looks like a tailor&#x27;s workroom, with pattern paper, pins and fabric swatches.</p>
+<p>For ideas away from the screen, see the guides to <a href="/apps/sewsie/christmas-dress-coloring-ideas/">Christmas dress coloring ideas</a> and <a href="/apps/sewsie/how-to-make-paper-dolls/">how to make paper dolls and clothes</a>.</p>
+<h2 id="questions">Questions</h2>
+<h3>What age is Sewsie for?</h3>
+<p>Children aged about 4 to 10. Younger ones can tap-fill and dress the doll without reading; older ones spend longer on blends, prints and matching outfits.</p>
+<h3>Does Sewsie work offline?</h3>
+<p>Yes. Coloring, dressing, scenes and the lookbook all work without a connection. Ads in the Google Play version only load when the device is online.</p>
+<h3>Are there ads in Sewsie?</h3>
+<p>On Google Play, the free version shows child-safe, non-personalized ads, and buying the unlock removes them. Ads never appear when the app opens or while your child is coloring or dressing the doll.</p>
+<h3>Can my child buy things by accident?</h3>
+<p>Purchases sit behind a grown-ups&#x27; question, and there is only one item to buy: a one-time unlock with no subscription.</p>
+</article>
+<aside class="rail"><nav class="toc"><b>On this page</b><ol><li><a href="#what-your-child-does-in-sewsie">What your child does in Sewsie</a></li><li><a href="#what-grown-ups-should-know">What grown-ups should know</a></li><li><a href="#how-sewsie-differs-from-other-coloring-games">How Sewsie differs from other coloring games</a></li><li><a href="#questions">Questions</a></li></ol></nav></aside></div>
+<section class="cards"><h2>Guides</h2><ul><li><a href="/apps/sewsie/christmas-dress-coloring-ideas/" lang="en"><b>Christmas dress coloring ideas for kids</b><span>Christmas dress coloring ideas for kids: 10 holiday color palettes, story prompts, ways to make coloring a family activity and screen-free crafts.</span><i>Read the guide →</i></a></li><li><a href="/apps/sewsie/coloring-games-for-kids-offline/" lang="en"><b>Coloring games for kids that work offline: a parent&#x27;s checklist</b><span>Choosing coloring games for kids that work offline: how to test offline play, read the ads and purchase rules, set up purchase checks and spot red flags.</span><i>Read the guide →</i></a></li><li><a href="/apps/sewsie/how-to-make-paper-dolls/" lang="en"><b>How to make paper dolls and clothes with kids</b><span>How to make paper dolls and clothes at home: what paper to use, how to draw the doll, fold-over tabs that hold, a stand, and wardrobe ideas by season.</span><i>Read the guide →</i></a></li><li><a href="/apps/sewsie/how-to-draw-a-dress-for-kids/" lang="en"><b>How to draw a dress for kids: easy steps with simple shapes</b><span>How to draw a dress for kids in six easy steps, using simple shapes, plus five dress styles to try, coloring tips and fixes for common mistakes.</span><i>Read the guide →</i></a></li></ul></section>
+
+<footer class="foot"><a href="/">InfiV Labs</a><a href="/apps/sewsie/privacy/">Privacy policy</a><a href="/apps/sewsie/terms/">Terms of use</a><a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></footer>
 </body>
 </html>

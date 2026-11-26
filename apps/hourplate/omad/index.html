@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OMAD (One Meal a Day): How It Works, and OMAD vs 16:8</title>
+<style>
+:root{--paper:#f4efe6;--shelf:#e9e1d3;--ink:#1d1b18;--muted:#5d564c;--accent:#c4421d;--line:#d6ccbb;
+--display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#171512;--shelf:#221f1a;--ink:#ede6da;--muted:#a89f92;--accent:#f07a52;--line:#3a352d}}
+body{font-family:system-ui,sans-serif;max-width:680px;margin:2rem auto;padding:0 1.25rem;line-height:1.55;color:var(--ink);background:var(--paper);overflow-wrap:break-word}
+a{overflow-wrap:anywhere}
+h1,h2,h3{font-family:var(--display);line-height:1.15}a{color:var(--accent)}
+.back a{color:var(--muted);text-decoration:none;display:inline-block;padding:.75rem 0}.back a::before{content:"← "}
+.icon{border-radius:22%;display:block}
+.lead{font-size:1.15rem;color:var(--muted)}
+.links a,footer a{display:inline-block;padding:.75rem 0}
+.button{display:inline-block;padding:.75rem 1.25rem;border-radius:6px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600}
+.stamp{display:inline-block;padding:.15rem .55rem;border:2px solid currentColor;border-radius:3px;font-size:.8rem;font-weight:700;color:var(--muted)}
+.stamp-live{color:#2f7a4a}.stamp-review{color:#8a5a00}.stamp-testing{color:var(--accent)}
+@media (prefers-color-scheme:dark){.stamp-live{color:#7cc89a}.stamp-review{color:#e2b45c}}
+.home{--paper:#0f0e0c;--surface:#1a1815;--ink:#f2ede4;--muted:#b0a797;--accent:#ff7a50;--line:#2e2a24;
+max-width:1100px;color-scheme:dark;margin-top:0}
+html:has(.home){overflow-x:clip}
+.hero{position:relative;padding:2.5rem 0 2rem;isolation:isolate}
+.home::before{content:"";position:fixed;inset:-10%;z-index:-1;pointer-events:none;
+background:radial-gradient(70vmax 55vmax at 10% 5%,rgba(255,122,80,.26),transparent 60%),radial-gradient(60vmax 50vmax at 100% 50%,rgba(63,179,154,.18),transparent 60%),
+radial-gradient(70vmax 45vmax at 15% 100%,rgba(255,196,107,.1),transparent 60%);animation:drift 20s ease-in-out infinite alternate}
+.wordmark{font-weight:800;letter-spacing:-.02em;font-size:1.05rem;margin:0}
+.hero h1{font-size:clamp(2.2rem,min(11vw,13vh),5.4rem);font-weight:700;letter-spacing:-.025em;line-height:1.02;margin:.7rem 0 1rem;max-width:14ch}
+.hero h1 span{display:inline-block;animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both}
+.hero h1 span:nth-child(n+5){background:linear-gradient(90deg,#ff7a50,#ffc46b,#ff7a50) 0 0/200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both,shimmer 5s 1.2s linear infinite}
+.hero .lead{max-width:34rem;margin:0;animation:rise .7s .5s cubic-bezier(.2,.7,.2,1) both}
+.ticker{overflow:hidden;border-block:1px solid var(--line);margin:0 calc(50% - 50vw);padding:.7rem 0;font-weight:700;font-size:.9rem;color:var(--muted);white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.ticker p{display:inline-block;margin:0;animation:ticker 78s linear infinite}
+.ticker span{padding:0 1.1rem}.ticker span::after{content:"✦";color:var(--accent);padding-left:2.2rem}
+section h2{font-size:1.5rem;margin:2.2rem 0 1rem}
+.shelf{list-style:none;padding:0;margin:0;display:grid;gap:1.5rem}
+.shelf li{animation:rise .8s calc(.6s + var(--i)*140ms) cubic-bezier(.2,.7,.2,1) both}
+@property --spread{syntax:"<number>";inherits:true;initial-value:0}
+.app{position:relative;isolation:isolate;display:grid;overflow:hidden;border-radius:24px;color:inherit;text-decoration:none;
+transition:transform .2s ease;-webkit-tap-highlight-color:transparent}
+.app::before{content:"";position:absolute;inset:-100%;z-index:-2;background:conic-gradient(var(--line) 0 55%,#ff7a50 72%,#ffc46b 82%,var(--line) 100%);animation:turn 7s linear infinite}
+.app::after{content:"";position:absolute;inset:2px;z-index:-1;border-radius:22px;background:var(--surface)}
+.app:active{transform:scale(.98)}
+.info{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;padding:1.5rem 1.4rem .5rem}
+.info .icon{width:72px;height:72px;box-shadow:0 10px 24px -8px rgba(0,0,0,.6);animation:bob 5s ease-in-out infinite alternate}
+.info b{font-family:var(--display);font-size:1.9rem;line-height:1.1;color:var(--ink)}
+.info>span:not(.stamp){color:var(--muted)}
+.home .stamp-live{color:#7cc89a}.home .stamp-review{color:#e2b45c}
+.app .stamp{animation:stamp .5s calc(1.2s + var(--i)*140ms) cubic-bezier(.3,1.4,.5,1) both}
+.fan{display:flex;justify-content:center;align-items:center;padding:1.5rem 1rem 2.5rem;animation:breathe 7s 2s ease-in-out infinite;transition:--spread .5s}
+.fan img{position:relative;width:29%;max-width:190px;height:auto;margin-inline:-2%;border-radius:18px;box-shadow:0 18px 36px -10px rgba(0,0,0,.65);
+translate:calc(var(--x)*var(--spread)*12%) var(--y);rotate:calc(var(--r)*(1 + var(--spread)*.5));animation:bob 4.5s ease-in-out infinite alternate}
+.fan img:nth-child(1){--x:-1;--y:16px;--r:-8deg;animation-delay:-1.5s}
+.fan img:nth-child(2){--x:0;--y:-8px;--r:0deg;z-index:1}
+.fan img:nth-child(3){--x:1;--y:16px;--r:8deg;animation-delay:-3s}
+.poster{padding:0 1.4rem 1.4rem}.poster img{width:100%;height:auto;border-radius:12px}
+@media (hover:hover){.app:hover .fan{animation-play-state:paused;--spread:1}}
+@media (min-width:720px){.app{grid-template-columns:1fr 1.15fr;min-height:420px}.info{justify-content:center;padding:2.5rem}.info .icon{width:88px;height:88px}.info b{font-size:2.4rem}}
+.home tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
+.table{overflow-x:auto}.home table{border-collapse:collapse;width:100%;min-width:560px}
+.home th,.home td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.home th{font-size:.85rem;color:var(--muted)}
+@media (max-width:599px){.home table{min-width:0}.home thead{display:none}.home tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.home td{border:0;padding:0}.home td:first-child{grid-row:span 3}.home td:nth-child(2){grid-column:2/4;font-weight:600}.home td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}.home td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}.home td:nth-child(5){grid-column:2/4}}.home td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}.home td .icon{width:40px;height:40px}
+.doc{--card:#fbf8f2;--deep:#8f3417;--accent:var(--deep);max-width:1120px;margin:0 auto;padding:0 1.25rem 1rem}
+@media (prefers-color-scheme:dark){.doc{--card:#1f1c18;--accent:var(--lift,#f07a52)}}
+.top{display:flex;align-items:center;flex-wrap:wrap;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.top a{padding:.7rem 0;text-decoration:none}.mark{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.trail{color:var(--muted)}.trail::before{content:"/";margin:0 .7rem;color:var(--line)}
+.doc .button{background:var(--deep);color:#fff;border-radius:999px;padding:.85rem 1.5rem;box-shadow:0 10px 24px -12px var(--deep);transition:transform .2s ease}
+.doc .button:active{transform:scale(.97)}
+.hero-app{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding:2.5rem 0 1rem;align-items:center}
+.hero-app h1{font-size:clamp(2.1rem,5vw,3.5rem);letter-spacing:-.02em;margin:1rem 0 .7rem;max-width:18ch}
+.hero-app .icon{width:88px;height:88px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+.hero-app .lead{max-width:36rem;margin:0 0 1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin:0}
+.stage{border-radius:28px;background:radial-gradient(80% 70% at 50% 45%,color-mix(in oklab,var(--accent) 22%,transparent),transparent 72%)}
+.stage .fan{padding:2rem 1rem 3rem}
+@media (min-width:860px){.hero-app{grid-template-columns:1.05fr 1fr;min-height:480px}}
+.prose{max-width:68ch;font-size:1.075rem;line-height:1.72}
+.prose h2{font-size:1.8rem;letter-spacing:-.01em;margin:2.8rem 0 .8rem;scroll-margin-top:1rem}
+.prose h3{font-family:system-ui,sans-serif;font-size:1.13rem;margin:1.9rem 0 .35rem}
+.prose ul{padding-left:1.2rem}.prose li{margin:.45rem 0}.prose li::marker{color:var(--accent)}
+.prose ol{counter-reset:step;list-style:none;padding:0}
+.prose ol>li{counter-increment:step;position:relative;padding-left:2.7rem;margin:.9rem 0}
+.prose ol>li::before{content:counter(step);position:absolute;left:0;top:.15rem;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .88rem/1.85rem system-ui,sans-serif;text-align:center}
+.prose .table{margin:1.6rem 0;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.prose table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+.prose th{background:var(--shelf);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left}
+.prose th,.prose td{padding:.7rem .95rem;border-bottom:1px solid var(--line);vertical-align:top}
+.prose tbody tr:last-child td{border-bottom:0}.prose td:first-child{font-weight:600}
+.prose blockquote{margin:1.8rem 0;padding:1rem 1.25rem 1rem 3rem;position:relative;border-radius:14px;background:color-mix(in oklab,var(--accent) 9%,var(--card));border:1px solid color-mix(in oklab,var(--accent) 28%,transparent);font-size:.98rem}
+.prose blockquote::before{content:"i";position:absolute;left:1.05rem;top:1.15rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .8rem/1.3rem Georgia,serif;text-align:center}
+.prose blockquote p{margin:0}
+.prose b{color:var(--ink)}.prose code{font:.9em ui-monospace,Menlo,monospace;padding:.1em .35em;border-radius:5px;background:var(--shelf);overflow-wrap:anywhere}
+.head{padding:2.8rem 0 2rem;max-width:48rem}
+.kicker{display:flex;align-items:center;gap:.6rem;margin:0;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.kicker img{width:30px;height:30px;border-radius:22%}
+.head h1{font-size:clamp(2.05rem,4.8vw,3.4rem);letter-spacing:-.02em;margin:.8rem 0 .9rem}
+.standfirst{font-size:1.24rem;line-height:1.5;color:var(--muted);margin:0 0 1.1rem}
+.meta{margin:0;font-size:.9rem;color:var(--muted)}.meta span+span::before{content:"·";margin:0 .55rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;border-top:1px solid var(--line);padding-top:.5rem}
+.toc{display:none}
+@media (min-width:980px){.layout{grid-template-columns:minmax(0,1fr) 300px;gap:4rem}.rail{position:sticky;top:1.5rem;align-self:start;padding-top:2.4rem}
+.toc{display:block;margin-bottom:1.5rem}}
+.toc b{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.toc ol{list-style:none;padding:0;margin:.7rem 0 0;border-left:2px solid var(--line)}
+.toc a{display:block;margin-left:-2px;padding:.35rem 0 .35rem 1rem;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:.93rem;line-height:1.4}
+.toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+.get{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;align-items:center;padding:1.4rem;border-radius:22px;border:1px solid var(--line);
+background:linear-gradient(155deg,color-mix(in oklab,var(--accent) 16%,var(--card)),var(--card) 70%)}
+.get .icon{grid-row:span 2;width:58px;height:58px;box-shadow:0 10px 22px -12px rgba(0,0,0,.5)}
+.get b{font-family:var(--display);font-size:1.35rem;line-height:1.15}.get small{color:var(--muted)}
+.get p{grid-column:1/-1;margin:.8rem 0 1rem;color:var(--muted);font-size:.95rem;line-height:1.5}
+.get .button{grid-column:1/-1;text-align:center}
+.cards{margin:3.5rem 0 1rem}.cards h2{font-size:1.65rem;margin-bottom:1.1rem}
+.cards ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.cards a{display:flex;flex-direction:column;gap:.55rem;height:100%;box-sizing:border-box;padding:1.3rem 1.3rem 1.1rem;border-radius:18px;border:1px solid var(--line);
+background:var(--card);color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.cards b{font-family:var(--display);font-size:1.22rem;line-height:1.25}.cards span{color:var(--muted);font-size:.94rem;line-height:1.5}
+.cards i{margin-top:auto;padding-top:.4rem;font-style:normal;font-weight:700;font-size:.9rem;color:var(--accent)}
+@media (hover:hover){.cards a:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 18px 34px -22px rgba(0,0,0,.5)}}
+.foot{display:flex;flex-wrap:wrap;gap:0 1.4rem;margin:4rem 0 1rem;padding-top:.6rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.foot a{color:var(--muted);padding:.75rem 0;display:inline-block}
+.prose td:empty{height:2.3rem}
+@media (min-width:860px){.stage .fan img{max-width:230px}}
+@media print{.top,.rail,.cards,.foot,.stage,.actions,.kicker img{display:none!important}.doc{max-width:none;padding:0}
+.layout{display:block;border:0}.prose{max-width:none;font-size:11pt}.prose .table{break-inside:avoid}.prose td:empty{height:9mm}
+.prose a{color:inherit}*{animation:none!important;box-shadow:none!important}}
+footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted)}
+@keyframes rise{from{opacity:0;transform:translateY(.6em)}}
+@keyframes drift{to{transform:translate(4%,3%) scale(1.08)}}
+@keyframes shimmer{to{background-position:-200% 0}}
+@keyframes ticker{to{transform:translateX(-50%)}}
+@keyframes turn{to{transform:rotate(1turn)}}
+@keyframes bob{to{transform:translateY(-10px)}}
+@keyframes breathe{0%,30%,100%{--spread:0}50%,80%{--spread:1}}
+@keyframes draw{from{transform:scaleX(0)}}
+@keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-12deg)}60%{opacity:1;transform:scale(.94) rotate(-1deg)}100%{transform:rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
+</style>
+<meta name="description" content="OMAD, one meal a day, explained: how the 23:1 fast works, how it compares with 16:8, what the small studies found, and who should not try it.">
+<link rel="canonical" href="https://infivlabs.github.io/apps/hourplate/omad/">
+<meta property="og:site_name" content="InfiV Labs">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://infivlabs.github.io/apps/hourplate/omad/">
+<meta property="og:title" content="OMAD (One Meal a Day): How It Works, and OMAD vs 16:8">
+<meta property="og:description" content="OMAD, one meal a day, explained: how the 23:1 fast works, how it compares with 16:8, what the small studies found, and who should not try it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://infivlabs.github.io/apps/hourplate/feature.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "OMAD (one meal a day): how it works and how it compares with 16:8", "description": "OMAD, one meal a day, explained: how the 23:1 fast works, how it compares with 16:8, what the small studies found, and who should not try it.", "inLanguage": "en", "url": "https://infivlabs.github.io/apps/hourplate/omad/", "mainEntityOfPage": "https://infivlabs.github.io/apps/hourplate/omad/", "author": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "publisher": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "about": {"@id": "https://infivlabs.github.io/apps/hourplate/#app", "name": "Hourplate"}, "image": "https://infivlabs.github.io/apps/hourplate/feature.png", "datePublished": "2026-11-26", "dateModified": "2026-11-26"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "InfiV Labs", "item": "https://infivlabs.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Hourplate", "item": "https://infivlabs.github.io/apps/hourplate/"}, {"@type": "ListItem", "position": 3, "name": "OMAD (one meal a day): how it works and how it compares with 16:8", "item": "https://infivlabs.github.io/apps/hourplate/omad/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is OMAD?", "acceptedAnswer": {"@type": "Answer", "text": "OMAD stands for one meal a day. You eat once, within about an hour, and fast for the other 23 hours, drinking only water and other calorie-free drinks."}}, {"@type": "Question", "name": "Is OMAD better than 16:8?", "acceptedAnswer": {"@type": "Answer", "text": "There is no good evidence that it is. 16:8 is easier to keep, makes it simpler to eat enough nutrients, and has been studied more. OMAD is much stricter, and small studies found more hunger and higher blood pressure and cholesterol on one meal a day."}}, {"@type": "Question", "name": "Can I drink coffee on OMAD?", "acceptedAnswer": {"@type": "Answer", "text": "Black coffee without sugar or milk is generally considered fine during the fasting hours. Milk, sugar, syrups and creamers add calories and end the fast."}}, {"@type": "Question", "name": "How long is the eating window on OMAD?", "acceptedAnswer": {"@type": "Answer", "text": "About one hour, which makes it a 23:1 schedule. A two-hour window (22:2) is sometimes counted as OMAD as well."}}]}]}</script>
+</head>
+<body class="doc" style="--deep:#886110;--lift:#e3a21a">
+<header class="top"><a class="mark" href="/">InfiV Labs</a><a class="trail" href="/apps/hourplate/">Hourplate</a></header>
+<header class="head"><p class="kicker"><img src="/apps/hourplate/icon.png" alt="">Hourplate guide</p>
+<h1>OMAD (one meal a day): how it works and how it compares with 16:8</h1>
+<p class="standfirst">OMAD, one meal a day, explained: how the 23:1 fast works, how it compares with 16:8, what the small studies found, and who should not try it.</p>
+<p class="meta"><span>Updated 26 Nov 2026</span><span>4 min read</span></p></header>
+<div class="layout"><article class="prose">
+<p>OMAD means eating one meal a day: you fast for about 23 hours and eat all your food in a window of about an hour, usually in the evening. It is the strictest of the daily intermittent fasting schedules. It is simple to describe and hard to do well, because one meal has to carry a whole day&#x27;s protein, fibre, vitamins and minerals, and research on it in people is limited to a few small, short trials.</p>
+<blockquote><p>OMAD is an extended daily fast. This page is not medical advice. Talk to a doctor before trying it, and do not try it if you are pregnant, breastfeeding, under 18, have diabetes, take medicine that lowers blood sugar, or have had an eating disorder.</p></blockquote>
+<h2 id="what-an-omad-day-looks-like">What an OMAD day looks like</h2>
+<div class="table"><table><thead><tr><th>Time</th><th>What happens</th></tr></thead><tbody><tr><td>7:00 AM</td><td>Wake up. Water, black coffee or plain tea</td></tr><tr><td>Through the day</td><td>Water, sparkling water, black coffee, unsweetened tea</td></tr><tr><td>6:00 PM</td><td>The one meal, eaten over about an hour</td></tr><tr><td>7:00 PM</td><td>The fast begins again, until 6 PM the next day</td></tr></tbody></table></div>
+<p>Some people call a two-meal version &quot;OMAD&quot; too, or eat over two hours (22:2). Strictly, OMAD is a single meal inside about an hour.</p>
+<h2 id="omad-vs-16-8">OMAD vs 16:8</h2>
+<div class="table"><table><thead><tr><th></th><th>16:8</th><th>OMAD</th></tr></thead><tbody><tr><td>Fasting each day</td><td>16 hours</td><td>about 23 hours</td></tr><tr><td>Eating window</td><td>8 hours</td><td>about 1 hour</td></tr><tr><td>Meals</td><td>Usually two, maybe a snack</td><td>One</td></tr><tr><td>Getting enough nutrients</td><td>Easier: two meals to spread food across</td><td>Harder: everything has to fit one plate</td></tr><tr><td>Time without food</td><td>16 hours, much of it asleep</td><td>About 23 hours, most of it awake</td></tr><tr><td>Fits around family and social meals</td><td>Usually, if dinner is in the window</td><td>Only if your one meal is the shared one</td></tr><tr><td>Research in people</td><td>More studies of time-restricted eating</td><td>Few, small and short</td></tr></tbody></table></div>
+<p>For most people 16:8 is the more practical choice, and OMAD is something some people do on certain days rather than every day. If you are curious about OMAD, it is sensible to have kept 16:8 and then 18:6 or 20:4 comfortably first. The <a href="/apps/hourplate/intermittent-fasting-schedule/">intermittent fasting schedule guide</a> covers those plans.</p>
+<h2 id="what-the-research-says">What the research says</h2>
+<p>There is not much of it. Two small studies come up most often:</p>
+<ul><li><b>A 2007 US Department of Agriculture trial</b> had healthy, normal-weight, middle-aged adults eat all their usual calories either in three meals a day or in one meal a day, for 8 weeks each. On one meal a day, people were significantly hungrier, and their blood pressure and their total, LDL and HDL cholesterol went up.</li><li><b>An 11-day trial in 11 young, lean people</b>, described by a nutrition lecturer at the University of Nottingham, found bigger losses of lean mass and bone density on one meal a day.</li></ul>
+<p>The same nutrition expert&#x27;s summary: it is hard to meet your nutritional needs in a single meal, very little is known about long-term effects, and she would not recommend it for children, pregnant or breastfeeding people, or anyone at risk of an eating disorder.</p>
+<p>That does not mean OMAD harms everyone, only that the evidence is thin and the known short-term effects are not all good.</p>
+<h2 id="who-should-not-try-omad">Who should not try OMAD</h2>
+<ul><li>Anyone pregnant or breastfeeding</li><li>Children and teenagers under 18</li><li>People with type 1 diabetes, or type 2 diabetes on insulin or other medicine that lowers blood sugar</li><li>Anyone with a current or past eating disorder</li><li>People who are underweight or malnourished, or have low blood sugar episodes</li><li>People with long-term health conditions, or who take medicine that must be taken with food</li></ul>
+<p>If any of these apply, talk to your doctor before any fasting plan, not just OMAD.</p>
+<h2 id="if-you-do-try-it">If you do try it</h2>
+<ol><li><b>Build the meal on purpose.</b> Protein (lentils, beans, eggs, fish, meat or tofu), plenty of vegetables, a wholegrain starch, fruit, and a dairy food or calcium-rich alternative.</li><li><b>Don&#x27;t skip fluids.</b> Drink water through the day.</li><li><b>Try it on one or two days a week first,</b> on top of a 16:8 routine, rather than every day.</li><li><b>Stop if you feel unwell.</b> Dizziness, fainting, shakiness, palpitations or feeling faint are reasons to eat now.</li><li><b>Keep medicines on schedule.</b> If a medicine needs food, that comes first; ask your pharmacist.</li></ol>
+<h2 id="common-mistakes">Common mistakes</h2>
+<ul><li><b>Treating the one meal as a free-for-all.</b> A very large, rich meal after 23 hours often leads to discomfort and doesn&#x27;t fix missing nutrients.</li><li><b>Drinking calories through the day</b>: milky coffee, juice or sweet drinks end the fast (see <a href="/apps/hourplate/what-breaks-a-fast/">what breaks a fast</a>).</li><li><b>Going straight from three meals to OMAD.</b> Step down through shorter fasts first.</li><li><b>Ignoring a pattern of bingeing or anxiety about food.</b> That is a sign to stop and get support.</li></ul>
+<h2 id="doing-this-in-hourplate">Doing this in Hourplate</h2>
+<p><a href="/apps/hourplate/">Hourplate</a> has an OMAD plan as part of Hourplate Pro, alongside 18:6 and 20:4. The free plans are 12:12, 14:10, 16:8 and one custom plan you can set from 1 to 72 hours. The ring fills toward your goal and shows the time you can eat; fasts longer than 24 hours show a note to talk to a doctor first.</p>
+<h2 id="questions">Questions</h2>
+<h3>What is OMAD?</h3>
+<p>OMAD stands for one meal a day. You eat once, within about an hour, and fast for the other 23 hours, drinking only water and other calorie-free drinks.</p>
+<h3>Is OMAD better than 16:8?</h3>
+<p>There is no good evidence that it is. 16:8 is easier to keep, makes it simpler to eat enough nutrients, and has been studied more. OMAD is much stricter, and small studies found more hunger and higher blood pressure and cholesterol on one meal a day.</p>
+<h3>Can I drink coffee on OMAD?</h3>
+<p>Black coffee without sugar or milk is generally considered fine during the fasting hours. Milk, sugar, syrups and creamers add calories and end the fast.</p>
+<h3>How long is the eating window on OMAD?</h3>
+<p>About one hour, which makes it a 23:1 schedule. A two-hour window (22:2) is sometimes counted as OMAD as well.</p>
+<h2 id="sources">Sources</h2>
+<ul><li><a href="https://doi.org/10.1093/ajcn/85.4.981">https://doi.org/10.1093/ajcn/85.4.981</a></li><li><a href="https://theconversation.com/one-meal-a-day-diet-popular-with-celebrities-could-do-more-harm-than-good-heres-why-203086">https://theconversation.com/one-meal-a-day-diet-popular-with-celebrities-could-do-more-harm-than-good-heres-why-203086</a></li><li><a href="https://health.clevelandclinic.org/intermittent-fasting-4-different-types-explained">https://health.clevelandclinic.org/intermittent-fasting-4-different-types-explained</a></li></ul>
+</article>
+<aside class="rail"><nav class="toc"><b>On this page</b><ol><li><a href="#what-an-omad-day-looks-like">What an OMAD day looks like</a></li><li><a href="#omad-vs-16-8">OMAD vs 16:8</a></li><li><a href="#what-the-research-says">What the research says</a></li><li><a href="#who-should-not-try-omad">Who should not try OMAD</a></li><li><a href="#if-you-do-try-it">If you do try it</a></li><li><a href="#common-mistakes">Common mistakes</a></li><li><a href="#doing-this-in-hourplate">Doing this in Hourplate</a></li><li><a href="#questions">Questions</a></li><li><a href="#sources">Sources</a></li></ol></nav><div class="get"><img class="icon" src="/apps/hourplate/icon.png" alt="" width="58" height="58"><b>Hourplate</b><small></small><p>Fasting tracker for 16:8, one meal a day, Ramadan, Lent &amp; Ekadashi. No sign-up.</p><a class="button" href="/apps/hourplate/">See Hourplate</a></div></aside></div>
+<section class="cards"><h2>More guides from Hourplate</h2><ul><li><a href="/apps/hourplate/ramadan-2027/" lang="en"><b>Ramadan 2027: expected start date, fasting hours and suhoor and iftar planning</b><span>Ramadan 2027 is expected to begin on Monday 8 February, subject to moon sighting. Fasting hours by city, Eid al-Fitr dates and suhoor and iftar tips.</span><i>Read the guide →</i></a></li><li><a href="/apps/hourplate/intermittent-fasting-schedule/" lang="en"><b>Intermittent fasting schedule: 16:8 and the other common plans, with examples</b><span>Intermittent fasting schedule guide: how 16:8, 14:10, 18:6 and 20:4 work, sample eating windows for real days, and how to work out your own.</span><i>Read the guide →</i></a></li><li><a href="/apps/hourplate/what-breaks-a-fast/" lang="en"><b>What breaks a fast? Drinks, calories and medicines in intermittent fasting</b><span>What breaks a fast in intermittent fasting: anything with calories. What you can drink, whether coffee, lemon water or gum count, and medicines.</span><i>Read the guide →</i></a></li></ul></section>
+
+<footer class="foot"><a href="/">InfiV Labs</a><a href="/apps/hourplate/privacy/">Privacy policy</a><a href="/apps/hourplate/terms/">Terms of use</a><a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></footer>
+</body>
+</html>

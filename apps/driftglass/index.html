@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sobriety Counter – Driftglass</title>
+<title>Driftglass: Sobriety Counter and Sober Day Tracker</title>
 <style>
 :root{--paper:#f4efe6;--shelf:#e9e1d3;--ink:#1d1b18;--muted:#5d564c;--accent:#c4421d;--line:#d6ccbb;
 --display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light dark}
@@ -59,12 +59,77 @@ translate:calc(var(--x)*var(--spread)*12%) var(--y);rotate:calc(var(--r)*(1 + va
 .poster{padding:0 1.4rem 1.4rem}.poster img{width:100%;height:auto;border-radius:12px}
 @media (hover:hover){.app:hover .fan{animation-play-state:paused;--spread:1}}
 @media (min-width:720px){.app{grid-template-columns:1fr 1.15fr;min-height:420px}.info{justify-content:center;padding:2.5rem}.info .icon{width:88px;height:88px}.info b{font-size:2.4rem}}
-tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
-.table{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px}
-th,td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
-th{font-size:.85rem;color:var(--muted)}
-@media (max-width:599px){table{min-width:0}thead{display:none}tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
-td{border:0;padding:0}td:first-child{grid-row:span 3}td:nth-child(2){grid-column:2/4;font-weight:600}td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}td:nth-child(5){grid-column:2/4}}td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}td .icon{width:40px;height:40px}
+.home tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
+.table{overflow-x:auto}.home table{border-collapse:collapse;width:100%;min-width:560px}
+.home th,.home td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.home th{font-size:.85rem;color:var(--muted)}
+@media (max-width:599px){.home table{min-width:0}.home thead{display:none}.home tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.home td{border:0;padding:0}.home td:first-child{grid-row:span 3}.home td:nth-child(2){grid-column:2/4;font-weight:600}.home td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}.home td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}.home td:nth-child(5){grid-column:2/4}}.home td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}.home td .icon{width:40px;height:40px}
+.doc{--card:#fbf8f2;--deep:#8f3417;--accent:var(--deep);max-width:1120px;margin:0 auto;padding:0 1.25rem 1rem}
+@media (prefers-color-scheme:dark){.doc{--card:#1f1c18;--accent:var(--lift,#f07a52)}}
+.top{display:flex;align-items:center;flex-wrap:wrap;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.top a{padding:.7rem 0;text-decoration:none}.mark{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.trail{color:var(--muted)}.trail::before{content:"/";margin:0 .7rem;color:var(--line)}
+.doc .button{background:var(--deep);color:#fff;border-radius:999px;padding:.85rem 1.5rem;box-shadow:0 10px 24px -12px var(--deep);transition:transform .2s ease}
+.doc .button:active{transform:scale(.97)}
+.hero-app{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding:2.5rem 0 1rem;align-items:center}
+.hero-app h1{font-size:clamp(2.1rem,5vw,3.5rem);letter-spacing:-.02em;margin:1rem 0 .7rem;max-width:18ch}
+.hero-app .icon{width:88px;height:88px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+.hero-app .lead{max-width:36rem;margin:0 0 1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin:0}
+.stage{border-radius:28px;background:radial-gradient(80% 70% at 50% 45%,color-mix(in oklab,var(--accent) 22%,transparent),transparent 72%)}
+.stage .fan{padding:2rem 1rem 3rem}
+@media (min-width:860px){.hero-app{grid-template-columns:1.05fr 1fr;min-height:480px}}
+.prose{max-width:68ch;font-size:1.075rem;line-height:1.72}
+.prose h2{font-size:1.8rem;letter-spacing:-.01em;margin:2.8rem 0 .8rem;scroll-margin-top:1rem}
+.prose h3{font-family:system-ui,sans-serif;font-size:1.13rem;margin:1.9rem 0 .35rem}
+.prose ul{padding-left:1.2rem}.prose li{margin:.45rem 0}.prose li::marker{color:var(--accent)}
+.prose ol{counter-reset:step;list-style:none;padding:0}
+.prose ol>li{counter-increment:step;position:relative;padding-left:2.7rem;margin:.9rem 0}
+.prose ol>li::before{content:counter(step);position:absolute;left:0;top:.15rem;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .88rem/1.85rem system-ui,sans-serif;text-align:center}
+.prose .table{margin:1.6rem 0;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.prose table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+.prose th{background:var(--shelf);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left}
+.prose th,.prose td{padding:.7rem .95rem;border-bottom:1px solid var(--line);vertical-align:top}
+.prose tbody tr:last-child td{border-bottom:0}.prose td:first-child{font-weight:600}
+.prose blockquote{margin:1.8rem 0;padding:1rem 1.25rem 1rem 3rem;position:relative;border-radius:14px;background:color-mix(in oklab,var(--accent) 9%,var(--card));border:1px solid color-mix(in oklab,var(--accent) 28%,transparent);font-size:.98rem}
+.prose blockquote::before{content:"i";position:absolute;left:1.05rem;top:1.15rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .8rem/1.3rem Georgia,serif;text-align:center}
+.prose blockquote p{margin:0}
+.prose b{color:var(--ink)}.prose code{font:.9em ui-monospace,Menlo,monospace;padding:.1em .35em;border-radius:5px;background:var(--shelf);overflow-wrap:anywhere}
+.head{padding:2.8rem 0 2rem;max-width:48rem}
+.kicker{display:flex;align-items:center;gap:.6rem;margin:0;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.kicker img{width:30px;height:30px;border-radius:22%}
+.head h1{font-size:clamp(2.05rem,4.8vw,3.4rem);letter-spacing:-.02em;margin:.8rem 0 .9rem}
+.standfirst{font-size:1.24rem;line-height:1.5;color:var(--muted);margin:0 0 1.1rem}
+.meta{margin:0;font-size:.9rem;color:var(--muted)}.meta span+span::before{content:"·";margin:0 .55rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;border-top:1px solid var(--line);padding-top:.5rem}
+.toc{display:none}
+@media (min-width:980px){.layout{grid-template-columns:minmax(0,1fr) 300px;gap:4rem}.rail{position:sticky;top:1.5rem;align-self:start;padding-top:2.4rem}
+.toc{display:block;margin-bottom:1.5rem}}
+.toc b{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.toc ol{list-style:none;padding:0;margin:.7rem 0 0;border-left:2px solid var(--line)}
+.toc a{display:block;margin-left:-2px;padding:.35rem 0 .35rem 1rem;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:.93rem;line-height:1.4}
+.toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+.get{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;align-items:center;padding:1.4rem;border-radius:22px;border:1px solid var(--line);
+background:linear-gradient(155deg,color-mix(in oklab,var(--accent) 16%,var(--card)),var(--card) 70%)}
+.get .icon{grid-row:span 2;width:58px;height:58px;box-shadow:0 10px 22px -12px rgba(0,0,0,.5)}
+.get b{font-family:var(--display);font-size:1.35rem;line-height:1.15}.get small{color:var(--muted)}
+.get p{grid-column:1/-1;margin:.8rem 0 1rem;color:var(--muted);font-size:.95rem;line-height:1.5}
+.get .button{grid-column:1/-1;text-align:center}
+.cards{margin:3.5rem 0 1rem}.cards h2{font-size:1.65rem;margin-bottom:1.1rem}
+.cards ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.cards a{display:flex;flex-direction:column;gap:.55rem;height:100%;box-sizing:border-box;padding:1.3rem 1.3rem 1.1rem;border-radius:18px;border:1px solid var(--line);
+background:var(--card);color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.cards b{font-family:var(--display);font-size:1.22rem;line-height:1.25}.cards span{color:var(--muted);font-size:.94rem;line-height:1.5}
+.cards i{margin-top:auto;padding-top:.4rem;font-style:normal;font-weight:700;font-size:.9rem;color:var(--accent)}
+@media (hover:hover){.cards a:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 18px 34px -22px rgba(0,0,0,.5)}}
+.foot{display:flex;flex-wrap:wrap;gap:0 1.4rem;margin:4rem 0 1rem;padding-top:.6rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.foot a{color:var(--muted);padding:.75rem 0;display:inline-block}
+.prose td:empty{height:2.3rem}
+@media (min-width:860px){.stage .fan img{max-width:230px}}
+@media print{.top,.rail,.cards,.foot,.stage,.actions,.kicker img{display:none!important}.doc{max-width:none;padding:0}
+.layout{display:block;border:0}.prose{max-width:none;font-size:11pt}.prose .table{break-inside:avoid}.prose td:empty{height:9mm}
+.prose a{color:inherit}*{animation:none!important;box-shadow:none!important}}
 footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted)}
 @keyframes rise{from{opacity:0;transform:translateY(.6em)}}
 @keyframes drift{to{transform:translate(4%,3%) scale(1.08)}}
@@ -77,13 +142,50 @@ footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);colo
 @keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-12deg)}60%{opacity:1;transform:scale(.94) rotate(-1deg)}100%{transform:rotate(-2deg)}}
 @media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
 </style>
+<meta name="description" content="A private sobriety counter that shows your days sober, money kept and milestones, with urge help and support lines. No account needed.">
+<link rel="canonical" href="https://infivlabs.github.io/apps/driftglass/">
+<meta property="og:site_name" content="InfiV Labs">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://infivlabs.github.io/apps/driftglass/">
+<meta property="og:title" content="Driftglass: Sobriety Counter and Sober Day Tracker">
+<meta property="og:description" content="A private sobriety counter that shows your days sober, money kept and milestones, with urge help and support lines. No account needed.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://infivlabs.github.io/apps/driftglass/feature.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "MobileApplication", "@id": "https://infivlabs.github.io/apps/driftglass/#app", "name": "Sobriety Counter – Driftglass", "description": "Driftglass is a private sobriety counter for anyone quitting drinking, drugs, gambling, porn or late-night scrolling.", "url": "https://infivlabs.github.io/apps/driftglass/", "operatingSystem": "Android", "publisher": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "applicationCategory": "Health And Fitness", "image": "https://infivlabs.github.io/apps/driftglass/icon.png", "screenshot": ["https://infivlabs.github.io/apps/driftglass/shot1.png", "https://infivlabs.github.io/apps/driftglass/shot2.png", "https://infivlabs.github.io/apps/driftglass/shot3.png"], "dateModified": "2026-11-18"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "InfiV Labs", "item": "https://infivlabs.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Sobriety Counter – Driftglass", "item": "https://infivlabs.github.io/apps/driftglass/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I count my days sober?", "acceptedAnswer": {"@type": "Answer", "text": "Count from your sobriety date, the first day you didn't drink. On that date you have zero full days; a day later you have one. Our guide on how many days sober you are walks through the counting rules with worked dates."}}, {"@type": "Question", "name": "Can I track more than one habit?", "acceptedAnswer": {"@type": "Answer", "text": "The free plan counts one habit. Plus counts alcohol, sugar, scrolling or anything else side by side, each on its own piece of glass."}}, {"@type": "Question", "name": "What happens to my count if I drink again?", "acceptedAnswer": {"@type": "Answer", "text": "You reset the counter, and your earlier days stay saved. Driftglass shows your total clean days and your longest stretch, so the time you already put in still counts."}}, {"@type": "Question", "name": "Does Driftglass help with Dry January?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. In the two weeks before January it offers to join a Dry January pack, then tracks each pledged day on a 31-dot strip. See our Dry January 2027 guide for a plan for the month. Driftglass is a self-tracking tool, not a treatment program or a medical device. If you drink heavily every day, stopping suddenly can be dangerous: talk to a doctor before you stop. In the US, the SAMHSA National Helpline is free and open 24/7 at 1-800-662-4357. In the UK, call Drinkline on 0300 123 1110."}}]}]}</script>
 </head>
-<body>
-<p class="back"><a href="/">InfiV Labs</a></p>
-<img class="icon" src="icon.png" alt="" width="96" height="96">
-<h1>Sobriety Counter – Driftglass</h1>
+<body class="doc" style="--deep:#1f6f64;--lift:#4c8c83">
+<header class="top"><a class="mark" href="/">InfiV Labs</a><span class="trail">Sobriety Counter – Driftglass</span></header>
+<section class="hero-app"><div><img class="icon" src="icon.png" alt="" width="88" height="88">
+<h1>Driftglass: a private sobriety counter for every sober day</h1>
 <p class="lead">Sober day tracker with a daily pledge, urge help and milestones. Fully private.</p>
-<p class="links"><a href="privacy/">Privacy policy</a> · <a href="terms/">Terms of use</a></p>
-<p class="links">Support: <a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></p>
+<p class="actions"></p></div><div class="stage"><span class="fan"><img src="shot2.png" alt="Sobriety Counter – Driftglass screenshot" width="1080" height="1920" loading="lazy"><img src="shot1.png" alt="Sobriety Counter – Driftglass screenshot" width="1080" height="1920" loading="lazy"><img src="shot3.png" alt="Sobriety Counter – Driftglass screenshot" width="1080" height="1920" loading="lazy"></span></div></section>
+<div class="layout"><article class="prose">
+<p>Driftglass is a sobriety counter app that shows exactly how long it has been since your last drink, down to the minute. Each counter is drawn as a piece of sea glass that gets smoother as your days sober add up, from a sharp fresh break on day one to fully tumbled at one year.</p>
+<p>It works for alcohol and for other habits people count days away from: drugs, gambling, porn, sugar or late-night scrolling.</p>
+<h2 id="what-the-sober-day-tracker-does">What the sober day tracker does</h2>
+<ul><li><b>Counts your clean time.</b> Days, hours and minutes since your start, plus the money kept and the hours regained if you enter what the habit used to cost you.</li><li><b>Lets you choose how a day counts.</b> Either one day per full 24 hours since your start, or one day per midnight passed.</li><li><b>Marks milestones.</b> 24, 48 and 72 hours, 1 and 2 weeks, 30, 60 and 90 days, every month to a year, 18 months, 1,000 days and then every year. Each one drops a new piece of glass into your jar.</li><li><b>Starts the day with a pledge.</b> Hold the glass for a moment to promise one sober day. In the evening, a short check-in asks how it went, how strong the urges were and what was behind them.</li><li><b>Keeps your past days.</b> A reset never erases anything. Earlier runs, total clean days and your longest stretch stay on record.</li></ul>
+<h2 id="help-for-the-hard-minutes">Help for the hard minutes</h2>
+<p>Long-press the glass or open Help when an urge hits: breathe for two minutes, play the tape forward, read your reasons, ride the wave with a ten-minute timer, or call someone from your own list.</p>
+<p>Support lines for the US, UK, Ireland, Canada, Australia and New Zealand, plus an international directory, are behind the lifebuoy on every screen.</p>
+<h2 id="private-by-design">Private by design</h2>
+<p>There is no account and no feed, and your records stay on your phone. Lock the app with a PIN or biometrics, keep reminders discreet and export everything as JSON or CSV.</p>
+<h2 id="free-and-plus">Free and Plus</h2>
+<p>The counter, the urge tools, the support lines, the lock and export are free. Driftglass Plus adds unlimited counters, the full journal with search, full patterns such as top triggers and risky hours, and extra share-card styles. Plus comes as a yearly plan with a free trial, a monthly plan or a one-time purchase.</p>
+<h2 id="questions">Questions</h2>
+<h3>How do I count my days sober?</h3>
+<p>Count from your sobriety date, the first day you didn&#x27;t drink. On that date you have zero full days; a day later you have one. Our guide on <a href="/apps/driftglass/how-many-days-sober-am-i/">how many days sober you are</a> walks through the counting rules with worked dates.</p>
+<h3>Can I track more than one habit?</h3>
+<p>The free plan counts one habit. Plus counts alcohol, sugar, scrolling or anything else side by side, each on its own piece of glass.</p>
+<h3>What happens to my count if I drink again?</h3>
+<p>You reset the counter, and your earlier days stay saved. Driftglass shows your total clean days and your longest stretch, so the time you already put in still counts.</p>
+<h3>Does Driftglass help with Dry January?</h3>
+<p>Yes. In the two weeks before January it offers to join a Dry January pack, then tracks each pledged day on a 31-dot strip. See our <a href="/apps/driftglass/dry-january-2027/">Dry January 2027 guide</a> for a plan for the month.</p>
+<blockquote><p>Driftglass is a self-tracking tool, not a treatment program or a medical device. If you drink heavily every day, stopping suddenly can be dangerous: talk to a doctor before you stop. In the US, the SAMHSA National Helpline is free and open 24/7 at 1-800-662-4357. In the UK, call Drinkline on 0300 123 1110.</p></blockquote>
+</article>
+<aside class="rail"><nav class="toc"><b>On this page</b><ol><li><a href="#what-the-sober-day-tracker-does">What the sober day tracker does</a></li><li><a href="#help-for-the-hard-minutes">Help for the hard minutes</a></li><li><a href="#private-by-design">Private by design</a></li><li><a href="#free-and-plus">Free and Plus</a></li><li><a href="#questions">Questions</a></li></ol></nav></aside></div>
+<section class="cards"><h2>Guides</h2><ul><li><a href="/apps/driftglass/how-many-days-sober-am-i/" lang="en"><b>How many days sober am I? Counting from your sobriety date</b><span>How many days sober am I? Count from your sobriety date, with worked examples, a 30/60/90-day to 1-year milestone table and money-saved math.</span><i>Read the guide →</i></a></li><li><a href="/apps/driftglass/dry-january-2027/" lang="en"><b>Dry January 2027: dates, plan and tips for 31 days alcohol-free</b><span>Dry January 2027 runs Friday, January 1 to Sunday, January 31. A week-by-week plan, tips for five weekends, and who should see a doctor first.</span><i>Read the guide →</i></a></li><li><a href="/apps/driftglass/alcohol-cravings/" lang="en"><b>How to stop alcohol cravings when they hit</b><span>How to stop alcohol cravings in the moment: how long an urge lasts, urge surfing step by step, playing the tape forward, and when to get medical help.</span><i>Read the guide →</i></a></li><li><a href="/apps/driftglass/sobriety-milestones/" lang="en"><b>Sobriety milestones from 24 hours to one year</b><span>Sobriety milestones from 24 hours to 1 year: what each one tends to feel like, why the early ones matter, and simple ways to mark a sober anniversary.</span><i>Read the guide →</i></a></li></ul></section>
+
+<footer class="foot"><a href="/">InfiV Labs</a><a href="/apps/driftglass/privacy/">Privacy policy</a><a href="/apps/driftglass/terms/">Terms of use</a><a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></footer>
 </body>
 </html>

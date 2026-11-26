@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tally Ten</title>
+<title>Tally Ten: Number Pairs Puzzle Where You Make Ten</title>
 <style>
 :root{--paper:#f4efe6;--shelf:#e9e1d3;--ink:#1d1b18;--muted:#5d564c;--accent:#c4421d;--line:#d6ccbb;
 --display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light dark}
@@ -59,12 +59,77 @@ translate:calc(var(--x)*var(--spread)*12%) var(--y);rotate:calc(var(--r)*(1 + va
 .poster{padding:0 1.4rem 1.4rem}.poster img{width:100%;height:auto;border-radius:12px}
 @media (hover:hover){.app:hover .fan{animation-play-state:paused;--spread:1}}
 @media (min-width:720px){.app{grid-template-columns:1fr 1.15fr;min-height:420px}.info{justify-content:center;padding:2.5rem}.info .icon{width:88px;height:88px}.info b{font-size:2.4rem}}
-tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
-.table{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px}
-th,td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
-th{font-size:.85rem;color:var(--muted)}
-@media (max-width:599px){table{min-width:0}thead{display:none}tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
-td{border:0;padding:0}td:first-child{grid-row:span 3}td:nth-child(2){grid-column:2/4;font-weight:600}td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}td:nth-child(5){grid-column:2/4}}td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}td .icon{width:40px;height:40px}
+.home tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
+.table{overflow-x:auto}.home table{border-collapse:collapse;width:100%;min-width:560px}
+.home th,.home td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.home th{font-size:.85rem;color:var(--muted)}
+@media (max-width:599px){.home table{min-width:0}.home thead{display:none}.home tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.home td{border:0;padding:0}.home td:first-child{grid-row:span 3}.home td:nth-child(2){grid-column:2/4;font-weight:600}.home td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}.home td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}.home td:nth-child(5){grid-column:2/4}}.home td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}.home td .icon{width:40px;height:40px}
+.doc{--card:#fbf8f2;--deep:#8f3417;--accent:var(--deep);max-width:1120px;margin:0 auto;padding:0 1.25rem 1rem}
+@media (prefers-color-scheme:dark){.doc{--card:#1f1c18;--accent:var(--lift,#f07a52)}}
+.top{display:flex;align-items:center;flex-wrap:wrap;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.top a{padding:.7rem 0;text-decoration:none}.mark{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.trail{color:var(--muted)}.trail::before{content:"/";margin:0 .7rem;color:var(--line)}
+.doc .button{background:var(--deep);color:#fff;border-radius:999px;padding:.85rem 1.5rem;box-shadow:0 10px 24px -12px var(--deep);transition:transform .2s ease}
+.doc .button:active{transform:scale(.97)}
+.hero-app{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding:2.5rem 0 1rem;align-items:center}
+.hero-app h1{font-size:clamp(2.1rem,5vw,3.5rem);letter-spacing:-.02em;margin:1rem 0 .7rem;max-width:18ch}
+.hero-app .icon{width:88px;height:88px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+.hero-app .lead{max-width:36rem;margin:0 0 1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin:0}
+.stage{border-radius:28px;background:radial-gradient(80% 70% at 50% 45%,color-mix(in oklab,var(--accent) 22%,transparent),transparent 72%)}
+.stage .fan{padding:2rem 1rem 3rem}
+@media (min-width:860px){.hero-app{grid-template-columns:1.05fr 1fr;min-height:480px}}
+.prose{max-width:68ch;font-size:1.075rem;line-height:1.72}
+.prose h2{font-size:1.8rem;letter-spacing:-.01em;margin:2.8rem 0 .8rem;scroll-margin-top:1rem}
+.prose h3{font-family:system-ui,sans-serif;font-size:1.13rem;margin:1.9rem 0 .35rem}
+.prose ul{padding-left:1.2rem}.prose li{margin:.45rem 0}.prose li::marker{color:var(--accent)}
+.prose ol{counter-reset:step;list-style:none;padding:0}
+.prose ol>li{counter-increment:step;position:relative;padding-left:2.7rem;margin:.9rem 0}
+.prose ol>li::before{content:counter(step);position:absolute;left:0;top:.15rem;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .88rem/1.85rem system-ui,sans-serif;text-align:center}
+.prose .table{margin:1.6rem 0;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.prose table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+.prose th{background:var(--shelf);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left}
+.prose th,.prose td{padding:.7rem .95rem;border-bottom:1px solid var(--line);vertical-align:top}
+.prose tbody tr:last-child td{border-bottom:0}.prose td:first-child{font-weight:600}
+.prose blockquote{margin:1.8rem 0;padding:1rem 1.25rem 1rem 3rem;position:relative;border-radius:14px;background:color-mix(in oklab,var(--accent) 9%,var(--card));border:1px solid color-mix(in oklab,var(--accent) 28%,transparent);font-size:.98rem}
+.prose blockquote::before{content:"i";position:absolute;left:1.05rem;top:1.15rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .8rem/1.3rem Georgia,serif;text-align:center}
+.prose blockquote p{margin:0}
+.prose b{color:var(--ink)}.prose code{font:.9em ui-monospace,Menlo,monospace;padding:.1em .35em;border-radius:5px;background:var(--shelf);overflow-wrap:anywhere}
+.head{padding:2.8rem 0 2rem;max-width:48rem}
+.kicker{display:flex;align-items:center;gap:.6rem;margin:0;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.kicker img{width:30px;height:30px;border-radius:22%}
+.head h1{font-size:clamp(2.05rem,4.8vw,3.4rem);letter-spacing:-.02em;margin:.8rem 0 .9rem}
+.standfirst{font-size:1.24rem;line-height:1.5;color:var(--muted);margin:0 0 1.1rem}
+.meta{margin:0;font-size:.9rem;color:var(--muted)}.meta span+span::before{content:"·";margin:0 .55rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;border-top:1px solid var(--line);padding-top:.5rem}
+.toc{display:none}
+@media (min-width:980px){.layout{grid-template-columns:minmax(0,1fr) 300px;gap:4rem}.rail{position:sticky;top:1.5rem;align-self:start;padding-top:2.4rem}
+.toc{display:block;margin-bottom:1.5rem}}
+.toc b{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.toc ol{list-style:none;padding:0;margin:.7rem 0 0;border-left:2px solid var(--line)}
+.toc a{display:block;margin-left:-2px;padding:.35rem 0 .35rem 1rem;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:.93rem;line-height:1.4}
+.toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+.get{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;align-items:center;padding:1.4rem;border-radius:22px;border:1px solid var(--line);
+background:linear-gradient(155deg,color-mix(in oklab,var(--accent) 16%,var(--card)),var(--card) 70%)}
+.get .icon{grid-row:span 2;width:58px;height:58px;box-shadow:0 10px 22px -12px rgba(0,0,0,.5)}
+.get b{font-family:var(--display);font-size:1.35rem;line-height:1.15}.get small{color:var(--muted)}
+.get p{grid-column:1/-1;margin:.8rem 0 1rem;color:var(--muted);font-size:.95rem;line-height:1.5}
+.get .button{grid-column:1/-1;text-align:center}
+.cards{margin:3.5rem 0 1rem}.cards h2{font-size:1.65rem;margin-bottom:1.1rem}
+.cards ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.cards a{display:flex;flex-direction:column;gap:.55rem;height:100%;box-sizing:border-box;padding:1.3rem 1.3rem 1.1rem;border-radius:18px;border:1px solid var(--line);
+background:var(--card);color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.cards b{font-family:var(--display);font-size:1.22rem;line-height:1.25}.cards span{color:var(--muted);font-size:.94rem;line-height:1.5}
+.cards i{margin-top:auto;padding-top:.4rem;font-style:normal;font-weight:700;font-size:.9rem;color:var(--accent)}
+@media (hover:hover){.cards a:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 18px 34px -22px rgba(0,0,0,.5)}}
+.foot{display:flex;flex-wrap:wrap;gap:0 1.4rem;margin:4rem 0 1rem;padding-top:.6rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.foot a{color:var(--muted);padding:.75rem 0;display:inline-block}
+.prose td:empty{height:2.3rem}
+@media (min-width:860px){.stage .fan img{max-width:230px}}
+@media print{.top,.rail,.cards,.foot,.stage,.actions,.kicker img{display:none!important}.doc{max-width:none;padding:0}
+.layout{display:block;border:0}.prose{max-width:none;font-size:11pt}.prose .table{break-inside:avoid}.prose td:empty{height:9mm}
+.prose a{color:inherit}*{animation:none!important;box-shadow:none!important}}
 footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted)}
 @keyframes rise{from{opacity:0;transform:translateY(.6em)}}
 @keyframes drift{to{transform:translate(4%,3%) scale(1.08)}}
@@ -77,13 +142,49 @@ footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);colo
 @keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-12deg)}60%{opacity:1;transform:scale(.94) rotate(-1deg)}100%{transform:rotate(-2deg)}}
 @media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
 </style>
+<meta name="description" content="Tally Ten is a number puzzle game: strike out equal numbers or pairs that make ten, and clear the page. 300 Journey boards, a Daily, big digits.">
+<link rel="canonical" href="https://infivlabs.github.io/apps/tallyten/">
+<meta property="og:site_name" content="InfiV Labs">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://infivlabs.github.io/apps/tallyten/">
+<meta property="og:title" content="Tally Ten: Number Pairs Puzzle Where You Make Ten">
+<meta property="og:description" content="Tally Ten is a number puzzle game: strike out equal numbers or pairs that make ten, and clear the page. 300 Journey boards, a Daily, big digits.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://infivlabs.github.io/apps/tallyten/feature.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "MobileApplication", "@id": "https://infivlabs.github.io/apps/tallyten/#app", "name": "Tally Ten", "description": "Tally Ten is a number puzzle for careful minds: strike out two numbers that are equal or that take ten together, and clear the page.", "url": "https://infivlabs.github.io/apps/tallyten/", "operatingSystem": "Android", "publisher": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "applicationCategory": "Game Puzzle", "image": "https://infivlabs.github.io/apps/tallyten/icon.png", "screenshot": ["https://infivlabs.github.io/apps/tallyten/shot1.png", "https://infivlabs.github.io/apps/tallyten/shot2.png", "https://infivlabs.github.io/apps/tallyten/shot3.png"], "dateModified": "2026-11-16"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "InfiV Labs", "item": "https://infivlabs.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Tally Ten", "item": "https://infivlabs.github.io/apps/tallyten/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Tally Ten free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, every mode and every difficulty is free, with three hints a day plus extra hints on most boards. The free version shows ads: a banner on the contents page, an occasional full-screen ad between boards, and optional short ads for an extra hint or add. Remove Ads is a single purchase. An optional VIP subscription removes the daily hint limit and the ads."}}, {"@type": "Question", "name": "Does Tally Ten work offline?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It plays offline with no account, and your progress stays on your phone."}}, {"@type": "Question", "name": "Can I make the numbers bigger?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Choose Big Numbers when you start, or switch it on later in settings: six columns and digits twice the size."}}, {"@type": "Question", "name": "What is the game called on paper?", "acceptedAnswer": {"@type": "Answer", "text": "The pencil version is usually called Take Ten. Its history and paper rules are in the game where you match numbers to make 10."}}]}]}</script>
 </head>
-<body>
-<p class="back"><a href="/">InfiV Labs</a></p>
-<img class="icon" src="icon.png" alt="" width="96" height="96">
-<h1>Tally Ten</h1>
+<body class="doc" style="--deep:#8c5c11;--lift:#ffa81f">
+<header class="top"><a class="mark" href="/">InfiV Labs</a><span class="trail">Tally Ten</span></header>
+<section class="hero-app"><div><img class="icon" src="icon.png" alt="" width="88" height="88">
+<h1>Tally Ten: the number pairs puzzle where you make ten</h1>
 <p class="lead">Pair equal numbers or make ten. Every Journey board can be cleared by logic.</p>
-<p class="links"><a href="privacy/">Privacy policy</a> · <a href="terms/">Terms of use</a></p>
-<p class="links">Support: <a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></p>
+<p class="actions"></p></div><div class="stage"><span class="fan"><img src="shot2.png" alt="Tally Ten screenshot" width="1080" height="1920" loading="lazy"><img src="shot1.png" alt="Tally Ten screenshot" width="1080" height="1920" loading="lazy"><img src="shot3.png" alt="Tally Ten screenshot" width="1080" height="1920" loading="lazy"></span></div></section>
+<div class="layout"><article class="prose">
+<p>Tally Ten is a number puzzle game based on the old pencil game Take Ten. You strike out two numbers that are equal, like 4 and 4, or that add up to ten, like 3 and 7, until the page is clear. When you run out of pairs, the numbers still open are written again at the bottom. Every Journey and Daily board has been checked by a solver before you get it, so it can always be cleared by logic, never luck.</p>
+<h2 id="how-it-plays">How it plays</h2>
+<ul><li>Tap two equal numbers, or two that make ten.</li><li>Pairs can sit side by side, one above the other, on a diagonal, or across the end of a line, and struck-out numbers never block them.</li><li>Out of moves? Use an add to write the open numbers again at the bottom. Each board gives you only a few, and Expert boards none.</li><li>A row you empty disappears, and emptying rows close together builds a combo.</li></ul>
+<p>The full rules, with a worked example board, are in <a href="/apps/tallyten/number-matching-game-rules/">how to play the number matching game</a>.</p>
+<h2 id="four-ways-to-play">Four ways to play</h2>
+<ul><li><b>Journey:</b> 300 boards climbing from Easy through Medium and Hard to Expert and Extreme, with up to three ticks each.</li><li><b>Today&#x27;s sheet:</b> one Daily board for everyone, gentle on Monday and toughest on Sunday. Missed days stay open in the calendar, and a full month earns a trophy.</li><li><b>Pen Book:</b> 100 harder pages where many pairs quietly ruin the page.</li><li><b>Classic:</b> the endless pencil game, stage after stage, with fewer adds as you go.</li></ul>
+<h2 id="who-it-is-for">Who it is for</h2>
+<p>Tally Ten is a number game for adults who like thinking one move ahead. You need to know only that 3 and 7 make ten. Hard and Expert are hard because of fewer adds and more pairs that lead nowhere, not because of a clock.</p>
+<p>It is also easy on the eyes. Big Numbers lays the board out in six columns with digits twice the size, and in dark mode the exercise-book page turns into a chalkboard. The guide to <a href="/apps/tallyten/number-games-for-seniors/">number games for seniors</a> has more on choosing and setting up readable puzzles.</p>
+<h2 id="how-it-differs">How it differs</h2>
+<p>On Easy and Medium boards, a tick shows while a clear is still possible. If a move loses it, a red-pen note in the margin names that move and takes you back to it. Hints come from the same solver: they point to a pair that keeps the clear alive, or tell you it is time to add. Paper rules switch off diagonals for the original rows-and-columns game. For tactics, see the <a href="/apps/tallyten/number-matching-strategy/">strategy guide and cheat sheet</a>.</p>
+<h2 id="questions">Questions</h2>
+<h3>Is Tally Ten free?</h3>
+<p>Yes, every mode and every difficulty is free, with three hints a day plus extra hints on most boards. The free version shows ads: a banner on the contents page, an occasional full-screen ad between boards, and optional short ads for an extra hint or add. Remove Ads is a single purchase. An optional VIP subscription removes the daily hint limit and the ads.</p>
+<h3>Does Tally Ten work offline?</h3>
+<p>Yes. It plays offline with no account, and your progress stays on your phone.</p>
+<h3>Can I make the numbers bigger?</h3>
+<p>Yes. Choose Big Numbers when you start, or switch it on later in settings: six columns and digits twice the size.</p>
+<h3>What is the game called on paper?</h3>
+<p>The pencil version is usually called Take Ten. Its history and paper rules are in <a href="/apps/tallyten/take-ten-game/">the game where you match numbers to make 10</a>.</p>
+</article>
+<aside class="rail"><nav class="toc"><b>On this page</b><ol><li><a href="#how-it-plays">How it plays</a></li><li><a href="#four-ways-to-play">Four ways to play</a></li><li><a href="#who-it-is-for">Who it is for</a></li><li><a href="#how-it-differs">How it differs</a></li><li><a href="#questions">Questions</a></li></ol></nav></aside></div>
+<section class="cards"><h2>Guides</h2><ul><li><a href="/apps/tallyten/number-matching-game-rules/" lang="en"><b>Number matching game rules: how to play, step by step</b><span>Number matching game rules in plain words: which pairs you can strike, how pairs connect across lines and gaps, what an add does, and how a board ends.</span><i>Read the guide →</i></a></li><li><a href="/apps/tallyten/number-matching-strategy/" lang="en"><b>Number matching strategy: tips, tricks and a cheat sheet</b><span>Number matching strategy that works: count the five digit families, find pairs that open other pairs, time your adds, and use the cheat sheet below.</span><i>Read the guide →</i></a></li><li><a href="/apps/tallyten/take-ten-game/" lang="en"><b>Take Ten: the game where you match numbers to make 10</b><span>The game where you match numbers to make 10 is the pencil game Take Ten. How to set it up on squared paper, its rules, and how phone versions differ.</span><i>Read the guide →</i></a></li><li><a href="/apps/tallyten/number-games-for-seniors/" lang="en"><b>Number games for seniors: large print puzzles to enjoy</b><span>Number games for seniors that are easy to read and quick to learn: which puzzles suit older adults, how to play in large print, and tablet setup tips.</span><i>Read the guide →</i></a></li></ul></section>
+
+<footer class="foot"><a href="/">InfiV Labs</a><a href="/apps/tallyten/privacy/">Privacy policy</a><a href="/apps/tallyten/terms/">Terms of use</a><a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></footer>
 </body>
 </html>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intermittent Fasting Schedule: 16:8 and Other Plans</title>
+<style>
+:root{--paper:#f4efe6;--shelf:#e9e1d3;--ink:#1d1b18;--muted:#5d564c;--accent:#c4421d;--line:#d6ccbb;
+--display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#171512;--shelf:#221f1a;--ink:#ede6da;--muted:#a89f92;--accent:#f07a52;--line:#3a352d}}
+body{font-family:system-ui,sans-serif;max-width:680px;margin:2rem auto;padding:0 1.25rem;line-height:1.55;color:var(--ink);background:var(--paper);overflow-wrap:break-word}
+a{overflow-wrap:anywhere}
+h1,h2,h3{font-family:var(--display);line-height:1.15}a{color:var(--accent)}
+.back a{color:var(--muted);text-decoration:none;display:inline-block;padding:.75rem 0}.back a::before{content:"← "}
+.icon{border-radius:22%;display:block}
+.lead{font-size:1.15rem;color:var(--muted)}
+.links a,footer a{display:inline-block;padding:.75rem 0}
+.button{display:inline-block;padding:.75rem 1.25rem;border-radius:6px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600}
+.stamp{display:inline-block;padding:.15rem .55rem;border:2px solid currentColor;border-radius:3px;font-size:.8rem;font-weight:700;color:var(--muted)}
+.stamp-live{color:#2f7a4a}.stamp-review{color:#8a5a00}.stamp-testing{color:var(--accent)}
+@media (prefers-color-scheme:dark){.stamp-live{color:#7cc89a}.stamp-review{color:#e2b45c}}
+.home{--paper:#0f0e0c;--surface:#1a1815;--ink:#f2ede4;--muted:#b0a797;--accent:#ff7a50;--line:#2e2a24;
+max-width:1100px;color-scheme:dark;margin-top:0}
+html:has(.home){overflow-x:clip}
+.hero{position:relative;padding:2.5rem 0 2rem;isolation:isolate}
+.home::before{content:"";position:fixed;inset:-10%;z-index:-1;pointer-events:none;
+background:radial-gradient(70vmax 55vmax at 10% 5%,rgba(255,122,80,.26),transparent 60%),radial-gradient(60vmax 50vmax at 100% 50%,rgba(63,179,154,.18),transparent 60%),
+radial-gradient(70vmax 45vmax at 15% 100%,rgba(255,196,107,.1),transparent 60%);animation:drift 20s ease-in-out infinite alternate}
+.wordmark{font-weight:800;letter-spacing:-.02em;font-size:1.05rem;margin:0}
+.hero h1{font-size:clamp(2.2rem,min(11vw,13vh),5.4rem);font-weight:700;letter-spacing:-.025em;line-height:1.02;margin:.7rem 0 1rem;max-width:14ch}
+.hero h1 span{display:inline-block;animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both}
+.hero h1 span:nth-child(n+5){background:linear-gradient(90deg,#ff7a50,#ffc46b,#ff7a50) 0 0/200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both,shimmer 5s 1.2s linear infinite}
+.hero .lead{max-width:34rem;margin:0;animation:rise .7s .5s cubic-bezier(.2,.7,.2,1) both}
+.ticker{overflow:hidden;border-block:1px solid var(--line);margin:0 calc(50% - 50vw);padding:.7rem 0;font-weight:700;font-size:.9rem;color:var(--muted);white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.ticker p{display:inline-block;margin:0;animation:ticker 78s linear infinite}
+.ticker span{padding:0 1.1rem}.ticker span::after{content:"✦";color:var(--accent);padding-left:2.2rem}
+section h2{font-size:1.5rem;margin:2.2rem 0 1rem}
+.shelf{list-style:none;padding:0;margin:0;display:grid;gap:1.5rem}
+.shelf li{animation:rise .8s calc(.6s + var(--i)*140ms) cubic-bezier(.2,.7,.2,1) both}
+@property --spread{syntax:"<number>";inherits:true;initial-value:0}
+.app{position:relative;isolation:isolate;display:grid;overflow:hidden;border-radius:24px;color:inherit;text-decoration:none;
+transition:transform .2s ease;-webkit-tap-highlight-color:transparent}
+.app::before{content:"";position:absolute;inset:-100%;z-index:-2;background:conic-gradient(var(--line) 0 55%,#ff7a50 72%,#ffc46b 82%,var(--line) 100%);animation:turn 7s linear infinite}
+.app::after{content:"";position:absolute;inset:2px;z-index:-1;border-radius:22px;background:var(--surface)}
+.app:active{transform:scale(.98)}
+.info{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;padding:1.5rem 1.4rem .5rem}
+.info .icon{width:72px;height:72px;box-shadow:0 10px 24px -8px rgba(0,0,0,.6);animation:bob 5s ease-in-out infinite alternate}
+.info b{font-family:var(--display);font-size:1.9rem;line-height:1.1;color:var(--ink)}
+.info>span:not(.stamp){color:var(--muted)}
+.home .stamp-live{color:#7cc89a}.home .stamp-review{color:#e2b45c}
+.app .stamp{animation:stamp .5s calc(1.2s + var(--i)*140ms) cubic-bezier(.3,1.4,.5,1) both}
+.fan{display:flex;justify-content:center;align-items:center;padding:1.5rem 1rem 2.5rem;animation:breathe 7s 2s ease-in-out infinite;transition:--spread .5s}
+.fan img{position:relative;width:29%;max-width:190px;height:auto;margin-inline:-2%;border-radius:18px;box-shadow:0 18px 36px -10px rgba(0,0,0,.65);
+translate:calc(var(--x)*var(--spread)*12%) var(--y);rotate:calc(var(--r)*(1 + var(--spread)*.5));animation:bob 4.5s ease-in-out infinite alternate}
+.fan img:nth-child(1){--x:-1;--y:16px;--r:-8deg;animation-delay:-1.5s}
+.fan img:nth-child(2){--x:0;--y:-8px;--r:0deg;z-index:1}
+.fan img:nth-child(3){--x:1;--y:16px;--r:8deg;animation-delay:-3s}
+.poster{padding:0 1.4rem 1.4rem}.poster img{width:100%;height:auto;border-radius:12px}
+@media (hover:hover){.app:hover .fan{animation-play-state:paused;--spread:1}}
+@media (min-width:720px){.app{grid-template-columns:1fr 1.15fr;min-height:420px}.info{justify-content:center;padding:2.5rem}.info .icon{width:88px;height:88px}.info b{font-size:2.4rem}}
+.home tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
+.table{overflow-x:auto}.home table{border-collapse:collapse;width:100%;min-width:560px}
+.home th,.home td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.home th{font-size:.85rem;color:var(--muted)}
+@media (max-width:599px){.home table{min-width:0}.home thead{display:none}.home tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.home td{border:0;padding:0}.home td:first-child{grid-row:span 3}.home td:nth-child(2){grid-column:2/4;font-weight:600}.home td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}.home td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}.home td:nth-child(5){grid-column:2/4}}.home td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}.home td .icon{width:40px;height:40px}
+.doc{--card:#fbf8f2;--deep:#8f3417;--accent:var(--deep);max-width:1120px;margin:0 auto;padding:0 1.25rem 1rem}
+@media (prefers-color-scheme:dark){.doc{--card:#1f1c18;--accent:var(--lift,#f07a52)}}
+.top{display:flex;align-items:center;flex-wrap:wrap;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.top a{padding:.7rem 0;text-decoration:none}.mark{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.trail{color:var(--muted)}.trail::before{content:"/";margin:0 .7rem;color:var(--line)}
+.doc .button{background:var(--deep);color:#fff;border-radius:999px;padding:.85rem 1.5rem;box-shadow:0 10px 24px -12px var(--deep);transition:transform .2s ease}
+.doc .button:active{transform:scale(.97)}
+.hero-app{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding:2.5rem 0 1rem;align-items:center}
+.hero-app h1{font-size:clamp(2.1rem,5vw,3.5rem);letter-spacing:-.02em;margin:1rem 0 .7rem;max-width:18ch}
+.hero-app .icon{width:88px;height:88px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+.hero-app .lead{max-width:36rem;margin:0 0 1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin:0}
+.stage{border-radius:28px;background:radial-gradient(80% 70% at 50% 45%,color-mix(in oklab,var(--accent) 22%,transparent),transparent 72%)}
+.stage .fan{padding:2rem 1rem 3rem}
+@media (min-width:860px){.hero-app{grid-template-columns:1.05fr 1fr;min-height:480px}}
+.prose{max-width:68ch;font-size:1.075rem;line-height:1.72}
+.prose h2{font-size:1.8rem;letter-spacing:-.01em;margin:2.8rem 0 .8rem;scroll-margin-top:1rem}
+.prose h3{font-family:system-ui,sans-serif;font-size:1.13rem;margin:1.9rem 0 .35rem}
+.prose ul{padding-left:1.2rem}.prose li{margin:.45rem 0}.prose li::marker{color:var(--accent)}
+.prose ol{counter-reset:step;list-style:none;padding:0}
+.prose ol>li{counter-increment:step;position:relative;padding-left:2.7rem;margin:.9rem 0}
+.prose ol>li::before{content:counter(step);position:absolute;left:0;top:.15rem;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .88rem/1.85rem system-ui,sans-serif;text-align:center}
+.prose .table{margin:1.6rem 0;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.prose table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+.prose th{background:var(--shelf);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left}
+.prose th,.prose td{padding:.7rem .95rem;border-bottom:1px solid var(--line);vertical-align:top}
+.prose tbody tr:last-child td{border-bottom:0}.prose td:first-child{font-weight:600}
+.prose blockquote{margin:1.8rem 0;padding:1rem 1.25rem 1rem 3rem;position:relative;border-radius:14px;background:color-mix(in oklab,var(--accent) 9%,var(--card));border:1px solid color-mix(in oklab,var(--accent) 28%,transparent);font-size:.98rem}
+.prose blockquote::before{content:"i";position:absolute;left:1.05rem;top:1.15rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .8rem/1.3rem Georgia,serif;text-align:center}
+.prose blockquote p{margin:0}
+.prose b{color:var(--ink)}.prose code{font:.9em ui-monospace,Menlo,monospace;padding:.1em .35em;border-radius:5px;background:var(--shelf);overflow-wrap:anywhere}
+.head{padding:2.8rem 0 2rem;max-width:48rem}
+.kicker{display:flex;align-items:center;gap:.6rem;margin:0;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.kicker img{width:30px;height:30px;border-radius:22%}
+.head h1{font-size:clamp(2.05rem,4.8vw,3.4rem);letter-spacing:-.02em;margin:.8rem 0 .9rem}
+.standfirst{font-size:1.24rem;line-height:1.5;color:var(--muted);margin:0 0 1.1rem}
+.meta{margin:0;font-size:.9rem;color:var(--muted)}.meta span+span::before{content:"·";margin:0 .55rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;border-top:1px solid var(--line);padding-top:.5rem}
+.toc{display:none}
+@media (min-width:980px){.layout{grid-template-columns:minmax(0,1fr) 300px;gap:4rem}.rail{position:sticky;top:1.5rem;align-self:start;padding-top:2.4rem}
+.toc{display:block;margin-bottom:1.5rem}}
+.toc b{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.toc ol{list-style:none;padding:0;margin:.7rem 0 0;border-left:2px solid var(--line)}
+.toc a{display:block;margin-left:-2px;padding:.35rem 0 .35rem 1rem;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:.93rem;line-height:1.4}
+.toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+.get{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;align-items:center;padding:1.4rem;border-radius:22px;border:1px solid var(--line);
+background:linear-gradient(155deg,color-mix(in oklab,var(--accent) 16%,var(--card)),var(--card) 70%)}
+.get .icon{grid-row:span 2;width:58px;height:58px;box-shadow:0 10px 22px -12px rgba(0,0,0,.5)}
+.get b{font-family:var(--display);font-size:1.35rem;line-height:1.15}.get small{color:var(--muted)}
+.get p{grid-column:1/-1;margin:.8rem 0 1rem;color:var(--muted);font-size:.95rem;line-height:1.5}
+.get .button{grid-column:1/-1;text-align:center}
+.cards{margin:3.5rem 0 1rem}.cards h2{font-size:1.65rem;margin-bottom:1.1rem}
+.cards ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.cards a{display:flex;flex-direction:column;gap:.55rem;height:100%;box-sizing:border-box;padding:1.3rem 1.3rem 1.1rem;border-radius:18px;border:1px solid var(--line);
+background:var(--card);color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.cards b{font-family:var(--display);font-size:1.22rem;line-height:1.25}.cards span{color:var(--muted);font-size:.94rem;line-height:1.5}
+.cards i{margin-top:auto;padding-top:.4rem;font-style:normal;font-weight:700;font-size:.9rem;color:var(--accent)}
+@media (hover:hover){.cards a:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 18px 34px -22px rgba(0,0,0,.5)}}
+.foot{display:flex;flex-wrap:wrap;gap:0 1.4rem;margin:4rem 0 1rem;padding-top:.6rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.foot a{color:var(--muted);padding:.75rem 0;display:inline-block}
+.prose td:empty{height:2.3rem}
+@media (min-width:860px){.stage .fan img{max-width:230px}}
+@media print{.top,.rail,.cards,.foot,.stage,.actions,.kicker img{display:none!important}.doc{max-width:none;padding:0}
+.layout{display:block;border:0}.prose{max-width:none;font-size:11pt}.prose .table{break-inside:avoid}.prose td:empty{height:9mm}
+.prose a{color:inherit}*{animation:none!important;box-shadow:none!important}}
+footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted)}
+@keyframes rise{from{opacity:0;transform:translateY(.6em)}}
+@keyframes drift{to{transform:translate(4%,3%) scale(1.08)}}
+@keyframes shimmer{to{background-position:-200% 0}}
+@keyframes ticker{to{transform:translateX(-50%)}}
+@keyframes turn{to{transform:rotate(1turn)}}
+@keyframes bob{to{transform:translateY(-10px)}}
+@keyframes breathe{0%,30%,100%{--spread:0}50%,80%{--spread:1}}
+@keyframes draw{from{transform:scaleX(0)}}
+@keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-12deg)}60%{opacity:1;transform:scale(.94) rotate(-1deg)}100%{transform:rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
+</style>
+<meta name="description" content="Intermittent fasting schedule guide: how 16:8, 14:10, 18:6 and 20:4 work, sample eating windows for real days, and how to work out your own.">
+<link rel="canonical" href="https://infivlabs.github.io/apps/hourplate/intermittent-fasting-schedule/">
+<meta property="og:site_name" content="InfiV Labs">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://infivlabs.github.io/apps/hourplate/intermittent-fasting-schedule/">
+<meta property="og:title" content="Intermittent Fasting Schedule: 16:8 and Other Plans">
+<meta property="og:description" content="Intermittent fasting schedule guide: how 16:8, 14:10, 18:6 and 20:4 work, sample eating windows for real days, and how to work out your own.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://infivlabs.github.io/apps/hourplate/feature.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "Intermittent fasting schedule: 16:8 and the other common plans, with examples", "description": "Intermittent fasting schedule guide: how 16:8, 14:10, 18:6 and 20:4 work, sample eating windows for real days, and how to work out your own.", "inLanguage": "en", "url": "https://infivlabs.github.io/apps/hourplate/intermittent-fasting-schedule/", "mainEntityOfPage": "https://infivlabs.github.io/apps/hourplate/intermittent-fasting-schedule/", "author": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "publisher": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "about": {"@id": "https://infivlabs.github.io/apps/hourplate/#app", "name": "Hourplate"}, "image": "https://infivlabs.github.io/apps/hourplate/feature.png", "datePublished": "2026-11-26", "dateModified": "2026-11-26"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "InfiV Labs", "item": "https://infivlabs.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Hourplate", "item": "https://infivlabs.github.io/apps/hourplate/"}, {"@type": "ListItem", "position": 3, "name": "Intermittent fasting schedule: 16:8 and the other common plans, with examples", "item": "https://infivlabs.github.io/apps/hourplate/intermittent-fasting-schedule/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the 16:8 intermittent fasting schedule?", "acceptedAnswer": {"@type": "Answer", "text": "You fast for 16 hours and eat within the remaining 8, every day or most days. A common version is eating from 12 PM to 8 PM and fasting from 8 PM to noon the next day."}}, {"@type": "Question", "name": "Which intermittent fasting schedule is good for beginners?", "acceptedAnswer": {"@type": "Answer", "text": "Many people start with 12:12 or 14:10 and move to 16:8 after a week or two once the shorter fast feels easy. There is no need to go further than a schedule you can keep comfortably."}}, {"@type": "Question", "name": "Does sleep count toward the fasting hours?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The fast runs from your last bite, so the hours you sleep are part of it. That is why most people put the fasting part across the night."}}, {"@type": "Question", "name": "Can I drink water during intermittent fasting?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Water, sparkling water, black coffee and unsweetened tea are generally fine during the fasting hours. Drinks with calories end the fast."}}]}]}</script>
+</head>
+<body class="doc" style="--deep:#886110;--lift:#e3a21a">
+<header class="top"><a class="mark" href="/">InfiV Labs</a><a class="trail" href="/apps/hourplate/">Hourplate</a></header>
+<header class="head"><p class="kicker"><img src="/apps/hourplate/icon.png" alt="">Hourplate guide</p>
+<h1>Intermittent fasting schedule: 16:8 and the other common plans, with examples</h1>
+<p class="standfirst">Intermittent fasting schedule guide: how 16:8, 14:10, 18:6 and 20:4 work, sample eating windows for real days, and how to work out your own.</p>
+<p class="meta"><span>Updated 26 Nov 2026</span><span>5 min read</span></p></header>
+<div class="layout"><article class="prose">
+<p>An intermittent fasting schedule is a daily split between hours of fasting and hours of eating. The most common is <b>16:8</b>: you fast for 16 hours and eat within an 8-hour window, for example from 12 PM to 8 PM. Many people start gentler, with 12:12 or 14:10, and some move on to 18:6 or 20:4 later. The right schedule is the one that fits your sleep, work and family meals, and that you can keep without feeling unwell.</p>
+<blockquote><p>This page explains how fasting schedules work. It is not medical advice. If you are pregnant, breastfeeding, under 18, have diabetes, take regular medicine or have had an eating disorder, talk to a doctor before you try fasting.</p></blockquote>
+<h2 id="the-common-intermittent-fasting-schedules">The common intermittent fasting schedules</h2>
+<div class="table"><table><thead><tr><th>Schedule</th><th>Fasting</th><th>Eating window</th><th>Example window</th></tr></thead><tbody><tr><td>12:12</td><td>12 hours</td><td>12 hours</td><td>8 AM to 8 PM</td></tr><tr><td>14:10</td><td>14 hours</td><td>10 hours</td><td>9 AM to 7 PM</td></tr><tr><td>16:8</td><td>16 hours</td><td>8 hours</td><td>12 PM to 8 PM</td></tr><tr><td>18:6</td><td>18 hours</td><td>6 hours</td><td>1 PM to 7 PM</td></tr><tr><td>20:4</td><td>20 hours</td><td>4 hours</td><td>3 PM to 7 PM</td></tr><tr><td>OMAD (one meal a day)</td><td>about 23 hours</td><td>about 1 hour</td><td>6 PM to 7 PM</td></tr><tr><td>5:2</td><td>Two non-consecutive days a week on about 500 calories</td><td>Normal eating on the other five</td><td>Monday and Thursday as low days</td></tr></tbody></table></div>
+<p>The first number is always the fasting hours. Sleep counts: if you finish dinner at 8 PM and sleep from 11 PM to 7 AM, you have already done 11 hours of a 16-hour fast when you wake.</p>
+<p>OMAD is the most demanding daily pattern and has its own page: <a href="/apps/hourplate/omad/">OMAD, one meal a day, compared with 16:8</a>.</p>
+<h2 id="16-8-intermittent-fasting-schedule-examples">16:8 intermittent fasting: schedule examples</h2>
+<p>16:8 is popular because one skipped meal, usually breakfast, does most of the work. Here are four ways to place the same 8 hours:</p>
+<div class="table"><table><thead><tr><th>Your day</th><th>Eating window</th><th>Fasting</th><th>What it looks like</th></tr></thead><tbody><tr><td>Late riser, family dinner</td><td>12 PM to 8 PM</td><td>8 PM to 12 PM</td><td>Lunch at noon, snack mid-afternoon, dinner by 8</td></tr><tr><td>Office hours</td><td>10 AM to 6 PM</td><td>6 PM to 10 AM</td><td>Late breakfast at work, early dinner</td></tr><tr><td>Early bird</td><td>8 AM to 4 PM</td><td>4 PM to 8 AM</td><td>Breakfast and lunch, light early supper</td></tr><tr><td>Evening workout</td><td>1 PM to 9 PM</td><td>9 PM to 1 PM</td><td>Lunch, then dinner after training</td></tr></tbody></table></div>
+<p>Some guidance suggests finishing your last meal about three hours before bed, which favours the earlier windows. In practice, the window you can keep five or six days a week matters more than the exact hours.</p>
+<h3>A sample 16:8 day (12 PM to 8 PM)</h3>
+<ol><li><b>7:00 AM</b>: wake up, water, black coffee or plain tea.</li><li><b>12:00 PM</b>: first meal. A proper lunch with protein, vegetables and a starch.</li><li><b>4:00 PM</b>: a snack if you need one: fruit, yoghurt, nuts.</li><li><b>7:30 PM</b>: dinner, finished by 8.</li><li><b>8:00 PM to 12:00 PM next day</b>: the fast. Water, black coffee and plain tea are fine (see <a href="/apps/hourplate/what-breaks-a-fast/">what breaks a fast</a>).</li></ol>
+<h2 id="how-to-work-out-your-eating-window">How to work out your eating window</h2>
+<p>Your fast starts at your last bite, not when you go to bed. Add the fasting hours to that time and you have the moment your next window opens:</p>
+<div class="table"><table><thead><tr><th>Last bite</th><th>14:10 opens at</th><th>16:8 opens at</th><th>18:6 opens at</th></tr></thead><tbody><tr><td>7:00 PM</td><td>9:00 AM</td><td>11:00 AM</td><td>1:00 PM</td></tr><tr><td>8:00 PM</td><td>10:00 AM</td><td>12:00 PM</td><td>2:00 PM</td></tr><tr><td>9:00 PM</td><td>11:00 AM</td><td>1:00 PM</td><td>3:00 PM</td></tr><tr><td>10:00 PM</td><td>12:00 PM</td><td>2:00 PM</td><td>4:00 PM</td></tr></tbody></table></div>
+<p>Then count the eating hours forward from your first meal to see when the window closes. On a 16:8 plan with a first meal at 12 PM, the window closes at 8 PM.</p>
+<h2 id="choosing-a-schedule">Choosing a schedule</h2>
+<ul><li><b>New to fasting?</b> Many people start with 12:12, which mostly means not snacking after dinner, then try 14:10 for a week or two before 16:8.</li><li><b>Shift work.</b> Anchor the window to your waking hours, not the clock. A night-shift worker might eat from 6 PM to 2 AM.</li><li><b>Family meals.</b> If dinner with others matters, keep it inside the window and skip breakfast instead.</li><li><b>Training.</b> Many people prefer a window that includes a meal after exercise.</li><li><b>18:6 and 20:4</b> leave less room to eat enough protein, fibre and vitamins. Move to them only once a shorter plan feels easy, if at all.</li><li><b>Women in perimenopause</b> may notice changes in sleep or cycles; medical guidance suggests extra caution. If anything feels off, shorten the fast.</li></ul>
+<h2 id="common-mistakes">Common mistakes</h2>
+<ul><li><b>Counting from bedtime.</b> The fast starts at your last bite.</li><li><b>Drinking calories in the fast</b>: milky coffee, juice, smoothies.</li><li><b>Making up for it in the window.</b> A huge meal at the end of a fast often leaves people sluggish and hungry again soon.</li><li><b>Jumping straight to 20:4.</b> Hunger, headaches and irritability are common side effects of going too far too fast.</li><li><b>Ignoring how you feel.</b> Dizziness, fainting or feeling unwell are signs to eat and stop, not to push on.</li></ul>
+<h2 id="doing-this-in-hourplate">Doing this in Hourplate</h2>
+<p><a href="/apps/hourplate/">Hourplate</a> has 12:12, 14:10, 16:8 and one custom plan free, and 18:6, 20:4, OMAD and longer plans in Hourplate Pro. Tap Start after your last bite and a ring fills toward your goal, with the time you can eat shown underneath; if you forgot to tap Start, you can move the start back up to 12 hours. A widget and a notification tell you when your window opens.</p>
+<h2 id="questions">Questions</h2>
+<h3>What is the 16:8 intermittent fasting schedule?</h3>
+<p>You fast for 16 hours and eat within the remaining 8, every day or most days. A common version is eating from 12 PM to 8 PM and fasting from 8 PM to noon the next day.</p>
+<h3>Which intermittent fasting schedule is good for beginners?</h3>
+<p>Many people start with 12:12 or 14:10 and move to 16:8 after a week or two once the shorter fast feels easy. There is no need to go further than a schedule you can keep comfortably.</p>
+<h3>Does sleep count toward the fasting hours?</h3>
+<p>Yes. The fast runs from your last bite, so the hours you sleep are part of it. That is why most people put the fasting part across the night.</p>
+<h3>Can I drink water during intermittent fasting?</h3>
+<p>Yes. Water, sparkling water, black coffee and unsweetened tea are generally fine during the fasting hours. Drinks with calories end the fast.</p>
+<h2 id="sources">Sources</h2>
+<ul><li><a href="https://health.clevelandclinic.org/intermittent-fasting-4-different-types-explained">https://health.clevelandclinic.org/intermittent-fasting-4-different-types-explained</a></li><li><a href="https://www.hopkinsmedicine.org/health/wellness-and-prevention/intermittent-fasting-what-is-it-and-how-does-it-work">https://www.hopkinsmedicine.org/health/wellness-and-prevention/intermittent-fasting-what-is-it-and-how-does-it-work</a></li></ul>
+</article>
+<aside class="rail"><nav class="toc"><b>On this page</b><ol><li><a href="#the-common-intermittent-fasting-schedules">The common intermittent fasting schedules</a></li><li><a href="#16-8-intermittent-fasting-schedule-examples">16:8 intermittent fasting: schedule examples</a></li><li><a href="#how-to-work-out-your-eating-window">How to work out your eating window</a></li><li><a href="#choosing-a-schedule">Choosing a schedule</a></li><li><a href="#common-mistakes">Common mistakes</a></li><li><a href="#doing-this-in-hourplate">Doing this in Hourplate</a></li><li><a href="#questions">Questions</a></li><li><a href="#sources">Sources</a></li></ol></nav><div class="get"><img class="icon" src="/apps/hourplate/icon.png" alt="" width="58" height="58"><b>Hourplate</b><small></small><p>Fasting tracker for 16:8, one meal a day, Ramadan, Lent &amp; Ekadashi. No sign-up.</p><a class="button" href="/apps/hourplate/">See Hourplate</a></div></aside></div>
+<section class="cards"><h2>More guides from Hourplate</h2><ul><li><a href="/apps/hourplate/ramadan-2027/" lang="en"><b>Ramadan 2027: expected start date, fasting hours and suhoor and iftar planning</b><span>Ramadan 2027 is expected to begin on Monday 8 February, subject to moon sighting. Fasting hours by city, Eid al-Fitr dates and suhoor and iftar tips.</span><i>Read the guide →</i></a></li><li><a href="/apps/hourplate/omad/" lang="en"><b>OMAD (one meal a day): how it works and how it compares with 16:8</b><span>OMAD, one meal a day, explained: how the 23:1 fast works, how it compares with 16:8, what the small studies found, and who should not try it.</span><i>Read the guide →</i></a></li><li><a href="/apps/hourplate/what-breaks-a-fast/" lang="en"><b>What breaks a fast? Drinks, calories and medicines in intermittent fasting</b><span>What breaks a fast in intermittent fasting: anything with calories. What you can drink, whether coffee, lemon water or gum count, and medicines.</span><i>Read the guide →</i></a></li></ul></section>
+
+<footer class="foot"><a href="/">InfiV Labs</a><a href="/apps/hourplate/privacy/">Privacy policy</a><a href="/apps/hourplate/terms/">Terms of use</a><a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></footer>
+</body>
+</html>

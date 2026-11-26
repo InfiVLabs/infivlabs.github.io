@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Year Habit Tracker 2027: A 30-Day Resolution Plan</title>
+<style>
+:root{--paper:#f4efe6;--shelf:#e9e1d3;--ink:#1d1b18;--muted:#5d564c;--accent:#c4421d;--line:#d6ccbb;
+--display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#171512;--shelf:#221f1a;--ink:#ede6da;--muted:#a89f92;--accent:#f07a52;--line:#3a352d}}
+body{font-family:system-ui,sans-serif;max-width:680px;margin:2rem auto;padding:0 1.25rem;line-height:1.55;color:var(--ink);background:var(--paper);overflow-wrap:break-word}
+a{overflow-wrap:anywhere}
+h1,h2,h3{font-family:var(--display);line-height:1.15}a{color:var(--accent)}
+.back a{color:var(--muted);text-decoration:none;display:inline-block;padding:.75rem 0}.back a::before{content:"← "}
+.icon{border-radius:22%;display:block}
+.lead{font-size:1.15rem;color:var(--muted)}
+.links a,footer a{display:inline-block;padding:.75rem 0}
+.button{display:inline-block;padding:.75rem 1.25rem;border-radius:6px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600}
+.stamp{display:inline-block;padding:.15rem .55rem;border:2px solid currentColor;border-radius:3px;font-size:.8rem;font-weight:700;color:var(--muted)}
+.stamp-live{color:#2f7a4a}.stamp-review{color:#8a5a00}.stamp-testing{color:var(--accent)}
+@media (prefers-color-scheme:dark){.stamp-live{color:#7cc89a}.stamp-review{color:#e2b45c}}
+.home{--paper:#0f0e0c;--surface:#1a1815;--ink:#f2ede4;--muted:#b0a797;--accent:#ff7a50;--line:#2e2a24;
+max-width:1100px;color-scheme:dark;margin-top:0}
+html:has(.home){overflow-x:clip}
+.hero{position:relative;padding:2.5rem 0 2rem;isolation:isolate}
+.home::before{content:"";position:fixed;inset:-10%;z-index:-1;pointer-events:none;
+background:radial-gradient(70vmax 55vmax at 10% 5%,rgba(255,122,80,.26),transparent 60%),radial-gradient(60vmax 50vmax at 100% 50%,rgba(63,179,154,.18),transparent 60%),
+radial-gradient(70vmax 45vmax at 15% 100%,rgba(255,196,107,.1),transparent 60%);animation:drift 20s ease-in-out infinite alternate}
+.wordmark{font-weight:800;letter-spacing:-.02em;font-size:1.05rem;margin:0}
+.hero h1{font-size:clamp(2.2rem,min(11vw,13vh),5.4rem);font-weight:700;letter-spacing:-.025em;line-height:1.02;margin:.7rem 0 1rem;max-width:14ch}
+.hero h1 span{display:inline-block;animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both}
+.hero h1 span:nth-child(n+5){background:linear-gradient(90deg,#ff7a50,#ffc46b,#ff7a50) 0 0/200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:rise .7s calc(var(--w)*70ms) cubic-bezier(.2,.7,.2,1) both,shimmer 5s 1.2s linear infinite}
+.hero .lead{max-width:34rem;margin:0;animation:rise .7s .5s cubic-bezier(.2,.7,.2,1) both}
+.ticker{overflow:hidden;border-block:1px solid var(--line);margin:0 calc(50% - 50vw);padding:.7rem 0;font-weight:700;font-size:.9rem;color:var(--muted);white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.ticker p{display:inline-block;margin:0;animation:ticker 78s linear infinite}
+.ticker span{padding:0 1.1rem}.ticker span::after{content:"✦";color:var(--accent);padding-left:2.2rem}
+section h2{font-size:1.5rem;margin:2.2rem 0 1rem}
+.shelf{list-style:none;padding:0;margin:0;display:grid;gap:1.5rem}
+.shelf li{animation:rise .8s calc(.6s + var(--i)*140ms) cubic-bezier(.2,.7,.2,1) both}
+@property --spread{syntax:"<number>";inherits:true;initial-value:0}
+.app{position:relative;isolation:isolate;display:grid;overflow:hidden;border-radius:24px;color:inherit;text-decoration:none;
+transition:transform .2s ease;-webkit-tap-highlight-color:transparent}
+.app::before{content:"";position:absolute;inset:-100%;z-index:-2;background:conic-gradient(var(--line) 0 55%,#ff7a50 72%,#ffc46b 82%,var(--line) 100%);animation:turn 7s linear infinite}
+.app::after{content:"";position:absolute;inset:2px;z-index:-1;border-radius:22px;background:var(--surface)}
+.app:active{transform:scale(.98)}
+.info{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;padding:1.5rem 1.4rem .5rem}
+.info .icon{width:72px;height:72px;box-shadow:0 10px 24px -8px rgba(0,0,0,.6);animation:bob 5s ease-in-out infinite alternate}
+.info b{font-family:var(--display);font-size:1.9rem;line-height:1.1;color:var(--ink)}
+.info>span:not(.stamp){color:var(--muted)}
+.home .stamp-live{color:#7cc89a}.home .stamp-review{color:#e2b45c}
+.app .stamp{animation:stamp .5s calc(1.2s + var(--i)*140ms) cubic-bezier(.3,1.4,.5,1) both}
+.fan{display:flex;justify-content:center;align-items:center;padding:1.5rem 1rem 2.5rem;animation:breathe 7s 2s ease-in-out infinite;transition:--spread .5s}
+.fan img{position:relative;width:29%;max-width:190px;height:auto;margin-inline:-2%;border-radius:18px;box-shadow:0 18px 36px -10px rgba(0,0,0,.65);
+translate:calc(var(--x)*var(--spread)*12%) var(--y);rotate:calc(var(--r)*(1 + var(--spread)*.5));animation:bob 4.5s ease-in-out infinite alternate}
+.fan img:nth-child(1){--x:-1;--y:16px;--r:-8deg;animation-delay:-1.5s}
+.fan img:nth-child(2){--x:0;--y:-8px;--r:0deg;z-index:1}
+.fan img:nth-child(3){--x:1;--y:16px;--r:8deg;animation-delay:-3s}
+.poster{padding:0 1.4rem 1.4rem}.poster img{width:100%;height:auto;border-radius:12px}
+@media (hover:hover){.app:hover .fan{animation-play-state:paused;--spread:1}}
+@media (min-width:720px){.app{grid-template-columns:1fr 1.15fr;min-height:420px}.info{justify-content:center;padding:2.5rem}.info .icon{width:88px;height:88px}.info b{font-size:2.4rem}}
+.home tbody tr{animation:rise .5s calc(var(--i)*50ms) ease-out both}
+.table{overflow-x:auto}.home table{border-collapse:collapse;width:100%;min-width:560px}
+.home th,.home td{text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.home th{font-size:.85rem;color:var(--muted)}
+@media (max-width:599px){.home table{min-width:0}.home thead{display:none}.home tbody tr{display:grid;grid-template-columns:40px 1fr auto;column-gap:.85rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.home td{border:0;padding:0}.home td:first-child{grid-row:span 3}.home td:nth-child(2){grid-column:2/4;font-weight:600}.home td:nth-child(3){grid-column:2;color:var(--muted);font-size:.9rem}.home td:nth-child(4){grid-column:3;grid-row:2;justify-self:end}.home td:nth-child(5){grid-column:2/4}}.home td a{display:inline-block;padding:.75rem 0;margin-right:.6rem}.home td .icon{width:40px;height:40px}
+.doc{--card:#fbf8f2;--deep:#8f3417;--accent:var(--deep);max-width:1120px;margin:0 auto;padding:0 1.25rem 1rem}
+@media (prefers-color-scheme:dark){.doc{--card:#1f1c18;--accent:var(--lift,#f07a52)}}
+.top{display:flex;align-items:center;flex-wrap:wrap;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.top a{padding:.7rem 0;text-decoration:none}.mark{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.trail{color:var(--muted)}.trail::before{content:"/";margin:0 .7rem;color:var(--line)}
+.doc .button{background:var(--deep);color:#fff;border-radius:999px;padding:.85rem 1.5rem;box-shadow:0 10px 24px -12px var(--deep);transition:transform .2s ease}
+.doc .button:active{transform:scale(.97)}
+.hero-app{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding:2.5rem 0 1rem;align-items:center}
+.hero-app h1{font-size:clamp(2.1rem,5vw,3.5rem);letter-spacing:-.02em;margin:1rem 0 .7rem;max-width:18ch}
+.hero-app .icon{width:88px;height:88px;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+.hero-app .lead{max-width:36rem;margin:0 0 1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin:0}
+.stage{border-radius:28px;background:radial-gradient(80% 70% at 50% 45%,color-mix(in oklab,var(--accent) 22%,transparent),transparent 72%)}
+.stage .fan{padding:2rem 1rem 3rem}
+@media (min-width:860px){.hero-app{grid-template-columns:1.05fr 1fr;min-height:480px}}
+.prose{max-width:68ch;font-size:1.075rem;line-height:1.72}
+.prose h2{font-size:1.8rem;letter-spacing:-.01em;margin:2.8rem 0 .8rem;scroll-margin-top:1rem}
+.prose h3{font-family:system-ui,sans-serif;font-size:1.13rem;margin:1.9rem 0 .35rem}
+.prose ul{padding-left:1.2rem}.prose li{margin:.45rem 0}.prose li::marker{color:var(--accent)}
+.prose ol{counter-reset:step;list-style:none;padding:0}
+.prose ol>li{counter-increment:step;position:relative;padding-left:2.7rem;margin:.9rem 0}
+.prose ol>li::before{content:counter(step);position:absolute;left:0;top:.15rem;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .88rem/1.85rem system-ui,sans-serif;text-align:center}
+.prose .table{margin:1.6rem 0;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.prose table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+.prose th{background:var(--shelf);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left}
+.prose th,.prose td{padding:.7rem .95rem;border-bottom:1px solid var(--line);vertical-align:top}
+.prose tbody tr:last-child td{border-bottom:0}.prose td:first-child{font-weight:600}
+.prose blockquote{margin:1.8rem 0;padding:1rem 1.25rem 1rem 3rem;position:relative;border-radius:14px;background:color-mix(in oklab,var(--accent) 9%,var(--card));border:1px solid color-mix(in oklab,var(--accent) 28%,transparent);font-size:.98rem}
+.prose blockquote::before{content:"i";position:absolute;left:1.05rem;top:1.15rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--deep);color:#fff;font:700 .8rem/1.3rem Georgia,serif;text-align:center}
+.prose blockquote p{margin:0}
+.prose b{color:var(--ink)}.prose code{font:.9em ui-monospace,Menlo,monospace;padding:.1em .35em;border-radius:5px;background:var(--shelf);overflow-wrap:anywhere}
+.head{padding:2.8rem 0 2rem;max-width:48rem}
+.kicker{display:flex;align-items:center;gap:.6rem;margin:0;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.kicker img{width:30px;height:30px;border-radius:22%}
+.head h1{font-size:clamp(2.05rem,4.8vw,3.4rem);letter-spacing:-.02em;margin:.8rem 0 .9rem}
+.standfirst{font-size:1.24rem;line-height:1.5;color:var(--muted);margin:0 0 1.1rem}
+.meta{margin:0;font-size:.9rem;color:var(--muted)}.meta span+span::before{content:"·";margin:0 .55rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;border-top:1px solid var(--line);padding-top:.5rem}
+.toc{display:none}
+@media (min-width:980px){.layout{grid-template-columns:minmax(0,1fr) 300px;gap:4rem}.rail{position:sticky;top:1.5rem;align-self:start;padding-top:2.4rem}
+.toc{display:block;margin-bottom:1.5rem}}
+.toc b{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.toc ol{list-style:none;padding:0;margin:.7rem 0 0;border-left:2px solid var(--line)}
+.toc a{display:block;margin-left:-2px;padding:.35rem 0 .35rem 1rem;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:.93rem;line-height:1.4}
+.toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+.get{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;align-items:center;padding:1.4rem;border-radius:22px;border:1px solid var(--line);
+background:linear-gradient(155deg,color-mix(in oklab,var(--accent) 16%,var(--card)),var(--card) 70%)}
+.get .icon{grid-row:span 2;width:58px;height:58px;box-shadow:0 10px 22px -12px rgba(0,0,0,.5)}
+.get b{font-family:var(--display);font-size:1.35rem;line-height:1.15}.get small{color:var(--muted)}
+.get p{grid-column:1/-1;margin:.8rem 0 1rem;color:var(--muted);font-size:.95rem;line-height:1.5}
+.get .button{grid-column:1/-1;text-align:center}
+.cards{margin:3.5rem 0 1rem}.cards h2{font-size:1.65rem;margin-bottom:1.1rem}
+.cards ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.cards a{display:flex;flex-direction:column;gap:.55rem;height:100%;box-sizing:border-box;padding:1.3rem 1.3rem 1.1rem;border-radius:18px;border:1px solid var(--line);
+background:var(--card);color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.cards b{font-family:var(--display);font-size:1.22rem;line-height:1.25}.cards span{color:var(--muted);font-size:.94rem;line-height:1.5}
+.cards i{margin-top:auto;padding-top:.4rem;font-style:normal;font-weight:700;font-size:.9rem;color:var(--accent)}
+@media (hover:hover){.cards a:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 18px 34px -22px rgba(0,0,0,.5)}}
+.foot{display:flex;flex-wrap:wrap;gap:0 1.4rem;margin:4rem 0 1rem;padding-top:.6rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.foot a{color:var(--muted);padding:.75rem 0;display:inline-block}
+.prose td:empty{height:2.3rem}
+@media (min-width:860px){.stage .fan img{max-width:230px}}
+@media print{.top,.rail,.cards,.foot,.stage,.actions,.kicker img{display:none!important}.doc{max-width:none;padding:0}
+.layout{display:block;border:0}.prose{max-width:none;font-size:11pt}.prose .table{break-inside:avoid}.prose td:empty{height:9mm}
+.prose a{color:inherit}*{animation:none!important;box-shadow:none!important}}
+footer{margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted)}
+@keyframes rise{from{opacity:0;transform:translateY(.6em)}}
+@keyframes drift{to{transform:translate(4%,3%) scale(1.08)}}
+@keyframes shimmer{to{background-position:-200% 0}}
+@keyframes ticker{to{transform:translateX(-50%)}}
+@keyframes turn{to{transform:rotate(1turn)}}
+@keyframes bob{to{transform:translateY(-10px)}}
+@keyframes breathe{0%,30%,100%{--spread:0}50%,80%{--spread:1}}
+@keyframes draw{from{transform:scaleX(0)}}
+@keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-12deg)}60%{opacity:1;transform:scale(.94) rotate(-1deg)}100%{transform:rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
+</style>
+<meta name="description" content="A New Year habit tracker for 2027: turn resolutions into three to six small daily habits, track the first 30 days, and plan through early March.">
+<link rel="canonical" href="https://infivlabs.github.io/apps/quadrille/new-year-habit-tracker/">
+<meta property="og:site_name" content="InfiV Labs">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://infivlabs.github.io/apps/quadrille/new-year-habit-tracker/">
+<meta property="og:title" content="New Year Habit Tracker 2027: A 30-Day Resolution Plan">
+<meta property="og:description" content="A New Year habit tracker for 2027: turn resolutions into three to six small daily habits, track the first 30 days, and plan through early March.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://infivlabs.github.io/apps/quadrille/feature.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "New Year habit tracker 2027: turn resolutions into daily squares", "description": "A New Year habit tracker for 2027: turn resolutions into three to six small daily habits, track the first 30 days, and plan through early March.", "inLanguage": "en", "url": "https://infivlabs.github.io/apps/quadrille/new-year-habit-tracker/", "mainEntityOfPage": "https://infivlabs.github.io/apps/quadrille/new-year-habit-tracker/", "author": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "publisher": {"@type": "Organization", "@id": "https://infivlabs.github.io/#org", "name": "InfiV Labs", "url": "https://infivlabs.github.io/", "email": "infivlabs@gmail.com"}, "about": {"@id": "https://infivlabs.github.io/apps/quadrille/#app", "name": "Quadrille"}, "image": "https://infivlabs.github.io/apps/quadrille/feature.png", "datePublished": "2026-11-26", "dateModified": "2026-11-26"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "InfiV Labs", "item": "https://infivlabs.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Quadrille", "item": "https://infivlabs.github.io/apps/quadrille/"}, {"@type": "ListItem", "position": 3, "name": "New Year habit tracker 2027: turn resolutions into daily squares", "item": "https://infivlabs.github.io/apps/quadrille/new-year-habit-tracker/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I track New Year's resolutions?", "acceptedAnswer": {"@type": "Answer", "text": "Turn each resolution into one action you can do on a given day, decide what counts as done, and tick it off on a grid of days. Review the grid weekly and after 30 days."}}, {"@type": "Question", "name": "How many resolutions should I make?", "acceptedAnswer": {"@type": "Answer", "text": "Three is a good number to start with, six at most. You can add more in February once the first ones need less effort."}}, {"@type": "Question", "name": "What is a 30-day habit challenge?", "acceptedAnswer": {"@type": "Answer", "text": "You pick a few habits and track them every day for 30 days, then decide which to keep. Thirty days is a useful checkpoint, but it is usually too short for a habit to feel automatic."}}, {"@type": "Question", "name": "Does it matter if I miss a day in January?", "acceptedAnswer": {"@type": "Answer", "text": "Very little. In habit research, missing a single opportunity did not materially affect how the habit formed. What hurts is a run of missed days, so fill the next square."}}]}]}</script>
+</head>
+<body class="doc" style="--deep:#2a58c9;--lift:#5f82d6">
+<header class="top"><a class="mark" href="/">InfiV Labs</a><a class="trail" href="/apps/quadrille/">Quadrille</a></header>
+<header class="head"><p class="kicker"><img src="/apps/quadrille/icon.png" alt="">Quadrille guide</p>
+<h1>New Year habit tracker 2027: turn resolutions into daily squares</h1>
+<p class="standfirst">A New Year habit tracker for 2027: turn resolutions into three to six small daily habits, track the first 30 days, and plan through early March.</p>
+<p class="meta"><span>Updated 26 Nov 2026</span><span>4 min read</span></p></header>
+<div class="layout"><article class="prose">
+<p>A New Year habit tracker works best when each resolution becomes one small action you can tick off on a given day. Pick three to six of them, write each as something you do (not something you stop), tie each to a moment in your day, and track them on a grid from January 1. Review after 30 days, then keep going: most habits take around two months to feel automatic, which for 2027 means early March.</p>
+<h2 id="why-resolutions-fade-and-what-helps">Why resolutions fade, and what helps</h2>
+<p>A Swedish study followed 1,066 people through a year of New Year&#x27;s resolutions (Oscarsson and colleagues, PLOS ONE, 2020). After twelve months, 55% considered themselves successful. One of the clearest differences was in how the goal was framed. People with approach goals, something to start or do more of, were successful 58.9% of the time; people with avoidance goals, something to stop or cut out, 47.1%. In practice that means &quot;eat fruit with lunch&quot; rather than &quot;stop snacking&quot;, and &quot;walk after dinner&quot; rather than &quot;stop sitting all evening&quot;.</p>
+<p>So the first job is translation: from a wish to a repeated, visible action.</p>
+<h2 id="turn-each-resolution-into-a-habit-you-can-track">Turn each resolution into a habit you can track</h2>
+<div class="table"><table><thead><tr><th>Resolution</th><th>Daily or weekly habit</th><th>Cue (when)</th><th>Smallest version that still counts</th></tr></thead><tbody><tr><td>Get fitter</td><td>Move 20 minutes</td><td>after work, shoes by the door</td><td>a 5-minute walk</td></tr><tr><td>Read more</td><td>Read 10 pages</td><td>in bed, before the phone</td><td>one page</td></tr><tr><td>Sleep better</td><td>Lights out by 23:00</td><td>22:30 alarm</td><td>phone in another room</td></tr><tr><td>Eat better</td><td>Fruit or vegetables with lunch</td><td>when you sit down to eat</td><td>one piece of fruit</td></tr><tr><td>Spend less</td><td>Write down every purchase</td><td>before bed</td><td>one line in a note</td></tr><tr><td>Learn a language</td><td>One lesson</td><td>with morning coffee</td><td>five flashcards</td></tr><tr><td>Be calmer</td><td>Breathe or sit quietly 5 minutes</td><td>after brushing teeth</td><td>three slow breaths</td></tr></tbody></table></div>
+<p>The &quot;smallest version&quot; column matters more than it looks. On a bad day you still fill the square, and the habit keeps its place in your day.</p>
+<h2 id="a-2027-calendar-for-your-tracker">A 2027 calendar for your tracker</h2>
+<p>January 1, 2027 is a Friday. Two sensible ways to start:</p>
+<ul><li><b>Start on January 1.</b> Your first 30 days end on Saturday, January 30.</li><li><b>Start on Monday, January 4</b>, after the holiday weekend, so every week of the grid begins on a Monday.</li></ul>
+<p>The best-known study of habit formation found a median of 66 days before a daily behavior felt automatic. Counted from January 1, day 66 is Sunday, March 7, 2027. Put a review on that date too. The details are in <a href="/apps/quadrille/how-long-to-form-a-habit/">how long it takes to form a habit</a>.</p>
+<h2 id="how-to-run-a-30-day-habit-challenge">How to run a 30-day habit challenge</h2>
+<ol><li><b>Choose three habits, six at most.</b> More rows means more squares left empty, and an empty grid is discouraging.</li><li><b>Write the rule for &quot;done&quot; before you start.</b> &quot;Walk&quot; is vague; &quot;walk 20 minutes, or 5 on a bad day&quot; is not.</li><li><b>Fill the square right after doing it</b>, not at night from memory.</li><li><b>Plan rest days for anything that is not daily.</b> A workout three times a week has four planned blank days; mark them as rest, not as failures.</li><li><b>Never miss twice.</b> One missed day barely matters. Two in a row is the start of stopping.</li><li><b>Review on day 30.</b> Keep what stuck, shrink what felt heavy, drop what you never wanted.</li></ol>
+<h2 id="habits-to-start-in-january">Habits to start in January</h2>
+<p>Good January habits are small, repeatable and easy to see:</p>
+<ul><li>a 10-minute walk after lunch</li><li>a glass of water before coffee</li><li>10 pages of a book</li><li>in bed by a fixed time</li><li>one line in a journal</li><li>10 minutes of tidying before bed</li><li>a fixed screen-off time</li><li>one vegetable with dinner</li><li>stretching while the kettle boils</li><li>texting one friend or family member</li></ul>
+<p>For a longer list sorted by area, see <a href="/apps/quadrille/habits-to-track/">100 habits to track</a>. If you prefer paper, the <a href="/apps/quadrille/habit-tracker-printable/">printable habit tracker template</a> has a weekly grid to copy.</p>
+<h2 id="common-mistakes">Common mistakes</h2>
+<ul><li><b>Ten habits on day one.</b> By mid-January the grid is mostly empty and the whole page feels lost.</li><li><b>Outcomes instead of actions.</b> &quot;Lose weight&quot; or &quot;be happier&quot; cannot be ticked off. Track the action you control.</li><li><b>All or nothing.</b> Keeping the smallest version on hard days keeps the chain.</li><li><b>Restarting the year after one miss.</b> Fill the next square and carry on.</li></ul>
+<h2 id="doing-this-in-quadrille">Doing this in Quadrille</h2>
+<p>Quadrille has a &quot;New Year, 30 days&quot; page of six rows: move 20 minutes, read 10 pages, water (8 glasses), lights out by 23:00, no sugar, and make the bed. It sits first on the Packs tab from December 26 to the end of January, and you can add all of it or edit the rows to suit you. The free version holds three habits, so the pack adds what fits. Each habit gets a year page that fills square by square through 2027.</p>
+<h2 id="questions">Questions</h2>
+<h3>How do I track New Year&#x27;s resolutions?</h3>
+<p>Turn each resolution into one action you can do on a given day, decide what counts as done, and tick it off on a grid of days. Review the grid weekly and after 30 days.</p>
+<h3>How many resolutions should I make?</h3>
+<p>Three is a good number to start with, six at most. You can add more in February once the first ones need less effort.</p>
+<h3>What is a 30-day habit challenge?</h3>
+<p>You pick a few habits and track them every day for 30 days, then decide which to keep. Thirty days is a useful checkpoint, but it is usually too short for a habit to feel automatic.</p>
+<h3>Does it matter if I miss a day in January?</h3>
+<p>Very little. In habit research, missing a single opportunity did not materially affect how the habit formed. What hurts is a run of missed days, so fill the next square.</p>
+<h2 id="sources">Sources</h2>
+<ul><li><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234097">https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234097</a></li><li><a href="https://www.su.se/english/news/articles/2022-02-07-how-to-succeed-in-keeping-your-new-years-resolution">https://www.su.se/english/news/articles/2022-02-07-how-to-succeed-in-keeping-your-new-years-resolution</a></li><li><a href="https://bps.org.uk/research-digest/how-form-habit">https://bps.org.uk/research-digest/how-form-habit</a></li></ul>
+</article>
+<aside class="rail"><nav class="toc"><b>On this page</b><ol><li><a href="#why-resolutions-fade-and-what-helps">Why resolutions fade, and what helps</a></li><li><a href="#turn-each-resolution-into-a-habit-you-can-track">Turn each resolution into a habit you can track</a></li><li><a href="#a-2027-calendar-for-your-tracker">A 2027 calendar for your tracker</a></li><li><a href="#how-to-run-a-30-day-habit-challenge">How to run a 30-day habit challenge</a></li><li><a href="#habits-to-start-in-january">Habits to start in January</a></li><li><a href="#common-mistakes">Common mistakes</a></li><li><a href="#doing-this-in-quadrille">Doing this in Quadrille</a></li><li><a href="#questions">Questions</a></li><li><a href="#sources">Sources</a></li></ol></nav><div class="get"><img class="icon" src="/apps/quadrille/icon.png" alt="" width="58" height="58"><b>Quadrille</b><small></small><p>Habit tracker on a weekly spread: a fair streak, widgets and seasonal packs.</p><a class="button" href="/apps/quadrille/">See Quadrille</a></div></aside></div>
+<section class="cards"><h2>More guides from Quadrille</h2><ul><li><a href="/apps/quadrille/how-long-to-form-a-habit/" lang="en"><b>How long does it take to form a habit?</b><span>How long it takes to form a habit, from the research: a median of 66 days in the UCL study, from 18 to 254 days, and where the 21-day rule came from.</span><i>Read the guide →</i></a></li><li><a href="/apps/quadrille/habits-to-track/" lang="en"><b>Habits to track: 100 ideas for your habit tracker</b><span>100 habits to track, sorted by area, each with a clear rule for what counts as done. Plus how many habits to track at once and daily versus weekly.</span><i>Read the guide →</i></a></li><li><a href="/apps/quadrille/habit-tracker-printable/" lang="en"><b>Habit tracker printable: a weekly grid, a monthly page and a spreadsheet</b><span>A habit tracker printable you can copy: a weekly grid, a monthly layout for squared paper, and a Google Sheets or Excel template with formulas.</span><i>Read the guide →</i></a></li></ul></section>
+
+<footer class="foot"><a href="/">InfiV Labs</a><a href="/apps/quadrille/privacy/">Privacy policy</a><a href="/apps/quadrille/terms/">Terms of use</a><a href="mailto:infivlabs@gmail.com">infivlabs@gmail.com</a></footer>
+</body>
+</html>
